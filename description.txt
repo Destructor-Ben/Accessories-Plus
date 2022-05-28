@@ -1,0 +1,25 @@
+Accessories+ adds and tweaks accessories to make the game better (at least I think its better).
+It is recommended to use this mod alongside the Wing Slot mod, since it basically gives you an extra accessory slot, which gives this mod more purpose.
+If you find any bugs or have any suggestions, please make them on the homepage.
+If you would like to help out with the mod development, DM me on Discord ().
+
+[c/62f5d0:Features/Changes]
+-Web slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
+-Hooks and wings display their stats in their tooltips (other mods can work with this, details on the homepage)
+-//Terraspark boots have a different crafting tree and has been buffed
+-//Ankh shield has a different crafting tree and has been buffed// TODO make hand warmer drop from ice biome enemies and give 2 new ankh items textures + names
+-//Bundle of ballons has a different crafting tree and has been buffed
+
+[c/62f5d0:Planned Features/Changes]
+-Config
+-Flight boots can be used with wings after all flight time has been used up
+-Magic carpet is considered a wing accessory and acts more like celestial starboard
+-Extra jump items and flight boots display stats in their tooltips
+-Architect gizmo pack has a different crafting tree and has been buffed
+-Grand design has a different crafting tree and has been buffed
+-Illuminant dye, which fully illuminates a player when equipped in dye slots (useful for keeping track of the player in dark spaces)
+
+[c/62f5d0:Changelog]
+ [c/8c62f5:v1.0.0]
+ -[i:939]Web slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
+ -[i:84]Hooks and wings display their stats in their tooltips
