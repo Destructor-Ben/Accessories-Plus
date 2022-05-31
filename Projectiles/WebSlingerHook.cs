@@ -7,6 +7,7 @@ using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
+using log4net;
 
 namespace AccessoriesPlus.Projectiles
 {
@@ -38,18 +39,50 @@ namespace AccessoriesPlus.Projectiles
 		}
 
 
-		Vector2 playerVelocity = new Vector2(0f, 0f);
+		// AI
+		Vector2 playerVelocity = new(0f, 0f);
 
-        public override void AI()
+		public override void AI()
         {
+			// PreAI stuff
 			Player player = Main.player[Projectile.owner];
 
 			if (player.dead)
 				Projectile.Kill();
 
-			playerVelocity += new Vector2(0f, 0.1f);
-			player.Center += playerVelocity;
-        }
+			// Distance and direction to player
+			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
+			float dstToPlayer = MathF.Sqrt(MathF.Pow(Projectile.Center.X - player.Center.X, 2f) + MathF.Pow(Projectile.Center.Y - player.Center.Y, 2f));
+
+			// Setting playerVelocity to player.velocity so movement is smooth
+			if (Projectile.timeLeft == 3600 * 10)
+            {
+				playerVelocity = player.velocity;
+			}
+
+			// Gravity
+			playerVelocity += new Vector2(0f, player.gravity * player.gravDir);
+
+			// Movement speed caps
+			if (playerVelocity.Y > player.maxFallSpeed)
+				playerVelocity.Y = player.maxFallSpeed;
+
+			if (playerVelocity.Y < -player.maxFallSpeed)
+				playerVelocity.Y = -player.maxFallSpeed;
+
+			if (playerVelocity.X > player.maxRunSpeed)
+				playerVelocity.X = player.maxRunSpeed;
+
+			if (playerVelocity.X < -player.maxRunSpeed)
+				playerVelocity.X = -player.maxRunSpeed;
+
+			/*/ Stopping velocity from changing if the player isn't moving TODO make it stop the player when they are at a standstill with velocity, not a standstill with no 
+			if (player.position.Y == player.oldPosition.Y && player.velocity.Y != 0f)
+				playerVelocity.Y = 0f;
+
+			if (player.position.X == player.oldPosition.X && player.velocity.X != 0f)
+				playerVelocity.X = 0f;*/
+		}
 
 
 		// Returns true if the player can use the grappling hook
@@ -106,10 +139,25 @@ namespace AccessoriesPlus.Projectiles
 		// Adjusts the position the player is when grappled
 		public override void GrappleTargetPoint(Player player, ref float grappleX, ref float grappleY)
 		{
+			// Distance and direction to player
 			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
-			float hangDist = MathF.Sqrt(MathF.Pow(Projectile.Center.X - player.Center.X, 2f) + MathF.Pow(Projectile.Center.Y - player.Center.Y, 2f));
+			float dstToPlayer = MathF.Sqrt(MathF.Pow(Projectile.Center.X - player.Center.X, 2f) + MathF.Pow(Projectile.Center.Y - player.Center.Y, 2f));
+
+			// Making the player hang in the same position
+			float hangDist = dstToPlayer;
 			grappleX += dirToPlayer.X * hangDist;
 			grappleY += dirToPlayer.Y * hangDist;
+
+			// Adding velocity to stop the player from going too far from the hook TODO: make it good ----------------------------------
+			// This is in GrappleTargetPoint() instead of AI() because it would make the player jerk forward when the hook reaches the furthest distance from the player
+			if (dstToPlayer > GrappleRange())
+			{
+				playerVelocity += (dstToPlayer - GrappleRange()) * -dirToPlayer;
+			}
+
+			// Moving the player from playerVelocity, which is used in AI()
+			grappleX += playerVelocity.X;
+			grappleY += playerVelocity.Y;
 		}
 
 		// Draws the grappling hook's chain

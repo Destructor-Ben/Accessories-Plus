@@ -1,5 +1,9 @@
 using Terraria.ModLoader;
+using Terraria.ID;
+using Terraria;
+using AccessoriesPlus.Items;
 using System.Collections.Generic;
+using log4net;
 
 namespace AccessoriesPlus
 {
@@ -176,15 +180,19 @@ namespace AccessoriesPlus
                 new string[]{ "3", "167", "46"},
                 new string[]{ "3", "201", "41"}
             };
-
-            base.Load();
         }
 
         public override void Unload()
         {
             instance = null;
-            base.Unload();
+
+            hookItemIDS = null;
+            wingItemIDS = null;
+
+            hookItemStats = null;
+            wingItemStats = null;
         }
+
 
         // Returns true if the item type is found in the hook IDs list
         public static bool IsItemHook(int itemType)
@@ -253,6 +261,209 @@ namespace AccessoriesPlus
             }
 
             return index;
+        }
+
+
+        // Recipes
+        public override void AddRecipes()
+        {
+            foreach (Recipe recipe in Main.recipe)
+            {
+                // Ankh shield stuff
+                // Ankh charm
+                if (recipe.HasResult(ItemID.AnkhCharm))
+                {
+                    recipe.requiredItem[4] = new Item(ModContent.GetInstance<ReflectiveBlindfold>().Type);
+                    recipe.AddIngredient(ModContent.GetInstance<MagicMitten>());
+                }
+
+
+                // Terraspark boots stuff
+                // Amphibian boots
+                if (recipe.HasResult(ItemID.AmphibianBoots))
+                {
+                    recipe.requiredItem[0] = new Item(ItemID.WaterWalkingBoots);
+                }
+
+                // Spectre boots
+                if (recipe.HasResult(ItemID.SpectreBoots))
+                {
+                    recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
+                }
+
+                // Lava waders
+                if (recipe.HasResult(ItemID.LavaWaders))
+                {
+                    recipe.RemoveRecipe();
+                }
+
+                // Obsidian amphibian boots
+                if (recipe.HasResult(ItemID.ObsidianWaterWalkingBoots))
+                {
+                    recipe.requiredItem[0] = new Item(ItemID.AmphibianBoots);
+                }
+
+
+                // Obsidian skull recipe stuff
+                // Magma stone
+                if (recipe.HasIngredient(ItemID.MagmaStone))
+                {
+                    RemoveIngredientFromRecipe(recipe, ItemID.MagmaStone);
+                    recipe.AddRecipeGroup("AccessoriesPlus:MagmaStones");
+                }
+                
+                // Lucky horseshoe
+                if (recipe.HasIngredient(ItemID.LuckyHorseshoe))
+                {
+                    RemoveIngredientFromRecipe(recipe, ItemID.LuckyHorseshoe);
+                    recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
+                }
+
+                // Obsidian rose
+                if (recipe.HasIngredient(ItemID.ObsidianRose))
+                {
+                    RemoveIngredientFromRecipe(recipe, ItemID.ObsidianRose);
+                    recipe.AddRecipeGroup("AccessoriesPlus:ObsidianRoses");
+                }
+
+                // Lava charm
+                if (recipe.HasIngredient(ItemID.LavaCharm))
+                {
+                    RemoveIngredientFromRecipe(recipe, ItemID.LavaCharm);
+                    recipe.AddRecipeGroup("AccessoriesPlus:LavaCharms");
+                }
+
+                
+                // Bundle of balloons
+                if (recipe.HasResult(ItemID.BundleofBalloons))
+                {
+                    recipe.RemoveRecipe();
+                }
+            }
+
+            // Lava waders recipe
+            CreateRecipe(ItemID.LavaWaders)
+                .AddTile(TileID.TinkerersWorkbench)
+                .AddIngredient(ItemID.ObsidianWaterWalkingBoots)
+                .AddRecipeGroup("AccessoriesPlus:LavaCharms")
+                .AddRecipeGroup("AccessoriesPlus:ObsidianRoses")
+                .Register();
+
+            // Terraspark boots alternate recipe
+            CreateRecipe(ItemID.TerrasparkBoots)
+                .AddTile(TileID.TinkerersWorkbench)
+                .AddIngredient(ItemID.FrostsparkBoots)
+                .AddIngredient(ItemID.HellfireTreads)
+                .Register();
+
+            // Bundle of balloons recipe
+            CreateRecipe(ItemID.BundleofBalloons)
+                .AddTile(TileID.TinkerersWorkbench)
+                .AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes")
+                .AddRecipeGroup("AccessoriesPlus:CloudBallons")
+                .AddRecipeGroup("AccessoriesPlus:BlizzardBalloons")
+                .AddRecipeGroup("AccessoriesPlus:SandstormBalloons")
+                .AddRecipeGroup("AccessoriesPlus:FartBalloons")
+                .AddRecipeGroup("AccessoriesPlus:TsunamiBalloons")
+                .Register();
+        }
+
+        // Recipe groups
+        public override void AddRecipeGroups()
+        {
+            // Obsidian skull items
+            // Lucky horseshoes
+            RecipeGroup.RegisterGroup("AccessoriesPlus:LuckyHorseshoes", new RecipeGroup(() =>
+                "Any Lucky Horseshoe",
+                new int[]
+                {
+                    ItemID.LuckyHorseshoe,
+                    ItemID.ObsidianHorseshoe
+                }));
+
+            // Obsidian roses
+            RecipeGroup.RegisterGroup("AccessoriesPlus:ObsidianRoses", new RecipeGroup(() =>
+                "Any Obsidian Rose",
+                new int[]
+                {
+                    ItemID.ObsidianRose,
+                    ItemID.ObsidianSkullRose,
+                    ItemID.MoltenSkullRose
+                }));
+
+            // Lava charms
+            RecipeGroup.RegisterGroup("AccessoriesPlus:LavaCharms", new RecipeGroup(() =>
+                "Any Lava Charm",
+                new int[]
+                {
+                    ItemID.LavaCharm,
+                    ItemID.MoltenCharm
+                }));
+
+            // Magma stones
+            RecipeGroup.RegisterGroup("AccessoriesPlus:MagmaStones", new RecipeGroup(() =>
+                "Any Magma Stone",
+                new int[]
+                {
+                    ItemID.MagmaStone,
+                    ItemID.LavaSkull,
+                    ItemID.MoltenSkullRose
+                }));
+
+
+            // Double jump balloons
+            // Cloud balloons
+            RecipeGroup.RegisterGroup("AccessoriesPlus:CloudBallons", new RecipeGroup(() =>
+                "Any Cloud in a Balloon",
+                new int[]
+                {
+                    ItemID.CloudinaBalloon,
+                    ItemID.BlueHorseshoeBalloon
+                }));
+
+            // Blizzard balloons
+            RecipeGroup.RegisterGroup("AccessoriesPlus:BlizzardBallons", new RecipeGroup(() =>
+                "Any Blizzard in a Balloon",
+                new int[]
+                {
+                    ItemID.BlizzardinaBalloon,
+                    ItemID.WhiteHorseshoeBalloon
+                }));
+
+            // Sandstorm balloons
+            RecipeGroup.RegisterGroup("AccessoriesPlus:SandstormBallons", new RecipeGroup(() =>
+                "Any Sandstorm in a Balloon",
+                new int[]
+                {
+                    ItemID.SandstorminaBalloon,
+                    ItemID.YellowHorseshoeBalloon
+                }));
+
+            // Fart balloons
+            RecipeGroup.RegisterGroup("AccessoriesPlus:FartBallons", new RecipeGroup(() =>
+                "Any Fart in a Balloon",
+                new int[]
+                {
+                    ItemID.FartInABalloon,
+                    ItemID.BalloonHorseshoeFart
+                }));
+
+            // Tsunami balloons
+            RecipeGroup.RegisterGroup("AccessoriesPlus:TsunamiBallons", new RecipeGroup(() =>
+                "Any Sharkron Balloon",
+                new int[]
+                {
+                    ItemID.SharkronBalloon,
+                    ItemID.BalloonHorseshoeSharkron
+                }));
+        }
+
+        // Function to easily remove ingredients from a recipe
+        public static void RemoveIngredientFromRecipe(Recipe recipe, int itemID)
+        {
+            Item ingredient;
+            recipe.TryGetIngredient(itemID, out ingredient);
+            recipe.RemoveIngredient(ingredient);
         }
     }
 }

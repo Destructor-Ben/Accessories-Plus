@@ -16,9 +16,9 @@ namespace AccessoriesPlus
 			}
 
 			// Adding hand warmer drop
-			if (npc.type == NPCID.ZombieEskimo || npc.type == NPCID.ZombieMerman)
+			if (npc.type == NPCID.SnowFlinx)
             {
-				npcLoot.Add(ItemDropRule.Common(ItemID.HandWarmer, 2));
+				npcLoot.Add(ItemDropRule.Common(ItemID.HandWarmer, 100));
 			}
 		}
 	}
