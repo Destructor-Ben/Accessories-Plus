@@ -40,8 +40,6 @@ namespace AccessoriesPlus.Projectiles
 
 
 		// AI
-		Vector2 playerVelocity = new(0f, 0f);
-
 		public override void AI()
         {
 			// PreAI stuff
@@ -50,40 +48,18 @@ namespace AccessoriesPlus.Projectiles
 			if (player.dead)
 				Projectile.Kill();
 
-			// Distance and direction to player
-			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
-			float dstToPlayer = MathF.Sqrt(MathF.Pow(Projectile.Center.X - player.Center.X, 2f) + MathF.Pow(Projectile.Center.Y - player.Center.Y, 2f));
 
-			// Setting playerVelocity to player.velocity so movement is smooth
+			// Setting playerVelocity to player.velocity, reseting swing direction, and setting the distance the player should be from the hook
 			if (Projectile.timeLeft == 3600 * 10)
-            {
+			{
+				if (!swinging)
+					dstToPlayerWhenGrappled = DistanceBetweenPoints(Projectile.Center, player.Center);
+
 				playerVelocity = player.velocity;
+
+				swingDirection = float.PositiveInfinity;
 			}
-
-			// Gravity
-			playerVelocity += new Vector2(0f, player.gravity * player.gravDir);
-
-			// Movement speed caps
-			if (playerVelocity.Y > player.maxFallSpeed)
-				playerVelocity.Y = player.maxFallSpeed;
-
-			if (playerVelocity.Y < -player.maxFallSpeed)
-				playerVelocity.Y = -player.maxFallSpeed;
-
-			if (playerVelocity.X > player.maxRunSpeed)
-				playerVelocity.X = player.maxRunSpeed;
-
-			if (playerVelocity.X < -player.maxRunSpeed)
-				playerVelocity.X = -player.maxRunSpeed;
-
-			/*/ Stopping velocity from changing if the player isn't moving TODO make it stop the player when they are at a standstill with velocity, not a standstill with no 
-			if (player.position.Y == player.oldPosition.Y && player.velocity.Y != 0f)
-				playerVelocity.Y = 0f;
-
-			if (player.position.X == player.oldPosition.X && player.velocity.X != 0f)
-				playerVelocity.X = 0f;*/
 		}
-
 
 		// Returns true if the player can use the grappling hook
         public override bool? CanUseGrapple(Player player)
@@ -136,26 +112,97 @@ namespace AccessoriesPlus.Projectiles
 		// Adjusts how fast you get pulled to the grappling hook projectile's landing position
 		public override void GrapplePullSpeed(Player player, ref float speed) { speed = 20f; }
 
-		// Adjusts the position the player is when grappled
+		// Where all the AI code is located
+		Vector2 playerVelocity = new(0f, 0f);
+
+		float dstToPlayerWhenGrappled = float.PositiveInfinity;
+
+		bool swinging = false;
+		float swingDirection = float.PositiveInfinity;
+		float swingVelocity = 0f;
+
+		const float stopSpeedThreshold = 1f;
+		const float playerSlowdownSpeed = 0.04f;
+
+		const float swingSpeed = 0.04f;
+		const float swingDirectionChangeThreshold = 2f;
+
 		public override void GrappleTargetPoint(Player player, ref float grappleX, ref float grappleY)
 		{
 			// Distance and direction to player
 			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
-			float dstToPlayer = MathF.Sqrt(MathF.Pow(Projectile.Center.X - player.Center.X, 2f) + MathF.Pow(Projectile.Center.Y - player.Center.Y, 2f));
+			float dstToPlayer = DistanceBetweenPoints(Projectile.Center, player.Center);
+
 
 			// Making the player hang in the same position
-			float hangDist = dstToPlayer;
-			grappleX += dirToPlayer.X * hangDist;
-			grappleY += dirToPlayer.Y * hangDist;
+			grappleX = player.Center.X;
+			grappleY = player.Center.Y;
 
-			// Adding velocity to stop the player from going too far from the hook TODO: make it good ----------------------------------
-			// This is in GrappleTargetPoint() instead of AI() because it would make the player jerk forward when the hook reaches the furthest distance from the player
-			if (dstToPlayer > GrappleRange())
+
+			// If the player is swinging
+			if (dstToPlayer > GrappleRange())//dstToPlayer > dstToPlayerWhenGrappled || 
+				swinging = true;
+			else
+				swinging = false;
+
+
+			// Gravity
+			playerVelocity += new Vector2(0f, player.gravity * player.gravDir);
+
+			// Swinging
+			if (swinging)
 			{
-				playerVelocity += (dstToPlayer - GrappleRange()) * -dirToPlayer;
+				// Removing gravity
+				playerVelocity.Y = 0f;
+
+				float xDifference = Projectile.Center.X - player.Center.X;
+
+				if ((swingVelocity < swingDirectionChangeThreshold && swingVelocity > -swingDirectionChangeThreshold) || swingDirection == float.PositiveInfinity)
+					swingDirection = xDifference / MathF.Abs(xDifference);
+				
+				if (!float.IsNaN(swingDirection))
+					swingVelocity += swingSpeed * ((swingDirection == xDifference / MathF.Abs(xDifference)) ? swingDirection : -swingDirection);
+
+				float newDstToPlayer = DistanceBetweenPoints(Projectile.Center, player.Center + new Vector2(swingDirection, 0f));
+				if (newDstToPlayer > dstToPlayerWhenGrappled || newDstToPlayer > GrappleRange())
+					playerVelocity.Y += 25f * player.gravDir;
+
+				// Adding the swing velocity to player velocity
+				playerVelocity.X += swingVelocity;
+
+				// Moving the player closer to the hook if they are too far away
+				Vector2 distanceToMove = (dstToPlayer - GrappleRange()) * -dirToPlayer;
+				grappleX += distanceToMove.X;
+				grappleY += distanceToMove.Y;
 			}
 
-			// Moving the player from playerVelocity, which is used in AI()
+
+			// Slowing down the player
+			if (playerVelocity.X > 0f)
+				playerVelocity.X -= playerSlowdownSpeed;
+
+			if (playerVelocity.X < 0f)
+				playerVelocity.X += playerSlowdownSpeed;
+
+			if (playerVelocity.X < stopSpeedThreshold && playerVelocity.X > -stopSpeedThreshold)
+				playerVelocity.X = 0f;
+
+
+			// Movement speed caps
+			if (playerVelocity.Y > player.maxFallSpeed)
+				playerVelocity.Y = player.maxFallSpeed;
+
+			if (playerVelocity.Y < -player.maxFallSpeed)
+				playerVelocity.Y = -player.maxFallSpeed;
+
+			if (playerVelocity.X > player.maxFallSpeed)
+				playerVelocity.X = player.maxFallSpeed;
+
+			if (playerVelocity.X < -player.maxFallSpeed)
+				playerVelocity.X = -player.maxFallSpeed;
+
+
+			// Moving the player
 			grappleX += playerVelocity.X;
 			grappleY += playerVelocity.Y;
 		}
@@ -187,6 +234,12 @@ namespace AccessoriesPlus.Projectiles
 			}
 			// Stop vanilla from drawing the default chain.
 			return false;
+		}
+
+		// Calculates the distance between 2 points
+		static float DistanceBetweenPoints(Vector2 pointA, Vector2 pointB)
+        {
+			return MathF.Sqrt(MathF.Pow(pointA.X - pointB.X, 2f) + MathF.Pow(pointA.Y - pointB.Y, 2f));
 		}
 
 		#region Old Code

@@ -102,28 +102,21 @@ namespace AccessoriesPlus
             // Hooks
             if (AccessoriesPlus.IsItemHook(item.type))
             {
-                if (item.type != ItemID.WebSlinger)
+                int index = FindIndexOfTooltipName("Equipable", tooltips);
+                if (index != -1)
                 {
-                    int index = FindIndexOfTooltipName("Equipable", tooltips);
-                    if (index != -1)
-                    {
-                        index++;
-                        string[] stats = AccessoriesPlus.GetHookStats(item.type);
+                    index++;
+                    string[] stats = AccessoriesPlus.GetHookStats(item.type);
 
-                        tooltips.Insert(index, new TooltipLine(Mod, "Reach", stats[0] + " tiles reach"));
-                        tooltips.Insert(index + 1, new TooltipLine(Mod, "Velocity", stats[1] + " velocity"));
-                        tooltips.Insert(index + 2, new TooltipLine(Mod, "NumHooks", stats[2] + (int.Parse(stats[2]) == 1 ? " hook" : " hooks")));
-                        tooltips.Insert(index + 3, new TooltipLine(Mod, "LatchingMode", stats[3] + " hook latching"));
-                    }
-                }
-                else
-                {
-                    int index = FindIndexOfTooltipName("Equipable", tooltips);
-                    if (index != -1)
-                    {
-                        index++;
-                        tooltips.Insert(index, new TooltipLine(Mod, "ModdedDescription", "Allows you to sling webs like Spiderman"));
-                    }
+                    tooltips.Insert(index, new TooltipLine(Mod, "Reach", stats[0] + " tiles reach"));
+                    tooltips.Insert(index + 1, new TooltipLine(Mod, "Velocity", stats[1] + " velocity"));
+                    tooltips.Insert(index + 2, new TooltipLine(Mod, "NumHooks", stats[2] + (int.Parse(stats[2]) == 1 ? " hook" : " hooks")));
+                    tooltips.Insert(index + 3, new TooltipLine(Mod, "LatchingMode", stats[3] + " hook latching"));
+
+                    // Additional tooltip for web slinger
+                    if (item.type == ItemID.WebSlinger)
+                        tooltips.Insert(index + 4, new TooltipLine(Mod, "ModdedDescription", "Allows you to sling webs like Spiderman"));
+
                 }
             }
             // Wings

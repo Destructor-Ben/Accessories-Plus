@@ -4,23 +4,33 @@ using Terraria;
 using AccessoriesPlus.Items;
 using System.Collections.Generic;
 using log4net;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria.GameContent;
+using AccessoriesPlus.Projectiles;
 
 namespace AccessoriesPlus
 {
 	public class AccessoriesPlus : Mod
-	{
+    {
         public static AccessoriesPlus instance;
 
+        // Item stats stuff
         public static List<int> hookItemIDS;
         public static List<int> wingItemIDS;
 
         public static List<string[]> hookItemStats;
         public static List<string[]> wingItemStats;
 
+        // Texture replacement stuff
+        private Asset<Texture2D> vanillaBundleOfBalloonsTexture;
+        private Asset<Texture2D> vanillaBundleOfBalloonsAccTexture;
+
         public override void Load()
         {
             instance = this;
 
+            // Item stats
             hookItemIDS = new List<int>()
             {
                 84,
@@ -112,7 +122,7 @@ namespace AccessoriesPlus
                 new string[]{ "26.25", "12", "1", "Single" },
                 new string[]{ "27.5", "12.5", "1", "Single" },
                 new string[]{ "29.125", "12.5", "1", "Single" },
-                new string[]{ "different", "different", "1", "different" },
+                new string[]{ "31.25", "20", "2", "Individual" }, // Web slinger
                 new string[]{ "21.875", "15", "2", "Simultaneous" },
                 new string[]{ "18.75", "13", "3", "Simultaneous" },
                 new string[]{ "25", "13", "2", "Simultaneous" },
@@ -180,17 +190,28 @@ namespace AccessoriesPlus
                 new string[]{ "3", "167", "46"},
                 new string[]{ "3", "201", "41"}
             };
+
+            // Texture replacement
+            vanillaBundleOfBalloonsTexture = TextureAssets.Item[ItemID.BundleofBalloons];
+            vanillaBundleOfBalloonsAccTexture = TextureAssets.AccBalloon[3];
+            TextureAssets.Item[ItemID.BundleofBalloons] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons");
+            TextureAssets.AccBalloon[3] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons_Balloon");
         }
 
         public override void Unload()
         {
             instance = null;
 
+            // Item stats
             hookItemIDS = null;
             wingItemIDS = null;
 
             hookItemStats = null;
             wingItemStats = null;
+
+            // Texture replacement
+            TextureAssets.Item[ItemID.BundleofBalloons] = vanillaBundleOfBalloonsTexture;
+            TextureAssets.AccBalloon[3] = vanillaBundleOfBalloonsAccTexture;
         }
 
 
@@ -294,7 +315,7 @@ namespace AccessoriesPlus
                 // Lava waders
                 if (recipe.HasResult(ItemID.LavaWaders))
                 {
-                    recipe.RemoveRecipe();
+                    recipe.DisableRecipe();
                 }
 
                 // Obsidian amphibian boots
@@ -337,7 +358,7 @@ namespace AccessoriesPlus
                 // Bundle of balloons
                 if (recipe.HasResult(ItemID.BundleofBalloons))
                 {
-                    recipe.RemoveRecipe();
+                    recipe.DisableRecipe();
                 }
             }
 
@@ -360,7 +381,7 @@ namespace AccessoriesPlus
             CreateRecipe(ItemID.BundleofBalloons)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes")
-                .AddRecipeGroup("AccessoriesPlus:CloudBallons")
+                .AddRecipeGroup("AccessoriesPlus:CloudBalloons")
                 .AddRecipeGroup("AccessoriesPlus:BlizzardBalloons")
                 .AddRecipeGroup("AccessoriesPlus:SandstormBalloons")
                 .AddRecipeGroup("AccessoriesPlus:FartBalloons")
@@ -413,7 +434,7 @@ namespace AccessoriesPlus
 
             // Double jump balloons
             // Cloud balloons
-            RecipeGroup.RegisterGroup("AccessoriesPlus:CloudBallons", new RecipeGroup(() =>
+            RecipeGroup.RegisterGroup("AccessoriesPlus:CloudBalloons", new RecipeGroup(() =>
                 "Any Cloud in a Balloon",
                 new int[]
                 {
@@ -422,7 +443,7 @@ namespace AccessoriesPlus
                 }));
 
             // Blizzard balloons
-            RecipeGroup.RegisterGroup("AccessoriesPlus:BlizzardBallons", new RecipeGroup(() =>
+            RecipeGroup.RegisterGroup("AccessoriesPlus:BlizzardBalloons", new RecipeGroup(() =>
                 "Any Blizzard in a Balloon",
                 new int[]
                 {
@@ -431,7 +452,7 @@ namespace AccessoriesPlus
                 }));
 
             // Sandstorm balloons
-            RecipeGroup.RegisterGroup("AccessoriesPlus:SandstormBallons", new RecipeGroup(() =>
+            RecipeGroup.RegisterGroup("AccessoriesPlus:SandstormBalloons", new RecipeGroup(() =>
                 "Any Sandstorm in a Balloon",
                 new int[]
                 {
@@ -440,7 +461,7 @@ namespace AccessoriesPlus
                 }));
 
             // Fart balloons
-            RecipeGroup.RegisterGroup("AccessoriesPlus:FartBallons", new RecipeGroup(() =>
+            RecipeGroup.RegisterGroup("AccessoriesPlus:FartBalloons", new RecipeGroup(() =>
                 "Any Fart in a Balloon",
                 new int[]
                 {
@@ -449,7 +470,7 @@ namespace AccessoriesPlus
                 }));
 
             // Tsunami balloons
-            RecipeGroup.RegisterGroup("AccessoriesPlus:TsunamiBallons", new RecipeGroup(() =>
+            RecipeGroup.RegisterGroup("AccessoriesPlus:TsunamiBalloons", new RecipeGroup(() =>
                 "Any Sharkron Balloon",
                 new int[]
                 {
@@ -461,8 +482,7 @@ namespace AccessoriesPlus
         // Function to easily remove ingredients from a recipe
         public static void RemoveIngredientFromRecipe(Recipe recipe, int itemID)
         {
-            Item ingredient;
-            recipe.TryGetIngredient(itemID, out ingredient);
+            recipe.TryGetIngredient(itemID, out Item ingredient);
             recipe.RemoveIngredient(ingredient);
         }
     }
