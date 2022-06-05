@@ -29,7 +29,7 @@ Also I couldn't be bothered to finish the new Ankh Shield items names and textur
 - Cell phone gets a different crafting tree and gets buffed - probably include demon conch and magic conch and allow you to teleport to oceans and hell
 
 [c/8ffdff:Changelog]
- [c/9970ff:v1.0.0 (dd/mm/yyyy)]
+ [c/9970ff:v1.0.0 (05/06/2022)]
  - [i:939] Web slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
  - [i:84][i:4978] Hooks and wings display their stats in their tooltips
  - [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull has been changed to also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull
