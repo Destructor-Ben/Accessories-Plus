@@ -7,9 +7,15 @@ namespace AccessoriesPlus.Items
 {
 	public class ReflectiveBlindfold : ModItem
 	{
-		public override void SetStaticDefaults()
+		// If better ankh shield is enabled
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return ModContent.GetInstance<APServerConfig>().betterAnkhShield;
+        }
+
+        public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Reflective Blindfold");
+			DisplayName.SetDefault("Blinding Mirror");
 			Tooltip.SetDefault("Immunity to Darkness and Stoned");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
@@ -22,7 +28,6 @@ namespace AccessoriesPlus.Items
 			Item.accessory = true;
 			Item.maxStack = 1;
 			Item.value = Item.sellPrice(gold: 2);
-			Item.faceSlot = 5;
 		}
 
 		public override void AddRecipes()

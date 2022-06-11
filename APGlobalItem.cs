@@ -11,28 +11,38 @@ namespace AccessoriesPlus
         public override void SetDefaults(Item item)
         {
             // Web slinger
-            if (item.type == ItemID.WebSlinger)
+            if (ModContent.GetInstance<APServerConfig>().betterWebSlinger)
             {
-                item.shoot = ModContent.ProjectileType<Projectiles.WebSlingerHook>();
-                item.shootSpeed = 20f;
+                if (item.type == ItemID.WebSlinger)
+                {
+                    item.shoot = ModContent.ProjectileType<Projectiles.WebSlingerHook>();
+                    item.shootSpeed = 20f;
+                }
             }
 
-            // Obsidian amphibian boots
-            if (item.type == ItemID.ObsidianWaterWalkingBoots)
+            // Terraspark boots stuff
+            if (ModContent.GetInstance<APServerConfig>().betterTerrasparkBoots)
             {
-                item.SetNameOverride("Obsidian Amphibian Boots");
-            }
+                // Obsidian amphibian boots
+                if (item.type == ItemID.ObsidianWaterWalkingBoots)
+                {
+                    item.SetNameOverride("Obsidian Amphibian Boots");
+                }
 
-            // Amphibian boots
-            if (item.type == ItemID.AmphibianBoots)
-            {
-                item.rare = ItemRarityID.LightRed;
+                // Amphibian boots
+                if (item.type == ItemID.AmphibianBoots)
+                {
+                    item.rare = ItemRarityID.LightRed;
+                }
             }
 
             // Bundle of balloons
-            if (item.type == ItemID.BundleofBalloons)
+            if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
             {
-                item.SetNameOverride("Bundle of Horseshoe Balloons");
+                if (item.type == ItemID.BundleofBalloons)
+                {
+                    item.SetNameOverride("Bundle of Horseshoe Balloons");
+                }
             }
             
         }
@@ -40,161 +50,168 @@ namespace AccessoriesPlus
         // Changing vanilla accessories effects
         public override void UpdateAccessory(Item item, Player player, bool hideVisual)
         {
-            // Ankh shield / charm
-            if (item.type == ItemID.AnkhCharm || item.type == ItemID.AnkhShield)
+            // Ankh shield stuff
+            if (ModContent.GetInstance<APServerConfig>().betterAnkhShield)
             {
-                // Magic mitten effects
-                player.buffImmune[46] = true;
-                player.buffImmune[47] = true;
-                player.pStone = true;
+                // Ankh shield / charm
+                if (item.type == ItemID.AnkhCharm || item.type == ItemID.AnkhShield)
+                {
+                    // Hand warmer effects
+                    player.buffImmune[46] = true;
+                    player.buffImmune[47] = true;
 
-                // Reflective blindfold effects
-                player.buffImmune[22] = true;
-                player.buffImmune[156] = true;
+                    // Reflective blindfold effects
+                    player.buffImmune[22] = true;
+                    player.buffImmune[156] = true;
+                }
+
+                // Ankh shield special buffs
+                if (item.type == ItemID.AnkhShield)
+                {
+                    // On fire
+                    player.buffImmune[24] = true;
+                    // Cursed inferno
+                    player.buffImmune[39] = true;
+                    // Ichor
+                    player.buffImmune[69] = true;
+                    // Acid venom
+                    player.buffImmune[70] = true;
+                }
             }
 
-            // Ankh shield special buffs
-            if (item.type == ItemID.AnkhShield)
+            // Terraspark boots
+            if (ModContent.GetInstance<APServerConfig>().betterTerrasparkBoots)
             {
-                // On fire
-                player.buffImmune[24] = true;
-                // Cursed inferno
-                player.buffImmune[39] = true;
-                // Ichor
-                player.buffImmune[69] = true;
-                // Acid venom
-                player.buffImmune[70] = true;
-            }
+                // Amphibian boots
+                if (item.type == ItemID.AmphibianBoots)
+                {
+                    // Allow walking on water instead of sprinting
+                    player.waterWalk2 = true;
+                    player.accRunSpeed = player.maxRunSpeed;
+                }
 
-            // Amphibian boots
-            if (item.type == ItemID.AmphibianBoots)
-            {
-                // Allow walking on water instead of sprinting
-                player.waterWalk2 = true;
-                player.accRunSpeed = player.maxRunSpeed;
-            }
+                // Spectre boots and its upgrades
+                if (item.type == ItemID.SpectreBoots || item.type == ItemID.LightningBoots || item.type == ItemID.FrostsparkBoots || item.type == ItemID.TerrasparkBoots || item.type == ItemID.FairyBoots)
+                {
+                    player.noFallDmg = true;
+                }
 
-            // Spectre boots and its upgrades
-            if (item.type == ItemID.SpectreBoots || item.type == ItemID.LightningBoots || item.type == ItemID.FrostsparkBoots || item.type == ItemID.TerrasparkBoots)
-            {
-                player.noFallDmg = true;
-            }
-
-            // Obsidian amphibian boots and its upgrades
-            if (item.type == ItemID.ObsidianWaterWalkingBoots || item.type == ItemID.LavaWaders || item.type == ItemID.HellfireTreads || item.type == ItemID.TerrasparkBoots)
-            {
-                player.autoJump = true;
-                player.frogLegJumpBoost = true;
+                // Obsidian amphibian boots and its upgrades
+                if (item.type == ItemID.ObsidianWaterWalkingBoots || item.type == ItemID.LavaWaders || item.type == ItemID.HellfireTreads || item.type == ItemID.TerrasparkBoots)
+                {
+                    player.autoJump = true;
+                    player.frogLegJumpBoost = true;
+                }
             }
 
             // Bundle of balloons
-            if (item.type == ItemID.BundleofBalloons)
+            if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
             {
-                player.hasJumpOption_Fart = true;
-                player.hasJumpOption_Sail = true;
-                player.noFallDmg = true;
+                if (item.type == ItemID.BundleofBalloons)
+                {
+                    player.hasJumpOption_Fart = true;
+                    player.hasJumpOption_Sail = true;
+                    player.noFallDmg = true;
+                }
             }
+
+
         }
 
         // Changing vanilla items tooltips
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             // Hooks
-            if (AccessoriesPlus.IsItemHook(item.type))
+            if (ModContent.GetInstance<APServerConfig>().hookStats)
             {
-                int index = FindIndexOfTooltipName("Equipable", tooltips);
-                if (index != -1)
+                if (AccessoriesPlus.IsItemHook(item.type))
                 {
-                    index++;
-                    string[] stats = AccessoriesPlus.GetHookStats(item.type);
+                    int index = FindIndexOfTooltipName("Equipable", tooltips);
+                    if (index != -1)
+                    {
+                        index++;
+                        string[] stats = AccessoriesPlus.GetHookStats(item.type);
 
-                    tooltips.Insert(index, new TooltipLine(Mod, "Reach", stats[0] + " tiles reach"));
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "Velocity", stats[1] + " velocity"));
-                    tooltips.Insert(index + 2, new TooltipLine(Mod, "NumHooks", stats[2] + (int.Parse(stats[2]) == 1 ? " hook" : " hooks")));
-                    tooltips.Insert(index + 3, new TooltipLine(Mod, "LatchingMode", stats[3] + " hook latching"));
+                        tooltips.Insert(index, new TooltipLine(Mod, "Reach", stats[0] + " tiles reach"));
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "Velocity", stats[1] + " velocity"));
+                        tooltips.Insert(index + 2, new TooltipLine(Mod, "NumHooks", stats[2] + (int.Parse(stats[2]) == 1 ? " hook" : " hooks")));
+                        tooltips.Insert(index + 3, new TooltipLine(Mod, "LatchingMode", stats[3] + " hook latching"));
 
-                    // Additional tooltip for web slinger
-                    if (item.type == ItemID.WebSlinger)
-                        tooltips.Insert(index + 4, new TooltipLine(Mod, "ModdedDescription", "Allows you to sling webs like Spiderman"));
+                        // Additional tooltip for web slinger
+                        if (ModContent.GetInstance<APServerConfig>().betterWebSlinger && item.type == ItemID.WebSlinger)
+                            tooltips.Insert(index + 4, new TooltipLine(Mod, "ModdedDescription", "Allows you to sling webs like Spiderman"));
 
+                    }
                 }
             }
+
             // Wings
-            if (AccessoriesPlus.IsItemWings(item.type))
+            if (ModContent.GetInstance<APServerConfig>().wingsStats)
             {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
+                if (AccessoriesPlus.IsItemWings(item.type))
                 {
-                    string[] stats = AccessoriesPlus.GetWingStats(item.type);
+                    int index = FindIndexOfTooltipName("Tooltip0", tooltips);
+                    if (index != -1)
+                    {
+                        string[] stats = AccessoriesPlus.GetWingStats(item.type);
 
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Negates fall damage"));
-                    tooltips.Insert(index, new TooltipLine(Mod, "FlightTime", stats[0] + " seconds flight time"));
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "FlightHeight", stats[1] + " tiles flight height"));
-                    tooltips.Insert(index + 2, new TooltipLine(Mod, "MaxHorizontalSpeed", stats[2] + " mph maximum horizontal speed"));
-                }
-            }
-
-            // Ankh shield/charm
-            string ankhLineName = "HealingBuffLine";
-            string ankhLineText = "Reduces the cooldown of healing potions by 25%";
-            if (item.type == ItemID.AnkhCharm)
-            {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
-                {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, ankhLineName, ankhLineText));
-                }
-            }
-            if (item.type == ItemID.AnkhShield)
-            {
-                int index = FindIndexOfTooltipName("Tooltip1", tooltips);
-                if (index != -1)
-                {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, ankhLineName, ankhLineText));
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Negates fall damage"));
+                        tooltips.Insert(index, new TooltipLine(Mod, "FlightTime", stats[0] + " seconds flight time"));
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "FlightHeight", stats[1] + " tiles flight height"));
+                        tooltips.Insert(index + 2, new TooltipLine(Mod, "MaxHorizontalSpeed", stats[2] + " mph maximum horizontal speed"));
+                    }
                 }
             }
 
-            // Amphibian boots
-            if (item.type == ItemID.AmphibianBoots)
-            {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
-                {
-                    // Replace the sprinting with walking in the tooltip
-                    tooltips[index].Text = "Provides the ability to walk on water and honey";
-                }
-            }
 
-            // Spectre boots and its upgrades
-            if (item.type == ItemID.SpectreBoots || item.type == ItemID.LightningBoots || item.type == ItemID.FrostsparkBoots || item.type == ItemID.TerrasparkBoots)
+            // Terraspark boots stuff
+            if (ModContent.GetInstance<APServerConfig>().betterTerrasparkBoots)
             {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
+                // Amphibian boots
+                if (item.type == ItemID.AmphibianBoots)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Negates fall damage"));
+                    int index = FindIndexOfTooltipName("Tooltip0", tooltips);
+                    if (index != -1)
+                    {
+                        // Replace the sprinting with walking in the tooltip
+                        tooltips[index].Text = "Provides the ability to walk on water and honey";
+                    }
                 }
-            }
-            
-            // Obsidian amphibian boots and its upgrades
-            if (item.type == ItemID.ObsidianWaterWalkingBoots || item.type == ItemID.LavaWaders || item.type == ItemID.HellfireTreads || item.type == ItemID.TerrasparkBoots)
-            {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
+
+                // Spectre boots and its upgrades
+                if (item.type == ItemID.SpectreBoots || item.type == ItemID.LightningBoots || item.type == ItemID.FrostsparkBoots || item.type == ItemID.TerrasparkBoots || item.type == ItemID.FairyBoots)
                 {
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Increases jump speed and allows auto-jump"));
-                    if (item.type != ItemID.TerrasparkBoots)
-                        tooltips.Insert(index + 2, new TooltipLine(Mod, "NegateFallDmg", "Increases fall resistance"));
+                    int index = FindIndexOfTooltipName("Tooltip0", tooltips);
+                    if (index != -1)
+                    {
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Negates fall damage"));
+                    }
+                }
+
+                // Obsidian amphibian boots and its upgrades
+                if (item.type == ItemID.ObsidianWaterWalkingBoots || item.type == ItemID.LavaWaders || item.type == ItemID.HellfireTreads || item.type == ItemID.TerrasparkBoots)
+                {
+                    int index = FindIndexOfTooltipName("Tooltip0", tooltips);
+                    if (index != -1)
+                    {
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "NegateFallDmg", "Increases jump speed and allows auto-jump"));
+                        if (item.type != ItemID.TerrasparkBoots)
+                            tooltips.Insert(index + 2, new TooltipLine(Mod, "NegateFallDmg", "Increases fall resistance"));
+                    }
                 }
             }
 
             // Bundle of balloons
-            if (item.type == ItemID.BundleofBalloons)
+            if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
             {
-                int index = FindIndexOfTooltipName("Tooltip0", tooltips);
-                if (index != -1)
+                if (item.type == ItemID.BundleofBalloons)
                 {
-                    tooltips[index].Text = "Allows the holder to sextuple jump";
-                    tooltips.Insert(index + 1, new TooltipLine(Mod, "TooltipNoFallDmgModded", "Negates fall damage"));
+                    int index = FindIndexOfTooltipName("Tooltip0", tooltips);
+                    if (index != -1)
+                    {
+                        tooltips[index].Text = "Allows the holder to sextuple jump";
+                        tooltips.Insert(index + 1, new TooltipLine(Mod, "TooltipNoFallDmgModded", "Negates fall damage"));
+                    }
                 }
             }
         }

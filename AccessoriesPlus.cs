@@ -7,14 +7,14 @@ using log4net;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.GameContent;
-using AccessoriesPlus.Projectiles;
+using System;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace AccessoriesPlus
 {
 	public class AccessoriesPlus : Mod
     {
-        public static AccessoriesPlus instance;
-
         // Item stats stuff
         public static List<int> hookItemIDS;
         public static List<int> wingItemIDS;
@@ -28,8 +28,6 @@ namespace AccessoriesPlus
 
         public override void Load()
         {
-            instance = this;
-
             // Item stats
             hookItemIDS = new List<int>()
             {
@@ -191,17 +189,28 @@ namespace AccessoriesPlus
                 new string[]{ "3", "201", "41"}
             };
 
+            // If better web slinger is enabled change its stats
+            if (!ModContent.GetInstance<APServerConfig>().betterWebSlinger)
+            {
+                hookItemStats[IDToIndex(ItemID.WebSlinger)] = new string[] { "22.625", "10", "8", "Simultaneous" };
+            }
+
             // Texture replacement
+            // Bundle of balloons
             vanillaBundleOfBalloonsTexture = TextureAssets.Item[ItemID.BundleofBalloons];
             vanillaBundleOfBalloonsAccTexture = TextureAssets.AccBalloon[3];
-            TextureAssets.Item[ItemID.BundleofBalloons] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons");
-            TextureAssets.AccBalloon[3] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons_Balloon");
+            if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
+            {
+                TextureAssets.Item[ItemID.BundleofBalloons] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons");
+                TextureAssets.AccBalloon[3] = ModContent.Request<Texture2D>("AccessoriesPlus/Items/BundleofBalloons_Balloon");
+            }
+
+            // Hooking
+            //On.Terraria.Player.CarpetMovement += HookCarpetMovement;
         }
 
         public override void Unload()
         {
-            instance = null;
-
             // Item stats
             hookItemIDS = null;
             wingItemIDS = null;
@@ -210,9 +219,83 @@ namespace AccessoriesPlus
             wingItemStats = null;
 
             // Texture replacement
+            // Bundle of balloons
             TextureAssets.Item[ItemID.BundleofBalloons] = vanillaBundleOfBalloonsTexture;
             TextureAssets.AccBalloon[3] = vanillaBundleOfBalloonsAccTexture;
+            vanillaBundleOfBalloonsTexture = null;
+            vanillaBundleOfBalloonsAccTexture = null;
         }
+
+
+        // Hooks
+        /*/ Flying carpet movement
+        private void HookCarpetMovement(On.Terraria.Player.orig_CarpetMovement orig, Player self)
+        {
+            if (ModContent.GetInstance<APServerConfig>().betterFlyingCarpet)
+            {
+                bool isCarpeting = false;
+                // If carpet can activate
+                if (self.grappling[0] == -1 && self.carpet && !self.canJumpAgain_Cloud && !self.canJumpAgain_Sandstorm && !self.canJumpAgain_Blizzard && !self.canJumpAgain_Fart && !self.canJumpAgain_Sail && !self.canJumpAgain_Unicorn && !self.canJumpAgain_Santank && !self.canJumpAgain_WallOfFleshGoat && !self.canJumpAgain_Basilisk && self.jump == 0 && self.velocity.Y != 0f && self.rocketTime == 0 && self.wingTime == 0f && !self.mount.Active)
+                {
+                    // Runs when the player first activates the carpet
+                    if (self.controlJump && self.canCarpet)
+                    {
+                        self.canCarpet = false;
+                        self.carpetTime = 300;
+                    }
+
+                    // If the carpet is being used
+                    if (self.carpetTime > 0 && self.controlJump)
+                    {
+                        // Movement variables
+                        self.fallStart = (int)(self.position.Y / 16f);
+                        isCarpeting = true;
+                        self.carpetTime--;
+
+                        // Removing gravity
+                        float gravity = self.gravity;
+                        if (self.gravDir == 1f && self.velocity.Y > -gravity)
+                        {
+                            self.velocity.Y = -(gravity + 1E-06f);
+                        }
+                        else if (self.gravDir == -1f && self.velocity.Y < gravity)
+                        {
+                            self.velocity.Y = gravity + 1E-06f;
+                        }
+
+                        // Animation
+                        self.carpetFrameCounter += 1f + Math.Abs(self.velocity.X * 0.5f);
+                        if (self.carpetFrameCounter > 8f)
+                        {
+                            self.carpetFrameCounter = 0f;
+                            self.carpetFrame++;
+                        }
+                        if (self.carpetFrame < 0)
+                        {
+                            self.carpetFrame = 0;
+                        }
+                        if (self.carpetFrame > 5)
+                        {
+                            self.carpetFrame = 0;
+                        }
+                    }
+                }
+
+                // Removing slowfall if carpeting, otherwise don't show the carpet
+                if (!isCarpeting)
+                {
+                    self.carpetFrame = -1;
+                }
+                else
+                {
+                    self.slowFall = false;
+                }
+            }
+            else
+            {
+                orig(self);
+            }
+        }*/
 
 
         // Returns true if the item type is found in the hook IDs list
@@ -291,94 +374,116 @@ namespace AccessoriesPlus
             foreach (Recipe recipe in Main.recipe)
             {
                 // Ankh shield stuff
-                // Ankh charm
-                if (recipe.HasResult(ItemID.AnkhCharm))
+                if (ModContent.GetInstance<APServerConfig>().betterAnkhShield)
                 {
-                    recipe.requiredItem[4] = new Item(ModContent.GetInstance<ReflectiveBlindfold>().Type);
-                    recipe.AddIngredient(ModContent.GetInstance<MagicMitten>());
+                    // Ankh charm
+                    if (recipe.HasResult(ItemID.AnkhCharm))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.Blindfold);
+                        recipe.AddIngredient(ModContent.GetInstance<ReflectiveBlindfold>());
+                        recipe.AddIngredient(ItemID.HandWarmer);
+                    }
                 }
 
 
                 // Terraspark boots stuff
-                // Amphibian boots
-                if (recipe.HasResult(ItemID.AmphibianBoots))
+                if (ModContent.GetInstance<APServerConfig>().betterTerrasparkBoots)
                 {
-                    recipe.requiredItem[0] = new Item(ItemID.WaterWalkingBoots);
-                }
+                    // Amphibian boots
+                    if (recipe.HasResult(ItemID.AmphibianBoots))
+                    {
+                        recipe.AddIngredient(ItemID.WaterWalkingBoots);
+                        RemoveIngredientFromRecipe(recipe, ItemID.SailfishBoots);
+                    }
 
-                // Spectre boots
-                if (recipe.HasResult(ItemID.SpectreBoots))
-                {
-                    recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
-                }
+                    // Spectre boots
+                    if (recipe.HasResult(ItemID.SpectreBoots))
+                    {
+                        recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
+                    }
 
-                // Lava waders
-                if (recipe.HasResult(ItemID.LavaWaders))
-                {
-                    recipe.DisableRecipe();
-                }
+                    // Lava waders
+                    if (recipe.HasResult(ItemID.LavaWaders))
+                    {
+                        recipe.DisableRecipe();
+                    }
 
-                // Obsidian amphibian boots
-                if (recipe.HasResult(ItemID.ObsidianWaterWalkingBoots))
-                {
-                    recipe.requiredItem[0] = new Item(ItemID.AmphibianBoots);
+                    // Obsidian amphibian boots
+                    if (recipe.HasResult(ItemID.ObsidianWaterWalkingBoots))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.WaterWalkingBoots);
+                        recipe.AddIngredient(ItemID.AmphibianBoots);
+                    }
                 }
 
 
                 // Obsidian skull recipe stuff
-                // Magma stone
-                if (recipe.HasIngredient(ItemID.MagmaStone))
+                if (ModContent.GetInstance<APServerConfig>().betterObSkullRecipes)
                 {
-                    RemoveIngredientFromRecipe(recipe, ItemID.MagmaStone);
-                    recipe.AddRecipeGroup("AccessoriesPlus:MagmaStones");
-                }
-                
-                // Lucky horseshoe
-                if (recipe.HasIngredient(ItemID.LuckyHorseshoe))
-                {
-                    RemoveIngredientFromRecipe(recipe, ItemID.LuckyHorseshoe);
-                    recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
+                    // Magma stone
+                    if (recipe.HasIngredient(ItemID.MagmaStone))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.MagmaStone);
+                        recipe.AddRecipeGroup("AccessoriesPlus:MagmaStones");
+                    }
+
+                    // Lucky horseshoe
+                    if (recipe.HasIngredient(ItemID.LuckyHorseshoe))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.LuckyHorseshoe);
+                        recipe.AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes");
+                    }
+
+                    // Obsidian rose
+                    if (recipe.HasIngredient(ItemID.ObsidianRose))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.ObsidianRose);
+                        recipe.AddRecipeGroup("AccessoriesPlus:ObsidianRoses");
+                    }
+
+                    // Lava charm
+                    if (recipe.HasIngredient(ItemID.LavaCharm))
+                    {
+                        RemoveIngredientFromRecipe(recipe, ItemID.LavaCharm);
+                        recipe.AddRecipeGroup("AccessoriesPlus:LavaCharms");
+                    }
                 }
 
-                // Obsidian rose
-                if (recipe.HasIngredient(ItemID.ObsidianRose))
-                {
-                    RemoveIngredientFromRecipe(recipe, ItemID.ObsidianRose);
-                    recipe.AddRecipeGroup("AccessoriesPlus:ObsidianRoses");
-                }
 
-                // Lava charm
-                if (recipe.HasIngredient(ItemID.LavaCharm))
-                {
-                    RemoveIngredientFromRecipe(recipe, ItemID.LavaCharm);
-                    recipe.AddRecipeGroup("AccessoriesPlus:LavaCharms");
-                }
-
-                
                 // Bundle of balloons
-                if (recipe.HasResult(ItemID.BundleofBalloons))
+                if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
                 {
-                    recipe.DisableRecipe();
+                    if (recipe.HasResult(ItemID.BundleofBalloons))
+                    {
+                        recipe.DisableRecipe();
+                    }
                 }
             }
 
-            // Lava waders recipe
-            CreateRecipe(ItemID.LavaWaders)
+            // Terraspark boots stuff
+            if (ModContent.GetInstance<APServerConfig>().betterTerrasparkBoots)
+            {
+                // Lava waders recipe
+                CreateRecipe(ItemID.LavaWaders)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddIngredient(ItemID.ObsidianWaterWalkingBoots)
                 .AddRecipeGroup("AccessoriesPlus:LavaCharms")
                 .AddRecipeGroup("AccessoriesPlus:ObsidianRoses")
                 .Register();
 
-            // Terraspark boots alternate recipe
-            CreateRecipe(ItemID.TerrasparkBoots)
+                // Terraspark boots alternate recipe
+                CreateRecipe(ItemID.TerrasparkBoots)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddIngredient(ItemID.FrostsparkBoots)
                 .AddIngredient(ItemID.HellfireTreads)
                 .Register();
+            }
 
-            // Bundle of balloons recipe
-            CreateRecipe(ItemID.BundleofBalloons)
+            // Bundle of balloons stuff
+            if (ModContent.GetInstance<APServerConfig>().betterBundleOfBalloons)
+            {
+                // Bundle of balloons recipe
+                CreateRecipe(ItemID.BundleofBalloons)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddRecipeGroup("AccessoriesPlus:LuckyHorseshoes")
                 .AddRecipeGroup("AccessoriesPlus:CloudBalloons")
@@ -387,6 +492,7 @@ namespace AccessoriesPlus
                 .AddRecipeGroup("AccessoriesPlus:FartBalloons")
                 .AddRecipeGroup("AccessoriesPlus:TsunamiBalloons")
                 .Register();
+            }
         }
 
         // Recipe groups

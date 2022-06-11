@@ -1,0 +1,17 @@
+﻿This updates plans:
+ An accessory that increases defense as your health decreases
+ An accessory like mana flower, but for health
+ An accessory that is a combination of the Treasure Magnet and Greedy Ring (maybe celestial magnet as well)?
+ Cell phone gets a different crafting tree and gets buffed - probably include demon conch and magic conch and allow you to teleport to oceans and hell
+ Web slinger even more
+
+Next updates plan:
+ Illuminant dye, which fully illuminates a player when equipped in dye slots (useful for keeping track of the player in dark spaces, probably will be obtained by the dye trader while in a graveyard or at night)
+ Cross mod tooltips for wings, hooks, extra jumps, and rocket boots
+ Extra jump items and rocket boots and its upgrades display stats in their tooltips
+ Magic carpet is considered a wing accessory and acts more like celestial starboard - this will have a config toggle for people who prefer it the vanilla way
+
+
+Ideas:
+ Architect gizmo pack gets a different crafting tree and gets buffed
+ Grand design gets a different crafting tree and gets buffed

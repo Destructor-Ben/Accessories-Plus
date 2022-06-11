@@ -1,38 +1,31 @@
-Accessories+ adds and tweaks accessories to make the game cooler and more fun.
+Accessories+ adds and tweaks accessories to make the game better.
+
+There is an option to use each feature in the config, so if you don't like one of them you can disable it.
 
 It is recommended to use this mod alongside the Wing Slot mod, since it is something I wanted to implement in this mod, but people have already done it very well and I'm lazy.
 
 If you find any bugs or have any suggestions, please let me know on the mod's Github.
 
-Also I couldn't be bothered to finish the new Ankh Shield items names and texture or finish the web slinger and I really wanted to release the mod, so those are going to change soon.
-
 [c/8ffdff:Features + Changes]
 - [i:939] Web Slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
 - [i:84][i:4978] Hooks and wings display their stats in their tooltips
-- [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull can also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull e.g recipes that require the [i:1322] Magma Stone can also use the [i:3999] Magma Skull and [i:4003] Molten Skull Rose as an alternative
 - [i:5000] Terraspark Boots have a slightly different crafting tree and have been buffed
 - [i:1613] Ankh Shield has a slightly different crafting tree and has been buffed
-- [i:1164] Bundle of Ballons has a slightly different crafting tree and has been buffed
-
-[c/8ffdff:Ideas and Planned Features + Changes]
-- Config
-- Cross mod tooltips for wings and hooks
-- Flight boots can be used with wings after all wing flight time has been used up
-- Magic carpet is considered a wing accessory and acts more like celestial starboard - this will have a config toggle for people who prefer it the vanilla way
-- Extra jump items and rocket boots and its upgrades display stats in their tooltips
-- Architect gizmo pack gets a different crafting tree and gets buffed
-- Grand design gets a different crafting tree and gets buffed
-- Illuminant dye, which fully illuminates a player when equipped in dye slots (useful for keeping track of the player in dark spaces, probably will be obtained by the dye trader while in a graveyard)
-- An accessory that increases defense as your health decreases
-- An accessory like mana flower, but for health
-- An accessory that is a combination of the Treasure Magnet and Greedy Ring (maybe celestial magnet as well)?
-- Cell phone gets a different crafting tree and gets buffed - probably include demon conch and magic conch and allow you to teleport to oceans and hell
+- [i:1164] Bundle of Balloons has a slightly different crafting tree and has been buffed
+- [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull can also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull e.g recipes that require the [i:1322] Magma Stone can also use the [i:3999] Magma Skull and [i:4003] Molten Skull Rose as an alternative
 
 [c/8ffdff:Changelog]
+ [c/9970ff:v1.1.0 (11/06/2022)]
+ - [i:575] Added a config
+ - [i:939] Web slinger is smoother and less buggy
+ - [i:888] Reflective Blindfold's sprite has been changed
+ - [i:888] Reflective Blindfold's name has been changed to Blinding Mirror
+ - [i:1921] Magic Mitten has been removed
+ - [i:1613] Ankh Shield and [i:1612] Ankh Charm no longer reduce healing potion cooldown by 25%
+ - [i:1612] Ankh Charm is now crafted with [i:1921] Hand Warmer instead of Magic Mitten
  [c/9970ff:v1.0.0 (05/06/2022)]
  - [i:939] Web slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
  - [i:84][i:4978] Hooks and wings display their stats in their tooltips
- - [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull has been changed to also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull
  - [i:5000] Terraspark Boots can additionally be crafted with [i:4874] Hellfire Treads instead of [i:908] Lava Waders, though this does not provide any extra functionality
  - [i:405] Spectre Boots recipe has been changed to additionally require a [i:158] Lucky Horseshoe or [i:396] Obsidian Horseshoe
  - [i:5000] Terraspark Boots, [i:1862] Frostspark Boots, [i:898] Lightning Boots, and [i:405] Spectre Boots negate fall damage
@@ -52,3 +45,4 @@ Also I couldn't be bothered to finish the new Ankh Shield items names and textur
  - [i:1164] Bundle of Balloons recipe has been changed to require either a [i:399] normal or [i:1250] horseshoe balloon for each of the jump types and a [i:158] Lucky Horseshoe or [i:396] Obsidian Horseshoe
  - [i:1164] Bundle of Balloons sprites have been changed
  - [i:1164] Bundle of Balloons has been renamed to Bundle of Horseshoe Balloons
+ - [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull has been changed to also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull

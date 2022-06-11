@@ -3,11 +3,14 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using log4net;
+using Terraria.DataStructures;
 
 namespace AccessoriesPlus.Projectiles
 {
@@ -47,21 +50,9 @@ namespace AccessoriesPlus.Projectiles
 
 			if (player.dead)
 				Projectile.Kill();
-
-
-			// Setting playerVelocity to player.velocity, reseting swing direction, and setting the distance the player should be from the hook
-			if (Projectile.timeLeft == 3600 * 10)
-			{
-				if (!swinging)
-					dstToPlayerWhenGrappled = DistanceBetweenPoints(Projectile.Center, player.Center);
-
-				playerVelocity = player.velocity;
-
-				swingDirection = float.PositiveInfinity;
-			}
 		}
 
-		// Returns true if the player can use the grappling hook
+        // Returns true if the player can use the grappling hook
         public override bool? CanUseGrapple(Player player)
 		{
 			int hooksOut = 0;
@@ -112,35 +103,48 @@ namespace AccessoriesPlus.Projectiles
 		// Adjusts how fast you get pulled to the grappling hook projectile's landing position
 		public override void GrapplePullSpeed(Player player, ref float speed) { speed = 20f; }
 
-		// Where all the AI code is located
-		Vector2 playerVelocity = new(0f, 0f);
 
-		float dstToPlayerWhenGrappled = float.PositiveInfinity;
+		// Where all the AI code is located // TODO: make the moving down more precise, make direction change based on velocity, allow it to grapple to trees, and make grapple range adjusting at the end of ai smoother
+		static Vector2 playerVelocity = new(float.PositiveInfinity, float.PositiveInfinity);
+
+		float dstToPlayerWhenGrappled = 500f;
 
 		bool swinging = false;
 		float swingDirection = float.PositiveInfinity;
-		float swingVelocity = 0f;
 
-		const float stopSpeedThreshold = 1f;
-		const float playerSlowdownSpeed = 0.04f;
+		const float swingSpeed = 0.4f;
+		const float swingDirChangeThreshold = 300f;
 
-		const float swingSpeed = 0.04f;
-		const float swingDirectionChangeThreshold = 2f;
+		const float stopSpeedThreshold = 0.3f;
+		const float playerSlowdownSpeed = 0.02f;
 
 		public override void GrappleTargetPoint(Player player, ref float grappleX, ref float grappleY)
 		{
-			// Distance and direction to player
-			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
-			float dstToPlayer = DistanceBetweenPoints(Projectile.Center, player.Center);
+			// Smooth transition into hooking and sets the variable grapple distance
+			bool justHooked = playerVelocity == new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+			if (justHooked)
+			{
+				// Smoothing tranistion
+				if (player.velocity != Vector2.Zero)
+				{
+					playerVelocity = player.velocity;
+				}
 
+				// Variable grapple distance
+				dstToPlayerWhenGrappled = DistanceBetweenPoints(Projectile.Center, player.Center);
+			}
 
 			// Making the player hang in the same position
 			grappleX = player.Center.X;
 			grappleY = player.Center.Y;
 
+			// Distance and direction to player
+			Vector2 dirToPlayer = Projectile.DirectionTo(player.Center);
+			float dstToPlayer = DistanceBetweenPoints(Projectile.Center, player.Center);
+
 
 			// If the player is swinging
-			if (dstToPlayer > GrappleRange())//dstToPlayer > dstToPlayerWhenGrappled || 
+			if (dstToPlayer > dstToPlayerWhenGrappled || dstToPlayer > GrappleRange())
 				swinging = true;
 			else
 				swinging = false;
@@ -152,28 +156,21 @@ namespace AccessoriesPlus.Projectiles
 			// Swinging
 			if (swinging)
 			{
-				// Removing gravity
+				// Resetting gravity
 				playerVelocity.Y = 0f;
 
+				// Setting swing direction
 				float xDifference = Projectile.Center.X - player.Center.X;
-
-				if ((swingVelocity < swingDirectionChangeThreshold && swingVelocity > -swingDirectionChangeThreshold) || swingDirection == float.PositiveInfinity)
+				bool shouldChangeDir = MathF.Abs(xDifference) > swingDirChangeThreshold;
+				if (shouldChangeDir || swingDirection == float.PositiveInfinity)
 					swingDirection = xDifference / MathF.Abs(xDifference);
-				
+
+				// Changing the x velocity of the player to make them swing
 				if (!float.IsNaN(swingDirection))
-					swingVelocity += swingSpeed * ((swingDirection == xDifference / MathF.Abs(xDifference)) ? swingDirection : -swingDirection);
+					playerVelocity.X += swingSpeed * swingDirection;
 
-				float newDstToPlayer = DistanceBetweenPoints(Projectile.Center, player.Center + new Vector2(swingDirection, 0f));
-				if (newDstToPlayer > dstToPlayerWhenGrappled || newDstToPlayer > GrappleRange())
-					playerVelocity.Y += 25f * player.gravDir;
-
-				// Adding the swing velocity to player velocity
-				playerVelocity.X += swingVelocity;
-
-				// Moving the player closer to the hook if they are too far away
-				Vector2 distanceToMove = (dstToPlayer - GrappleRange()) * -dirToPlayer;
-				grappleX += distanceToMove.X;
-				grappleY += distanceToMove.Y;
+				// Moving the player down so they are at the edge of the swing distance
+				playerVelocity.Y += 25f * player.gravDir;
 			}
 
 
@@ -186,7 +183,7 @@ namespace AccessoriesPlus.Projectiles
 
 			if (playerVelocity.X < stopSpeedThreshold && playerVelocity.X > -stopSpeedThreshold)
 				playerVelocity.X = 0f;
-
+			 
 
 			// Movement speed caps
 			if (playerVelocity.Y > player.maxFallSpeed)
@@ -205,6 +202,15 @@ namespace AccessoriesPlus.Projectiles
 			// Moving the player
 			grappleX += playerVelocity.X;
 			grappleY += playerVelocity.Y;
+
+			// Moving the player closer to the hook if they are too far away
+			float newDstToPlayer = DistanceBetweenPoints(Projectile.Center, new Vector2(grappleX, grappleY));
+			if (newDstToPlayer > GrappleRange() || newDstToPlayer > dstToPlayerWhenGrappled)
+			{
+				Vector2 distanceToMove = (newDstToPlayer - dstToPlayerWhenGrappled) * -dirToPlayer;
+				grappleX += distanceToMove.X;
+				grappleY += distanceToMove.Y;
+			}
 		}
 
 		// Draws the grappling hook's chain
