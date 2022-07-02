@@ -114,8 +114,6 @@ namespace AccessoriesPlus
                     player.noFallDmg = true;
                 }
             }
-
-
         }
 
         // Changing vanilla items tooltips

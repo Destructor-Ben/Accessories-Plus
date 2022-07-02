@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 using System.ComponentModel;
+using Newtonsoft.Json;
 using Microsoft.Xna.Framework;
 
 namespace AccessoriesPlus
@@ -22,12 +23,31 @@ namespace AccessoriesPlus
         [DefaultValue(true)]
         public bool betterWebSlinger;
 
-        /*/ Flying carpet
-        [Label("[i:939]  Better Flying Carpet")]
+        // Web slinger
+        [Label("[i:1037]  Illuminant Dye (Unfinished)")]
+        [Tooltip("Enables or Disables the Illuminant Dye Item\nReload Required")]
+        [ReloadRequired]
+        [DefaultValue(false)]
+        public bool illuminantDye;
+
+        // Lifeform analyzer
+        [Label("[i:3118]  Better Lifeform Analyzer (Unfinished)")]
+        [Tooltip("When enabled, the Lifeform Analyzer displays more information about all nearby creatures")]
+        [DefaultValue(false)]
+        public bool betterLifeformAnalyzer;
+
+        // Metal detector
+        [Label("[i:3102]  Better Metal Detector (Unfinished)")]
+        [Tooltip("When enabled, the Metal Detector displays more information about nearby loot")]
+        [DefaultValue(false)]
+        public bool betterMetalDetector;
+
+        // Flying carpet
+        [Label("[i:934]  Better Flying Carpet (Unfinished)")]
         [Tooltip("When enabled, the Flying Carpet acts more like the Celestial Starboard and is considered a wing type accessory\nReload Required")]
         [ReloadRequired]
-        [DefaultValue(true)]
-        public bool betterFlyingCarpet;*/
+        [DefaultValue(false)]
+        public bool betterFlyingCarpet;
 
         // Hook stats
         [Label("[i:84]  Hook Stats")]

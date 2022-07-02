@@ -12,9 +12,12 @@ If you find any bugs or have any suggestions, please let me know on the mod's Gi
 - [i:5000] Terraspark Boots have a slightly different crafting tree and have been buffed
 - [i:1613] Ankh Shield has a slightly different crafting tree and has been buffed
 - [i:1164] Bundle of Balloons has a slightly different crafting tree and has been buffed
-- [i:193] Any recipe requiring an item that can be upgraded with an Obsidian Skull can also have the Obsidian Skull upgraded version used in the recipe instead of the original, though this does not give the resulting item the effects of the Obsidian Skull e.g recipes that require the [i:1322] Magma Stone can also use the [i:3999] Magma Skull and [i:4003] Molten Skull Rose as an alternative
+- [i:193] Recipes requiring the [i:1323] Obsidian Rose, [i:1322] Magma Stone, [i:158] Lucky Horseshoe, and [i:906] Lava Charm can use the Obsidian Skull versions as well
 
 [c/8ffdff:Changelog]
+ [c/9970ff:v1.1.1 (03/07/2022)]
+ - [i:521] Ported mod to new tModLoader version
+ - [i:520] Slightly improved mod compatibility with recipes
  [c/9970ff:v1.1.0 (11/06/2022)]
  - [i:575] Added a config
  - [i:939] Web slinger is smoother and less buggy

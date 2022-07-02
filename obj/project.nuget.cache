@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HjGsAFPBTK/mrlTU19fw42x9+W/2NbrD7VMmkQllQCoj/zGhXZUcm7ZuRNQ9E+EQj/hAObsLZMjLOqD5X2KBog==",
+  "dgSpecHash": "OysHsvE0ImBGmRSs2oh6UqvZfp/Tpyuu016e55lrCJx29E1eKxe91WLqmICGJdh/BMZwAW0P054ZSUariWkUFg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
+  "projectFilePath": "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\benho\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],

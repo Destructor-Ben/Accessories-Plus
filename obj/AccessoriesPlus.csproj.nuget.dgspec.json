@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj": {}
+    "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj": {}
   },
   "projects": {
-    "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj": {
+    "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
+        "projectUniqueName": "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
         "projectName": "AccessoriesPlus",
-        "projectPath": "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
+        "projectPath": "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
         "packagesPath": "C:\\Users\\benho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\benho\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\obj\\",
+        "outputPath": "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

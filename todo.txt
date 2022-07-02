@@ -1,17 +1,42 @@
 ﻿This updates plans:
- An accessory that increases defense as your health decreases
- An accessory like mana flower, but for health
- An accessory that is a combination of the Treasure Magnet and Greedy Ring (maybe celestial magnet as well)?
- Cell phone gets a different crafting tree and gets buffed - probably include demon conch and magic conch and allow you to teleport to oceans and hell
+ Illuminant dye
+
+ Better lifeform analyzer and metal detector
+ When accessories are combined and at least one accessory has a prefix, the prefix will be given to the crafted accessory - if there are two the player will be asked which one they want
+ Magic carpet is considered a wing accessory and acts more like celestial starboard
+
+ Etheral boots compatibility
+ Calamity mod compatibility
+
  Web slinger even more
+ - [i:1037] Added Illuminant Dye
+ - [i:84][i:4978] Added cross-mod tooltips for wings and hooks
+ - [i:939] Web slinger is even smoother and less buggy
+
+  (includes some modded hooks and wings)
+- [i:1037] Illuminant Dye, which fully illuminates the player and can be purchased from the Dye Trader during an eclipse
+
+- [i:520] Compatibility with Vitality Mod and Ethereal Boots
+
 
 Next updates plan:
- Illuminant dye, which fully illuminates a player when equipped in dye slots (useful for keeping track of the player in dark spaces, probably will be obtained by the dye trader while in a graveyard or at night)
- Cross mod tooltips for wings, hooks, extra jumps, and rocket boots
- Extra jump items and rocket boots and its upgrades display stats in their tooltips
- Magic carpet is considered a wing accessory and acts more like celestial starboard - this will have a config toggle for people who prefer it the vanilla way
+ There isn't one
 
 
 Ideas:
  Architect gizmo pack gets a different crafting tree and gets buffed
  Grand design gets a different crafting tree and gets buffed
+ Cell phone gets a different crafting tree and gets buffed - probably include demon conch and magic conch and allow you to teleport to oceans and hell
+
+ An accessory that increases defense as your health decreases
+ An accessory like mana flower, but for health - include charm of myths
+ An accessory that is a combination of the Treasure Magnet and Greedy Ring (maybe celestial magnet as well)?
+ An accessory that is a combination of all arena buffs but doesn't have to be equipped
+ Combination of mana cloak celestial magnet and mana regen band
+ More infinite ammo
+
+ Make rare accessories more common for less grinding to give the mod more purpose
+ Make rod of discord more common - drop from queen slime instead of chaos elementals?
+ Tidy up mana flower tree and regen band trees
+
+ Increased drop rate of all accessories so less grinding
