@@ -1,26 +1,30 @@
-﻿This updates plans:
- Illuminant dye
+﻿Todo:
+ Reformat mod
 
- Better lifeform analyzer and metal detector
- When accessories are combined and at least one accessory has a prefix, the prefix will be given to the crafted accessory - if there are two the player will be asked which one they want
- Magic carpet is considered a wing accessory and acts more like celestial starboard
+ Accessory obtainability
+ Prefixes - Work for weapons as well
 
- Etheral boots compatibility
- Calamity mod compatibility
-
- Web slinger even more
- - [i:1037] Added Illuminant Dye
- - [i:84][i:4978] Added cross-mod tooltips for wings and hooks
- - [i:939] Web slinger is even smoother and less buggy
-
-  (includes some modded hooks and wings)
-- [i:1037] Illuminant Dye, which fully illuminates the player and can be purchased from the Dye Trader during an eclipse
-
-- [i:520] Compatibility with Vitality Mod and Ethereal Boots
+ Accessory trees
+ Sort out icon on steam workshop - Get icon to be 512px [Done]
+ Sort out description - Remove changelog from terraria and get formatting nice [Done]
+ 
+ Add release date in changelog
+ Publish the github
+ Add github link on steam page
+ Disable the data stripper
+ 
+ Data stripper:
+	 Add support for multiple recipes
 
 
-Next updates plan:
- There isn't one
+
+Long Term Plans:
+ Make a tree of every accessory to make a bunch of mega combo accessories
+ Make accessories more accessible - May change fishing and angler quests a bit + traveling merchant spawns and prices
+ Make prefixes better - get previous one so you don't have to keep reforging & make reforging easier
+ Better Web Slinger + Drill
+ Compatibility with Calamity
+
 
 
 Ideas:
@@ -33,10 +37,11 @@ Ideas:
  An accessory that is a combination of the Treasure Magnet and Greedy Ring (maybe celestial magnet as well)?
  An accessory that is a combination of all arena buffs but doesn't have to be equipped
  Combination of mana cloak celestial magnet and mana regen band
- More infinite ammo
+ Combination of all bee accessories
 
- Make rare accessories more common for less grinding to give the mod more purpose
- Make rod of discord more common - drop from queen slime instead of chaos elementals?
- Tidy up mana flower tree and regen band trees
+ Tidy up mana flower tree and regen band 
+ Recipes for aglet, climbing claws, show spikes, hermes boots, lucky horseshoe, shiny red balloon, lava charm, the emblems, and ice skates
 
  Increased drop rate of all accessories so less grinding
+
+ When items are combined and at least one item has a prefix, the prefix will be given to the crafted item - if there are two the player will be asked which one they want
