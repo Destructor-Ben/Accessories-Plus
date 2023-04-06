@@ -1,2 +1,3 @@
 # Accessories+
- A Terraria mod to make accessories better
+
+A Terraria mod focused around improving accessories
