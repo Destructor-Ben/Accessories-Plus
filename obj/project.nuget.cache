@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZhVJ1CgxU80JHwsV8fNqrE6e4dM1DyZzZyOdrWb9Lw5HDgQ9ZT7FZmVHOXPHCk01PWr1fbH7saGjVR4jOJN8lw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\benho\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\AccessoriesPlus\\AccessoriesPlus.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\benho\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

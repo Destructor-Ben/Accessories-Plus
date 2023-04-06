@@ -1,0 +1,30 @@
+
+Mods: {
+	AccessoriesPlus: {
+		Config: {
+			Name: Config
+
+			Headers: {
+				Features: Features
+				BugFixes: Bug Fixes
+			}
+		}
+
+		AccessorySlots: {
+			WingSlot: {
+				FunctionalTooltip: Wings
+				VanityTooltip: Vanity Wings
+			}
+
+			ShieldSlot: {
+				FunctionalTooltip: Shield
+				VanityTooltip: Vanity Shield
+			}
+
+			BootSlot: {
+				FunctionalTooltip: Boots
+				VanityTooltip: Vanity Boots
+			}
+		}
+	}
+}

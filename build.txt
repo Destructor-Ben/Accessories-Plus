@@ -1,4 +1,6 @@
 displayName = Accessories+
 author = Destructor_Ben
-version = 1.2.1
-homepage=https://github.com/Destructor-Ben/AccessoriesPlus
+version = 1.0.0.0
+homepage = https://github.com/Destructor-Ben/Accessories-Plus
+hideCode = true
+hideResources = true
