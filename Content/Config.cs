@@ -1,7 +1,7 @@
 ﻿using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
-namespace AccessoriesPlus;
+namespace AccessoriesPlus.Content;
 [Label("$Mods.AccessoriesPlus.Config.Name")]
 public class Config : ModConfig
 {
