@@ -1,0 +1,41 @@
+AccessorySlots: {
+	WingSlot: {
+		FunctionalTooltip: Wings
+		VanityTooltip: Vanity Wings
+	}
+
+	ShieldSlot: {
+		FunctionalTooltip: Shield
+		VanityTooltip: Vanity Shield
+	}
+
+	BootSlot: {
+		FunctionalTooltip: Boots
+		VanityTooltip: Vanity Boots
+	}
+}
+
+Tooltips: {
+	HandOfCreation0: Increases block placement range by 5
+	HandOfCreation1: Increases tool range by 4
+	TerrasparkBoots0: Increases jump speed and allows auto-jump
+	TerrasparkBoots1: Increases fall resistance
+	BundleOfBalloons0: Allows the holder to sextuple jump
+
+	WingStats: {
+		NegateFallDamage: Negates fall damage
+		FlightTime: "{0} {^0:second;seconds} flight time"
+		FlightHeight: "{0} {^0:tile;tiles} flight height"
+		HorizontalSpeed: "{0} mph max horizontal speed"
+		VerticalMultiplier: "{0}% jump speed multiplier"
+	}
+
+	HookStats: {
+		Reach: "{0} {^0:tile;tiles} reach"
+		Velocity: "{0} mph velocity"
+		NumHooks: "{0} {^0:hook;hooks}"
+		LatchingSingle: Single hook latching
+		LatchingIndividual: Individual hook latching
+		LatchingSimultaneous: Simultaneous hook latching
+	}
+}

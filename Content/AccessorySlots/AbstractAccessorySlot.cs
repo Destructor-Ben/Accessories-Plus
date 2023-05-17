@@ -1,12 +1,8 @@
-﻿using Terraria;
-using Terraria.Localization;
-using Terraria.ModLoader;
-
-namespace AccessoriesPlus.Content.AccessorySlots;
+﻿namespace AccessoriesPlus.Content.AccessorySlots;
 internal abstract class AbstractAccessorySlot : ModAccessorySlot
 {
-    public virtual LocalizedText FunctionalTooltip => Language.GetText($"Mods.AccessoriesPlus.AccessorySlots.{GetType().Name}.FunctionalTooltip");
-    public virtual LocalizedText VanityTooltip => Language.GetText($"Mods.AccessoriesPlus.AccessorySlots.{GetType().Name}.VanityTooltip");
+    public virtual LocalizedText FunctionalTooltip => Util.GetText($"AccessorySlots.{GetType().Name}.FunctionalTooltip");
+    public virtual LocalizedText VanityTooltip => Util.GetText($"AccessorySlots.{GetType().Name}.VanityTooltip");
 
     public abstract int FunctionalItemID { get; }
     public abstract int VanityItemID { get; }

@@ -1,7 +1,4 @@
-﻿using Terraria;
-using Terraria.ID;
-
-namespace AccessoriesPlus.Content.AccessorySlots;
+﻿namespace AccessoriesPlus.Content.AccessorySlots;
 internal class BootSlot : AbstractAccessorySlot
 {
     public override int FunctionalItemID => ItemID.HermesBoots;
@@ -10,5 +7,10 @@ internal class BootSlot : AbstractAccessorySlot
     public override bool IsValidItem(Item item)
     {
         return item.shoeSlot > 0;
+    }
+
+    public override bool IsEnabled()
+    {
+        return Config.Instance.SlotBoots;
     }
 }

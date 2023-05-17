@@ -1,0 +1,110 @@
+DisplayName: Config
+
+Headers: {
+	ImprovedAccessories: Improved Accessories
+	ImprovedMounts: Improved Mounts
+	ImprovedMinecarts: Improved Minecarts
+	ImprovedPets: Improved Pets
+	ImprovedGrapplingHooks: Improved Grappling Hooks
+	AccessorySlots: Accessory Slots
+	StatTooltips: Stat Tooltips
+	Obtainability: Obtainability
+}
+
+// Improved Accessories
+
+// Improved Mounts
+
+// Improved Minecarts
+
+// Improved Pets
+
+// Improved Grappling Hooks
+
+// Accessory Slots
+SlotMoonlord: {
+	Label: "[i:BossMaskMoonlord] Post-Moonlord Accessory Slot"
+	Tooltip: Enables an extra accessory slot post Moonlord
+}
+
+SlotWings: {
+	Label: "[i:WingsSolar] Wing Slot"
+	Tooltip: Enables an accessory slot for only wings
+}
+
+SlotShield: {
+	Label: "[i:AnkhShield] Shield Slot"
+	Tooltip: Enables an accessory slot for only shields
+}
+
+SlotBoots: {
+	Label: "[i:TerrasparkBoots] Boot Slot"
+	Tooltip: Enables an accessory slot for only boots
+}
+
+SlotForceWings: {
+	Label: "[i:CreativeWings] Force Wing Slot"
+	Tooltip: Force wings to be placed in the boot slot
+}
+
+SlotForceShields: {
+	Label: "[i:ObsidianShield] Force Shield Slot"
+	Tooltip: Force shields to be placed in the boot slot
+}
+
+SlotForceBoots: {
+	Label: "[i:HermesBoots] Force Boot Slot"
+	Tooltip: Force boots to be placed in the boot slot
+}
+
+// Stat Tooltips
+StatsWings: {
+	Label: "[i:WingsSolar] Wing Stats"
+	Tooltip: Enables wing stats
+}
+
+StatsHooks: {
+	Label: "[i:LunarHook] Hook Stats"
+	Tooltip: Enables hook stats
+}
+
+StatsLightPets: {
+	Label: "[i:SuspiciousLookingTentacle] Light Pet Stats"
+	Tooltip: Enables light pet stats
+}
+
+StatsMinecarts: {
+	Label: "[i:MeowmereMinecart] Minecart Stats"
+	Tooltip: Enables minecart stats
+}
+
+StatsMounts: {
+	Label: "[i:DrillContainmentUnit] Mount Stats"
+	Tooltip: Enables mount stats
+}
+
+// Obtainability
+ObtainabilityRecipes: {
+	Label: "[i:HermesBoots] More Accessory Recipes"
+	Tooltip: TODO
+}
+
+ObtainabilityShimmer: {
+	Label: "[i:BottomlessShimmerBucket] Accessory Shimmering"
+	Tooltip: TODO
+}
+
+ObtainabilityTravellingMerchant: {
+	Label: "[i:PeddlersHat] Common Travelling Merchant Accessories"
+	Tooltip: TODO
+}
+
+ObtainabilityPresents: {
+	Label: "[i:Present] Remove Accessories From Presents"
+	Tooltip:
+		'''
+		Remove the [i:HandWarmer] Hand Warmer and [i:Toolbox] Toolbox from presents
+		Adds a recipe for the Hand Warmer
+		Makes the Mechanic sell the Toolbox
+		'''
+}
