@@ -129,4 +129,6 @@ internal static class Util
         RecipeGroup.RegisterGroup("AccessoriesPlus:" + name, group);
         return group;
     }
+
+    // TODO - asset requesting
 }

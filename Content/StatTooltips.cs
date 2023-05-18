@@ -59,7 +59,7 @@ internal class StatTooltips : GlobalItem
         hookStats.Add(ItemID.StaticHook, new HookStats() { Reach = 37.5f, Velocity = 16, NumHooks = 2, LatchingMode = LatchingMode.Individual });
         #endregion
 
-        #region Vanilla Light pet Stats https://terraria.wiki.gg/wiki/Pets#Light_Pets
+        #region Vanilla Light Pet Stats https://terraria.wiki.gg/wiki/Pets#Light_Pets
         #endregion
 
         #region Vanilla Minecart Stats https://terraria.wiki.gg/wiki/Minecarts
@@ -166,6 +166,7 @@ internal class StatTooltips : GlobalItem
         public float Brightness = -1f;
         public bool Controllable = false;
         public bool ExposesTreasure = false;
+        public bool ExposesEnemies = false;
     }
 
     internal class MinecartStats : Stats

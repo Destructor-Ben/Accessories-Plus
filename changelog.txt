@@ -1,34 +1,4 @@
-[h1]Changelog[/h1]
-[b]v1.2.1 (02/09/2022)[/b]
+[b]v1.0.0.0[/b]
 [list]
-[*]Refactored the mod description and icon in tModLoader and on Steam
-[*]Added crafting trees for accessories to better show what the mod changes
-[/list]
-[b]v1.2.0 (23/08/2022)[/b]
-[list]
-[*]Ported to the new tModLoader version
-[*]Rewrote the mod since it was a mess
-[*]Removed the better Web Slinger
-[*]Removed the simpler Obsidian Skull recipes
-[/list]
-[b]v1.1.1 (03/07/2022)[/b]
-[list]
-[*]Ported mod to new tModLoader version
-[*]Slightly improved mod compatibility with recipes
-[/list]
-[b]v1.1.0 (11/06/2022)[/b]
-[list]
-[*]Added a config
-[*]Web slinger is smoother and less buggy
-[*]Reflective Blindfold's name has been changed to Blinding Mirror
-[*]Removed the Magic Mitten and it's effects on the Ankh Shield
-[/list]
-[b]v1.0.0 (05/06/2022)[/b]
-[list]
-[*]Web slinger acts like Spiderman's web slingers and can drop from Wall Creepers and Black Recluses
-[*]Hooks and wings display their stats in their tooltips
-[*]Terraspark Boots have a different crafting tree and are better
-[*]Ankh Shield has a different crafting tree and is better
-[*]Bundle of Balloons have a different crafting tree and are better
-[*]Recipes involving the Obsidian Skull upgraded items have been simplified
+[*]Rewrote the entire mod and ported it to 1.4.4
 [/list]

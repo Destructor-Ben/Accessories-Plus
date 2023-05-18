@@ -1,16 +1,15 @@
-Accessories+ adds and tweaks accessories to make the game better.
+Accessories+ adds and tweaks accessories, equipment, and accessory slots to improve and balance Terraria.
 
-There is an option to use each feature in the config, so if you don't like one of them you can disable it.
+There is an option to use each feature in the config, so if you don't like some of them you can disable them.
 
-Support for Calamity is coming soon.
+If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam or Github page.
 
-If you find any bugs or have any suggestions, please let me know on the mod's Steam or Github page.
+The changelog can be found on the Steam Workshop page under the change notes.
+
+To find the recipes changes, use the Recipe Browser mod.
 
 [hr][/hr]
 [h1]Features + Changes[/h1]
 [list]
-[*]Hooks and wings display their stats in their tooltips
-[*]Terraspark Boots have a different crafting tree and are better
-[*]Ankh Shield has a different crafting tree and is better
-[*]Bundle of Balloons has a different crafting tree and is better
+[*]TODO
 [/list]

@@ -20,6 +20,9 @@ Tooltips: {
 	HandOfCreation1: Increases tool range by 4
 	TerrasparkBoots0: Increases jump speed and allows auto-jump
 	TerrasparkBoots1: Increases fall resistance
+	AnkhShield0: Puts a shell around the owner when below 50% life that reduces damage by 25%
+	AnkhShield1: Absorbs 25% of damage done to players on your team when above 25% life
+	AnkhShield2: Enemies are more likely to target you
 	BundleOfBalloons0: Allows the holder to sextuple jump
 
 	WingStats: {

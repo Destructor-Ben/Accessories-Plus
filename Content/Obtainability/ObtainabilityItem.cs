@@ -19,6 +19,9 @@ internal class ObtainabilityItem : GlobalItem
             ItemID.Sets.ShimmerTransformToItem[ItemID.LifeformAnalyzer] = ItemID.DPSMeter;
             ItemID.Sets.ShimmerTransformToItem[ItemID.DPSMeter] = ItemID.Stopwatch;
 
+            // Shiny red balloon to balloon pufferfish
+            ItemID.Sets.ShimmerTransformToItem[ItemID.ShinyRedBalloon] = ItemID.BalloonPufferfish;
+
             // Corruption and crimson counterparts
             ItemID.Sets.ShimmerTransformToItem[ItemID.PutridScent] = ItemID.FleshKnuckles;
             ItemID.Sets.ShimmerTransformToItem[ItemID.FleshKnuckles] = ItemID.PutridScent;

@@ -33,7 +33,31 @@ internal class Recipes : ModSystem
             .AddIngredient(ItemID.AmphibianBoots)
             .Register();
 
-        // Ankh shield/charm
+        // Ankh shield
+        Recipe.Create(ItemID.AnkhShield)
+            .AddTile(TileID.TinkerersWorkbench)
+            .AddIngredient(ItemID.AnkhCharm)
+            .AddIngredient(ItemID.ObsidianShield)
+            .AddIngredient(ItemID.FrozenShield)
+            .AddIngredient(ItemID.HeroShield)
+            .DisableDecraft()
+            .Register();
+        Recipe.Create(ItemID.AnkhShield)
+            .AddTile(TileID.TinkerersWorkbench)
+            .AddIngredient(ItemID.AnkhCharm)
+            .AddIngredient(ItemID.ObsidianShield)
+            .AddIngredient(ItemID.FrozenTurtleShell)
+            .AddIngredient(ItemID.HeroShield)
+            .Register();
+        Recipe.Create(ItemID.AnkhShield)
+            .AddTile(TileID.TinkerersWorkbench)
+            .AddIngredient(ItemID.AnkhCharm)
+            .AddIngredient(ItemID.ObsidianShield)
+            .AddIngredient(ItemID.FrozenShield)
+            .AddIngredient(ItemID.FleshKnuckles)
+            .DisableDecraft()
+            .Register();
+
         Recipe.Create(ItemID.AnkhCharm)
             .AddTile(TileID.TinkerersWorkbench)
             .AddIngredient(ItemID.ArmorBracing)
@@ -69,6 +93,7 @@ internal class Recipes : ModSystem
         // Terraspark boots
         Util.RemoveRecipesForItem(ItemID.TerrasparkBoots);
         // Ankh shield/charm
+        Util.RemoveRecipesForItem(ItemID.AnkhShield);
         Util.RemoveRecipesForItem(ItemID.AnkhCharm);
         // Bundle of horseshoe balloons
         Util.RemoveRecipesForItem(ItemID.BundleofBalloons);

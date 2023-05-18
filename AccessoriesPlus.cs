@@ -1,5 +1,6 @@
 ﻿global using AccessoriesPlus.Configuration;
 global using AccessoriesPlus.Utilities;
+global using ReLogic.Content;
 global using Terraria;
 global using Terraria.ID;
 global using Terraria.Localization;

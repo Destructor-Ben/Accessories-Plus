@@ -33,6 +33,20 @@ internal class Config : ModConfig
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedHandOfCreation = true;
+
+    public bool ReworkedShinyStone = true;
+    #endregion
+
+    #region Improved Grappling Hooks
+    [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedGrapplingHooks")]
+
+    public bool GrapplingHooks = true;
+    #endregion
+
+    #region Improved Pets
+    [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedPets")]
+
+    public bool Pets = true;
     #endregion
 
     #region Improved Mounts
@@ -45,18 +59,6 @@ internal class Config : ModConfig
     [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedMinecarts")]
 
     public bool Minecarts = true;
-    #endregion
-
-    #region Improved Pets
-    [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedPets")]
-
-    public bool Pets = true;
-    #endregion
-
-    #region Improved Grappling Hooks
-    [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedGrapplingHooks")]
-
-    public bool GrapplingHooks = true;
     #endregion
 
     #region Accessory Slots
