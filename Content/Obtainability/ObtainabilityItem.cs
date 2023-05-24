@@ -68,5 +68,11 @@ internal class ObtainabilityItem : GlobalItem
                 .AddIngredient(ItemID.FlinxFur, 5)
                 .Register();
         }
+
+        // TODO - more accessory recipes
+        if (Config.Instance.ObtainabiltyRecipes)
+        {
+
+        }
     }
 }

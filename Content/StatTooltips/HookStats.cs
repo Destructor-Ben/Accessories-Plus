@@ -1,0 +1,233 @@
+﻿namespace AccessoriesPlus.Content.StatTooltips;
+internal class HookStats : Stats
+{
+    public float Reach = -1f;
+    public int NumHooks = -1;
+    public LatchingMode Latching = LatchingMode.Unknown;
+    public float ShootSpeed = -1f;
+    public float RetreatSpeed = -1f;
+    public float PullSpeed = -1f;
+
+    // TODO - Give these in pixels or tiles?
+    public static Dictionary<int, float> VanillaReach { get; private set; } = new()
+    {
+        // Pre hardmode
+        { ItemID.GrapplingHook,   18.75f },
+        { ItemID.AmethystHook,    18.75f },
+        { ItemID.SquirrelHook,    19f },
+        { ItemID.TopazHook,       20.625f },
+        { ItemID.SapphireHook,    22.5f },
+        { ItemID.EmeraldHook,     24.375f },
+        { ItemID.RubyHook,        26.25f },
+        { ItemID.AmberHook,       27.5f },
+        { ItemID.DiamondHook,     29.125f },
+
+        { ItemID.WebSlinger,      22.625f },
+        { ItemID.SkeletronHand,   21.875f },
+        { ItemID.SlimeHook,       18.75f },
+        { ItemID.FishHook,        25f },
+        { ItemID.IvyWhip,         28f },
+        { ItemID.BatHook,         31.25f },
+        { ItemID.CandyCaneHook,   25f },
+                                  
+        // Hardmode               
+        { ItemID.DualHook,        27.5f },
+        { ItemID.QueenSlimeHook,  30f },
+        { ItemID.ThornHook,       30f },
+        { ItemID.IlluminantHook,  30f },
+        { ItemID.WormHook,        30f },
+        { ItemID.TendonHook,      30f },
+        { ItemID.AntiGravityHook, 31.25f },
+        { ItemID.SpookyHook,      34.375f },
+        { ItemID.ChristmasHook,   34.375f },
+        { ItemID.LunarHook,       34.375f },
+        { ItemID.StaticHook,      37.5f },
+    };
+    public static Dictionary<int, int> VanillaNumHooks { get; private set; } = new()
+    {
+        // Pre hardmode
+        { ItemID.GrapplingHook,   1 },
+        { ItemID.AmethystHook,    1 },
+        { ItemID.SquirrelHook,    1 },
+        { ItemID.TopazHook,       1 },
+        { ItemID.SapphireHook,    1 },
+        { ItemID.EmeraldHook,     1 },
+        { ItemID.RubyHook,        1 },
+        { ItemID.AmberHook,       1 },
+        { ItemID.DiamondHook,     1 },
+
+        { ItemID.WebSlinger,      8 },
+        { ItemID.SkeletronHand,   2 },
+        { ItemID.SlimeHook,       3 },
+        { ItemID.FishHook,        2 },
+        { ItemID.IvyWhip,         3 },
+        { ItemID.BatHook,         1 },
+        { ItemID.CandyCaneHook,   1 },
+                                  
+        // Hardmode               
+        { ItemID.DualHook,        2 },
+        { ItemID.QueenSlimeHook,  1 },
+        { ItemID.ThornHook,       3 },
+        { ItemID.IlluminantHook,  3 },
+        { ItemID.WormHook,        3 },
+        { ItemID.TendonHook,      3 },
+        { ItemID.AntiGravityHook, 3 },
+        { ItemID.SpookyHook,      3 },
+        { ItemID.ChristmasHook,   3 },
+        { ItemID.LunarHook,       4 },
+        { ItemID.StaticHook,      2 },
+    };
+    public static Dictionary<int, LatchingMode> VanillaLatching { get; private set; } = new()
+    {
+        // Pre hardmode
+        { ItemID.GrapplingHook,   LatchingMode.Single },
+        { ItemID.AmethystHook,    LatchingMode.Single },
+        { ItemID.SquirrelHook,    LatchingMode.Single },
+        { ItemID.TopazHook,       LatchingMode.Single },
+        { ItemID.SapphireHook,    LatchingMode.Single },
+        { ItemID.EmeraldHook,     LatchingMode.Single },
+        { ItemID.RubyHook,        LatchingMode.Single },
+        { ItemID.AmberHook,       LatchingMode.Single },
+        { ItemID.DiamondHook,     LatchingMode.Single },
+
+        { ItemID.WebSlinger,      LatchingMode.Simultaneous },
+        { ItemID.SkeletronHand,   LatchingMode.Simultaneous },
+        { ItemID.SlimeHook,       LatchingMode.Simultaneous},
+        { ItemID.FishHook,        LatchingMode.Simultaneous },
+        { ItemID.IvyWhip,         LatchingMode.Simultaneous },
+        { ItemID.BatHook,         LatchingMode.Single    },
+        { ItemID.CandyCaneHook,   LatchingMode.Single },
+                                  
+        // Hardmode               
+        { ItemID.DualHook,        LatchingMode.Individual },
+        { ItemID.QueenSlimeHook,  LatchingMode.Single },
+        { ItemID.ThornHook,       LatchingMode.Simultaneous },
+        { ItemID.IlluminantHook,  LatchingMode.Simultaneous },
+        { ItemID.WormHook,        LatchingMode.Simultaneous },
+        { ItemID.TendonHook,      LatchingMode.Simultaneous },
+        { ItemID.AntiGravityHook, LatchingMode.Simultaneous },
+        { ItemID.SpookyHook,      LatchingMode.Simultaneous },
+        { ItemID.ChristmasHook,   LatchingMode.Simultaneous },
+        { ItemID.LunarHook,       LatchingMode.Simultaneous },
+        { ItemID.StaticHook,      LatchingMode.Individual },
+    };
+    public static Dictionary<int, float> VanillaRetreatSpeed { get; private set; } = new()
+    {
+        // Pre hardmode
+        { ItemID.GrapplingHook,   11f },
+        { ItemID.AmethystHook,    11f },
+        { ItemID.SquirrelHook,    11f },
+        { ItemID.TopazHook,       11.75f },
+        { ItemID.SapphireHook,    12.5f },
+        { ItemID.EmeraldHook,     13.25f },
+        { ItemID.RubyHook,        14f },
+        { ItemID.AmberHook,       15f },
+        { ItemID.DiamondHook,     14.75f },
+
+        { ItemID.WebSlinger,      11f },
+        { ItemID.SkeletronHand,   11f },
+        { ItemID.SlimeHook,       11f },
+        { ItemID.FishHook,        11f },
+        { ItemID.IvyWhip,         15f },
+        { ItemID.BatHook,         20f },
+        { ItemID.CandyCaneHook,   11f },
+                                  
+        // Hardmode               
+        { ItemID.DualHook,        17f },
+        { ItemID.QueenSlimeHook,  11f },
+        { ItemID.ThornHook,       18f },
+        { ItemID.IlluminantHook,  18f },
+        { ItemID.WormHook,        18f },
+        { ItemID.TendonHook,      18f },
+        { ItemID.AntiGravityHook, 20f },
+        { ItemID.SpookyHook,      22f },
+        { ItemID.ChristmasHook,   17f },
+        { ItemID.LunarHook,       24f },
+        { ItemID.StaticHook,      24f },
+    };
+    public static Dictionary<int, float> VanillaPullSpeed { get; private set; } = new()
+    {
+        // Pre hardmode
+        { ItemID.GrapplingHook,   11f },
+        { ItemID.AmethystHook,    11f },
+        { ItemID.SquirrelHook,    11f },
+        { ItemID.TopazHook,       11f },
+        { ItemID.SapphireHook,    11f },
+        { ItemID.EmeraldHook,     11f },
+        { ItemID.RubyHook,        11f },
+        { ItemID.AmberHook,       11f },
+        { ItemID.DiamondHook,     11f },
+
+        { ItemID.WebSlinger,      11f },
+        { ItemID.SkeletronHand,   11f },
+        { ItemID.SlimeHook,       11f },
+        { ItemID.FishHook,        11f },
+        { ItemID.IvyWhip,         11f },
+        { ItemID.BatHook,         14f },
+        { ItemID.CandyCaneHook,   11f },
+                                  
+        // Hardmode               
+        { ItemID.DualHook,        11f },
+        { ItemID.QueenSlimeHook,  11f },
+        { ItemID.ThornHook,       12f },
+        { ItemID.IlluminantHook,  11f },
+        { ItemID.WormHook,        11f },
+        { ItemID.TendonHook,      11f },
+        { ItemID.AntiGravityHook, 11f },
+        { ItemID.SpookyHook,      11f },
+        { ItemID.ChristmasHook,   11f },
+        { ItemID.LunarHook,       16f },
+        { ItemID.StaticHook,      11f },
+    };
+
+    private HookStats(float reach = -1f, int numHooks = -1, LatchingMode latchingMode = LatchingMode.Unknown, float shootSpeed = -1f, float retreatSpeed = -1f, float pullSpeed = -1f, string misc = "") : base(misc)
+    {
+        Reach = reach;
+        NumHooks = numHooks;
+        Latching = latchingMode;
+        ShootSpeed = shootSpeed;
+        RetreatSpeed = retreatSpeed;
+        PullSpeed = pullSpeed;
+    }
+
+    public static HookStats Get(Item item)
+    {
+        if (!Main.projHook[item.shoot])
+            return null;
+
+        var stats = new HookStats();
+        var proj = new Projectile();
+        proj.SetDefaults(item.shoot);
+
+        // Reach
+        stats.Reach = proj.ModProjectile?.GrappleRange() ?? Util.FromDictOrDefault(item.type, VanillaReach, -1f);
+
+        // Number of hooks
+        stats.NumHooks = Util.FromDictOrDefault(item.type, VanillaNumHooks, ProjectileID.Sets.SingleGrappleHook[item.shoot] ? 1 : -1);
+        ProjectileLoader.NumGrappleHooks(proj, Main.LocalPlayer, ref stats.NumHooks);
+
+        // Latching
+        stats.Latching = Util.FromDictOrDefault(item.type, VanillaLatching, ProjectileID.Sets.SingleGrappleHook[item.shoot] ? LatchingMode.Single : LatchingMode.Unknown);
+
+        // Shoot speed
+        stats.ShootSpeed = item.shootSpeed;
+
+        // Retreat speed
+        stats.RetreatSpeed = Util.FromDictOrDefault(item.type, VanillaRetreatSpeed, -1f);
+        ProjectileLoader.GrappleRetreatSpeed(proj, Main.LocalPlayer, ref stats.RetreatSpeed);
+
+        // Pull speed
+        stats.PullSpeed = Util.FromDictOrDefault(item.type, VanillaPullSpeed, -1f);
+        ProjectileLoader.GrapplePullSpeed(proj, Main.LocalPlayer, ref stats.PullSpeed);
+
+        return stats;
+    }
+
+    public enum LatchingMode
+    {
+        Unknown,
+        Single,
+        Individual,
+        Simultaneous
+    }
+}

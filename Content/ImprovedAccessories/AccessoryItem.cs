@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
+﻿using Terraria.GameContent;
 
 namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryItem : GlobalItem
@@ -17,10 +16,13 @@ internal class AccessoryItem : GlobalItem
         OriginalBOHBTexture = TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons];
         OriginalBOHBBalloonTexture = TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle];
 
-        TextureAssets.Item[ItemID.BundleofBalloons] = ModContent.Request<Texture2D>("AccessoriesPlus/Assets/BundleofBalloons");
-        TextureAssets.Item[ItemID.HorseshoeBundle] = ModContent.Request<Texture2D>("AccessoriesPlus/Assets/BundleofHorseshoeBalloons");
-        TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = ModContent.Request<Texture2D>("AccessoriesPlus/Assets/BundleofBalloons_Balloon");
-        TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = ModContent.Request<Texture2D>("AccessoriesPlus/Assets/BundleofHorseshoeBalloons_Balloon");
+        if (Config.Instance.ImprovedHorseshoeBundle)
+        {
+            TextureAssets.Item[ItemID.BundleofBalloons] = Util.RequestTex("BundleofBalloons");
+            TextureAssets.Item[ItemID.HorseshoeBundle] = Util.RequestTex("BundleofHorseshoeBalloons");
+            TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = Util.RequestTex("BundleofBalloons_Balloon");
+            TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = Util.RequestTex("BundleofHorseshoeBalloons_Balloon");
+        }
     }
 
     public override void Unload()
@@ -43,7 +45,8 @@ internal class AccessoryItem : GlobalItem
         switch (entity.type)
         {
             case ItemID.AnkhShield:
-                entity.defense = 10;
+                if (Config.Instance.ImprovedAnkhShield)
+                    entity.defense = 12;
                 break;
             default:
                 break;
@@ -59,28 +62,43 @@ internal class AccessoryItem : GlobalItem
         {
             case ItemID.HandOfCreation:
                 // Hand of creation
-                player.CopyVanillaEquipEffects(ItemID.Toolbelt, hideVisual);
-                player.CopyVanillaEquipEffects(ItemID.Toolbox, hideVisual);
+                if (Config.Instance.ImprovedHandOfCreation)
+                {
+                    player.CopyVanillaEquipEffects(ItemID.Toolbelt, hideVisual);
+                    player.CopyVanillaEquipEffects(ItemID.Toolbox, hideVisual);
+                }
                 break;
             case ItemID.TerrasparkBoots:
                 // Terraspark boots
-                player.CopyVanillaEquipEffects(ItemID.AmphibianBoots, hideVisual);
+                if (Config.Instance.ImprovedTerrasparkBoots)
+                {
+                    player.CopyVanillaEquipEffects(ItemID.AmphibianBoots, hideVisual);
+                }
                 break;
             case ItemID.AnkhShield:
                 // Ankh shield
-                player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
-                player.CopyVanillaEquipEffects(ItemID.HeroShield, hideVisual);
-                player.CopyVanillaEquipEffects(ItemID.FrozenShield, hideVisual);
+                if (Config.Instance.ImprovedAnkhShield)
+                {
+                    player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
+                    player.CopyVanillaEquipEffects(ItemID.HeroShield, hideVisual);
+                    player.CopyVanillaEquipEffects(ItemID.FrozenShield, hideVisual);
+                }
                 break;
             case ItemID.AnkhCharm:
                 // Ankh charm
-                player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
+                if (Config.Instance.ImprovedAnkhShield)
+                {
+                    player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
+                }
                 break;
             case ItemID.BundleofBalloons:
             case ItemID.HorseshoeBundle:
-                // Bundle of Horseshoe balloons
-                player.CopyVanillaEquipEffects(ItemID.FartInABalloon, hideVisual);
-                player.CopyVanillaEquipEffects(ItemID.SharkronBalloon, hideVisual);
+                // Bundle of horseshoe balloons
+                if (Config.Instance.ImprovedHorseshoeBundle)
+                {
+                    player.CopyVanillaEquipEffects(ItemID.FartInABalloon, hideVisual);
+                    player.CopyVanillaEquipEffects(ItemID.SharkronBalloon, hideVisual);
+                }
                 break;
             default:
                 break;
@@ -94,22 +112,34 @@ internal class AccessoryItem : GlobalItem
         {
             case ItemID.HandOfCreation:
                 // Hand of creation
-                tooltips.InsertTooltips("Tooltip2", after: true, Util.GetTooltipLine("HandOfCreation0"), Util.GetTooltipLine("HandOfCreation1"));
-                tooltips.RemoveTooltips("Tooltip2");
+                if (Config.Instance.ImprovedHandOfCreation)
+                {
+                    tooltips.InsertTooltips("Tooltip2", after: true, Util.GetTooltipLine("HandOfCreation0"), Util.GetTooltipLine("HandOfCreation1"));
+                    tooltips.RemoveTooltips("Tooltip2");
+                }
                 break;
             case ItemID.TerrasparkBoots:
                 // Terraspark boots
-                tooltips.InsertTooltips("Tooltip4", after: true, Util.GetTooltipLine("TerrasparkBoots0"), Util.GetTooltipLine("TerrasparkBoots1"));
+                if (Config.Instance.ImprovedTerrasparkBoots)
+                {
+                    tooltips.InsertTooltips("Tooltip4", after: true, Util.GetTooltipLine("TerrasparkBoots0"), Util.GetTooltipLine("TerrasparkBoots1"));
+                }
                 break;
             case ItemID.AnkhShield:
                 // Ankh shield
-                tooltips.InsertTooltips("Tooltip1", after: true, Util.GetTooltipLine("AnkhShield0"), Util.GetTooltipLine("AnkhShield1"), Util.GetTooltipLine("AnkhShield2"));
+                if (Config.Instance.ImprovedAnkhShield)
+                {
+                    tooltips.InsertTooltips("Tooltip1", after: true, Util.GetTooltipLine("AnkhShield0"), Util.GetTooltipLine("AnkhShield1"), Util.GetTooltipLine("AnkhShield2"));
+                }
                 break;
             case ItemID.BundleofBalloons:
             case ItemID.HorseshoeBundle:
                 // Bundle of horseshoe balloons
-                tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("BundleOfBalloons0"));
-                tooltips.RemoveTooltips("Tooltip0");
+                if (Config.Instance.ImprovedHorseshoeBundle)
+                {
+                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("BundleOfBalloons0"));
+                    tooltips.RemoveTooltips("Tooltip0");
+                }
                 break;
             default:
                 break;

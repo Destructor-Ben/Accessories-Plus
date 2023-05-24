@@ -1,15 +1,47 @@
 Accessories+ adds and tweaks accessories, equipment, and accessory slots to improve and balance Terraria.
 
-There is an option to use each feature in the config, so if you don't like some of them you can disable them.
+There is an option to use each feature in the config, so if you don't like some of them you can disable them. The config also lists the features in more detail.
 
-If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam or Github page.
+The mod is not complete yet, and many more features such as improvements and reworks to mounts, minecarts, grappling hooks, pets, and more accessories will be coming.
+
+If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam Page, [url=https://github.com/Destructor-Ben/Accessories-Plus]Github Repository[/url] or [url=https://discord.gg/uQzTRx2V8Y]Discord Server[/url]
 
 The changelog can be found on the Steam Workshop page under the change notes.
 
-To find the recipes changes, use the Recipe Browser mod.
+To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2619954303]Recipe Browser Mod[/url]
 
 [hr][/hr]
 [h1]Features + Changes[/h1]
+[b]Improved Accessories[/b]
 [list]
-[*]TODO
+[*]Improved Terraspark Boots
+[*]Improved Ankh Shield
+[*]Improved Bundle of Horseshoe Balloons
+[*]Improved Hand of Creation
+[*]Improved PDA
+[/list]
+
+[b]Accessory Slots[/b]
+[list]
+[*]Post-Moonlord Accessory Slot
+[*]Wing Slot
+[*]Shield Slot
+[*]Boot Slot
+[/list]
+
+[b]Stat Tooltips[/b]
+[list]
+[*]Wings have stats in their tooltips
+[*]Hooks have stats in their tooltips
+[*]Light pets have stats in their tooltips
+[*]Minecarts have stats in their tooltips
+[*]Mounts have stats in their tooltips
+[/list]
+
+[b]Obtainability[/b]
+[list]
+[*]More accessory recipes
+[*]More accessories can be shimmered into each other
+[*]The Travelling Merchant is guaranteed to sell an accessory
+[*]Accessories found in presents have other methods of obtaining
 [/list]

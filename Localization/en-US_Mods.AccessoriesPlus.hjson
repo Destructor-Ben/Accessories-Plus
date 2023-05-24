@@ -1,3 +1,10 @@
+Unknown: Unknown
+
+InfoDisplays: {
+	FoundRareCreature: "{0} {1} {^1:tile;tiles} away"
+	FoundTreasure: "{0} {1} {^1:tile;tiles} away"
+}
+
 AccessorySlots: {
 	WingSlot: {
 		FunctionalTooltip: Wings
@@ -26,7 +33,7 @@ Tooltips: {
 	BundleOfBalloons0: Allows the holder to sextuple jump
 
 	WingStats: {
-		NegateFallDamage: Negates fall damage
+		NegatesFallDamage: Negates fall damage
 		FlightTime: "{0} {^0:second;seconds} flight time"
 		FlightHeight: "{0} {^0:tile;tiles} flight height"
 		HorizontalSpeed: "{0} mph max horizontal speed"
@@ -35,10 +42,35 @@ Tooltips: {
 
 	HookStats: {
 		Reach: "{0} {^0:tile;tiles} reach"
-		Velocity: "{0} mph velocity"
+		ReachUnknown: Unknown reach
 		NumHooks: "{0} {^0:hook;hooks}"
+		NumHooksUnknown: Unknown number of hooks
 		LatchingSingle: Single hook latching
 		LatchingIndividual: Individual hook latching
 		LatchingSimultaneous: Simultaneous hook latching
+		LatchingUnknown: Unknown hook latching
+		ShootSpeed: "{0} mph shoot speed"
+		ShootSpeedUnknown: Unknown shoot speed
+		RetreatSpeed: "{0} mph retreat speed"
+		RetreatSpeedUnknown: Unknown retreat speed
+		PullSpeed: "{0} mph pull speed"
+		PullSpeedUnknown: Unknown pull speed
+	}
+
+	LightPetStats: {
+		Brightness: "{0}% brightness"
+		Controllable: Controllable
+		ExposesTreasure: Reveals treasure
+		ExposesEnemies: Reveals enemies
+	}
+
+	MinecartStats: {
+		MaxSpeed: "{0} mph max speed"
+		Acceleration: "{0} mph/s acceleration"
+	}
+
+	MountStats: {
+		TODO1: a
+		TODO2: a
 	}
 }

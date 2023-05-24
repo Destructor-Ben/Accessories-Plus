@@ -1,12 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
 namespace AccessoriesPlus.Configuration;
 [Label("$Mods.AccessoriesPlus.Config.DisplayName")]
 internal class Config : ModConfig
 {
-    // TODO - implement config
-    // TODO - localize config
     public static Config Instance => ModContent.GetInstance<Config>();
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
@@ -23,20 +22,28 @@ internal class Config : ModConfig
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedAnkhShield = true;
-    [Label("$Mods.AccessoriesPlus.Config.ImprovedBOHBShield.Label")]
-    [Tooltip("$Mods.AccessoriesPlus.Config.ImprovedBOHBShield.Tooltip")]
+    [Label("$Mods.AccessoriesPlus.Config.ImprovedHorseshoeBundle.Label")]
+    [Tooltip("$Mods.AccessoriesPlus.Config.ImprovedHorseshoeBundle.Tooltip")]
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedBOHBShield = true;
+    public bool ImprovedHorseshoeBundle = true;
+
     [Label("$Mods.AccessoriesPlus.Config.ImprovedHandOfCreation.Label")]
     [Tooltip("$Mods.AccessoriesPlus.Config.ImprovedHandOfCreation.Tooltip")]
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedHandOfCreation = true;
+    [Label("$Mods.AccessoriesPlus.Config.ImprovedPDA.Label")]
+    [Tooltip("$Mods.AccessoriesPlus.Config.ImprovedPDA.Tooltip")]
+    [DefaultValue(true)]
+    [ReloadRequired]
+    public bool ImprovedPDA = true;
 
+    [JsonIgnore]
     public bool ReworkedShinyStone = true;
     #endregion
 
+    /* Old
     #region Improved Grappling Hooks
     [Header("$Mods.AccessoriesPlus.Config.Headers.ImprovedGrapplingHooks")]
 
@@ -60,6 +67,7 @@ internal class Config : ModConfig
 
     public bool Minecarts = true;
     #endregion
+    //*/
 
     #region Accessory Slots
     [Header("$Mods.AccessoriesPlus.Config.Headers.AccessorySlots")]
@@ -143,4 +151,40 @@ internal class Config : ModConfig
     [ReloadRequired]
     public bool ObtainabilityPresents = true;
     #endregion
+
+    /* Descriptions to be added later
+    Ingame description
+    [c/c78fff:Improved Grappling Hooks]
+    - A
+
+    [c/c78fff:Improved Pets]
+    - A
+
+    [c/c78fff:Improved Mounts]
+    - A
+
+    [c/c78fff:Improved Minecarts]
+    - A
+
+    Steam description
+    [b]Improved Grappling Hooks[/b]
+    [list]
+    [*]A
+    [/list]
+
+    [b]Improved Pets[/b]
+    [list]
+    [*]A
+    [/list]
+
+    [b]Improved Mounts[/b]
+    [list]
+    [*]A
+    [/list]
+
+    [b]Improved Minecarts[/b]
+    [list]
+    [*]A
+    [/list]
+    */
 }

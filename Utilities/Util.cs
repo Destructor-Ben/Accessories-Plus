@@ -2,6 +2,16 @@
 internal static class Util
 {
     /// <summary>
+    /// Multiply pixels per tick by this to get miles per hour
+    /// </summary>
+    public static float PPTToMPH = 216000f / 42240f;
+
+    /// <summary>
+    /// Gets the centre of the screen
+    /// </summary>
+    public static Vector2 ScreenCenter = Main.ScreenSize.ToVector2() / 2f;
+
+    /// <summary>
     /// Finds the index of the tooltip name
     /// </summary>
     /// <param name="tooltipName"></param>
@@ -81,6 +91,16 @@ internal static class Util
     }
 
     /// <summary>
+    /// Returns a localized text string
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static string GetTextValue(string key)
+    {
+        return GetText(key).Value;
+    }
+
+    /// <summary>
     /// Returns a localized text string with the formatting
     /// </summary>
     /// <param name="key"></param>
@@ -88,7 +108,15 @@ internal static class Util
     /// <returns></returns>
     public static string GetTextValue(string key, params object[] stringFormat)
     {
-        return GetText(key).Format(stringFormat);
+        try
+        {
+            return GetText(key).Format(stringFormat);
+        }
+        catch (FormatException)
+        {
+            AccessoriesPlus.Instance.Logger.Warn($"Localization key \"{key}\" had invalid pluralization, make sure it is \"{{^0\"}}, not \"{{0^\"}} ");
+            return "";
+        }
     }
 
     /// <summary>
@@ -130,5 +158,50 @@ internal static class Util
         return group;
     }
 
-    // TODO - asset requesting
+    /// <summary>
+    /// Rounds the given value
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="nearest"></param>
+    /// <returns></returns>
+    public static float RoundToNearest(float value, float nearest = 10f)
+    {
+        return MathF.Round(value * nearest) / nearest;
+    }
+
+    /// <summary>
+    /// Requests an asset in the Assets folder
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="name"></param>
+    /// <param name="mode"></param>
+    /// <returns></returns>
+    public static Asset<T> Request<T>(string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad) where T : class
+    {
+        return ModContent.Request<T>("AccessoriesPlus/Assets/" + name, mode);
+    }
+
+    /// <summary>
+    /// Requests a texture in the Assets/Textures folder
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="mode"></param>
+    /// <returns></returns>
+    public static Asset<Texture2D> RequestTex(string name, AssetRequestMode mode = AssetRequestMode.AsyncLoad)
+    {
+        return Request<Texture2D>("Textures/" + name, mode);
+    }
+
+    /// <summary>
+    /// Gets the element if it's in the dictionary, otherwise returns the default value
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <param name="dict"></param>
+    /// <param name="defaultVal"></param>
+    /// <returns></returns>
+    public static T FromDictOrDefault<T>(int key, Dictionary<int, T> dict, T defaultVal)
+    {
+        return dict.ContainsKey(key) ? dict[key] : defaultVal;
+    }
 }

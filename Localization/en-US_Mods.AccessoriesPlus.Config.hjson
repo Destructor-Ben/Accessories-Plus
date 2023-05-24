@@ -12,6 +12,39 @@ Headers: {
 }
 
 // Improved Accessories
+ImprovedTerrasparkBoots: {
+	Label: "[i:TerrasparkBoots] Improved Terraspark Boots"
+	Tooltip: Makes the Terraspark Boots include the [i:AmphibianBoots] Amphibian Boots
+}
+
+ImprovedAnkhShield: {
+	Label: "[i:AnkhShield] Improved Ankh Shield"
+	Tooltip:
+		'''
+		Makes the Ankh Shield include the [i:HeroShield] Hero Shield and [i:FrozenShield] Frozen Shield
+		Makes the Ankh Charm include the [i:HandWarmer] Hand Warmer
+		Increases the defense of the Ankh Shield to 12
+		'''
+}
+
+ImprovedHorseshoeBundle: {
+	Label: "[i:HorseshoeBundle] Improved Bundle of Horseshoe Balloons"
+	Tooltip: Makes the Bundle of Balloons include the [i:SharkronBalloon] Sharkron Balloon and [i:FartInABalloon] Fart in a Balloon
+}
+
+ImprovedHandOfCreation: {
+	Label: "[i:HandOfCreation] Improved Hand of Creation"
+	Tooltip: Makes the Hand of Creation include the [i:Toolbox] Toolbox and [i:Toolbelt] Toolbelt
+}
+
+ImprovedPDA: {
+	Label: "[i:PDA] Improved PDA"
+	Tooltip:
+		'''
+		Makes [i:Hellstone] Hellstone and [i:Diamond] Gems trackable by the [i:MetalDetector] Metal Detector
+		TODO - Arrows
+		'''
+}
 
 // Improved Mounts
 
@@ -44,17 +77,17 @@ SlotBoots: {
 
 SlotForceWings: {
 	Label: "[i:CreativeWings] Force Wing Slot"
-	Tooltip: Force wings to be placed in the boot slot
+	Tooltip: Forces wings to be placed in the boot slot
 }
 
 SlotForceShields: {
 	Label: "[i:ObsidianShield] Force Shield Slot"
-	Tooltip: Force shields to be placed in the boot slot
+	Tooltip: Forces shields to be placed in the boot slot
 }
 
 SlotForceBoots: {
 	Label: "[i:HermesBoots] Force Boot Slot"
-	Tooltip: Force boots to be placed in the boot slot
+	Tooltip: Forces boots to be placed in the boot slot
 }
 
 // Stat Tooltips
@@ -86,17 +119,34 @@ StatsMounts: {
 // Obtainability
 ObtainabilityRecipes: {
 	Label: "[i:HermesBoots] More Accessory Recipes"
-	Tooltip: TODO
+	Tooltip:
+		'''
+		Adds various recipes for accessories
+		Use the Recipe Browser Mod to find them since I'm lazy
+		'''
 }
 
 ObtainabilityShimmer: {
 	Label: "[i:BottomlessShimmerBucket] Accessory Shimmering"
-	Tooltip: TODO
+	Tooltip:
+		'''
+		Allows the following accessories to be shimmered into each other
+		[i:BrickLayer] Brick Layer, [i:ExtendoGrip] Extendo Grip, [i:PaintSprayer] Paint Sprayer, and [i:PortableCementMixer] Portable Cement Mixer
+		[i:Stopwatch] Stopwatch, [i:LifeformAnalyzer] Lifeform Analyzer, and [i:DPSMeter] DPS Meter
+		[i:ShinyRedBalloon] Shiny Red Balloon and [i:BalloonPufferfish] Balloon Pufferfish
+		[i:PutridScent] Putrid Scent and [i:FleshKnuckles] Flesh Knuckles
+		[i:BandofStarpower] Band of Starpower and [i:PanicNecklace] Panic Necklace
+		[i:WormScarf] Worm Scarf and [i:BrainOfConfusion] Brain of Confusion
+		'''
 }
 
 ObtainabilityTravellingMerchant: {
 	Label: "[i:PeddlersHat] Common Travelling Merchant Accessories"
-	Tooltip: TODO
+	Tooltip:
+		'''
+		Guarantees that the Travelling Merchant will have an extra slot dedicated to an accessory
+		The slot will have a 50/50 chance of being an accessory for the [i:HandOfCreation] Hand of Creation or [i:PDA] PDA
+		'''
 }
 
 ObtainabilityPresents: {

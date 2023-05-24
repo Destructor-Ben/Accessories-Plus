@@ -1,34 +1,38 @@
 Accessories+ adds and tweaks accessories, equipment, and accessory slots to improve and balance Terraria.
 
-There is an option to use each feature in the config, so if you don't like some of them you can disable them.
+There is an option to use each feature in the config, so if you don't like some of them you can disable them. The config also lists the features in more detail.
 
-If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam or Github page.
+The mod is not complete yet, and many more features such as improvements and reworks to mounts, minecarts, grappling hooks, pets, and more accessories will be coming.
+
+If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam Page, Github Repository, or Discord Server
 
 The changelog can be found on the Steam Workshop page under the change notes.
 
-To find the recipes changes, use the Recipe Browser mod.
+To find the recipes changed, use the Recipe Browser mod.
 
-[c/8ffdff:Features + Changes] TODO featuers and changes
+[c/8ffdff:Features + Changes]
 [c/c78fff:Improved Accessories]
-- [i:GrapplingHook][i:CreativeWings] Hooks and wings display their stats in their tooltips
-- [i:TerrasparkBoots] Improved the Terraspark Boots
-- [i:AnkhShield] Improved the Ankh Shield
-- [i:HorseshoeBundle] Improved the Bundle of Hdorseshoe Balloons
-
-[c/c78fff:Improved Grappling Hooks]
-- TODO
-
-[c/c78fff:Improved Pets]
-- TODO
-
-[c/c78fff:Improved Mounts]
-- TODO
-
-[c/c78fff:Improved Minecarts]
-- TODO
+- [i:TerrasparkBoots] Improved Terraspark Boots
+- [i:AnkhShield] Improved Ankh Shield
+- [i:HorseshoeBundle] Improved Bundle of Horseshoe Balloons
+- [i:HandOfCreation] Improved Hand of Creation
+- [i:PDA] Improved PDA
 
 [c/c78fff:Accessory Slots]
-- TODO
+- [i:BossMaskMoonlord] Post-Moonlord Accessory Slot
+- [i:WingsSolar] Wing Slot
+- [i:AnkhShield] Shield Slot
+- [i:TerrasparkBoots] Boot Slot
+
+[c/c78fff:Stat Tooltips]
+- [i:WingsSolar] Wings have stats in their tooltips
+- [i:LunarHook] Hooks have stats in their tooltips
+- [i:SuspiciousLookingTentacle] Light pets have stats in their tooltips
+- [i:MeowmereMinecart] Minecarts have stats in their tooltips
+- [i:DrillContainmentUnit] Mounts have stats in their tooltips
 
 [c/c78fff:Obtainability]
-- TODO
+- [i:HermesBoots] More accessory recipes
+- [i:BottomlessShimmerBucket] More accessories can be shimmered into each other
+- [i:PeddlersHat] The Travelling Merchant is guaranteed to sell an accessory
+- [i:Present] Accessories found in presents have other methods of obtaining
