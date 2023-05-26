@@ -8,40 +8,40 @@ internal class HookStats : Stats
     public float RetreatSpeed = -1f;
     public float PullSpeed = -1f;
 
-    // TODO - Give these in pixels or tiles?
+    // TODO - combine these into a single dictionary of HookStats
     public static Dictionary<int, float> VanillaReach { get; private set; } = new()
     {
         // Pre hardmode
-        { ItemID.GrapplingHook,   18.75f },
-        { ItemID.AmethystHook,    18.75f },
-        { ItemID.SquirrelHook,    19f },
-        { ItemID.TopazHook,       20.625f },
-        { ItemID.SapphireHook,    22.5f },
-        { ItemID.EmeraldHook,     24.375f },
-        { ItemID.RubyHook,        26.25f },
-        { ItemID.AmberHook,       27.5f },
-        { ItemID.DiamondHook,     29.125f },
+        { ItemID.GrapplingHook,   16f * 18.75f },
+        { ItemID.AmethystHook,    16f * 18.75f },
+        { ItemID.SquirrelHook,    16f * 19f },
+        { ItemID.TopazHook,       16f * 20.625f },
+        { ItemID.SapphireHook,    16f * 22.5f },
+        { ItemID.EmeraldHook,     16f * 24.375f },
+        { ItemID.RubyHook,        16f * 26.25f },
+        { ItemID.AmberHook,       16f * 27.5f },
+        { ItemID.DiamondHook,     16f * 29.125f },
 
-        { ItemID.WebSlinger,      22.625f },
-        { ItemID.SkeletronHand,   21.875f },
-        { ItemID.SlimeHook,       18.75f },
-        { ItemID.FishHook,        25f },
-        { ItemID.IvyWhip,         28f },
-        { ItemID.BatHook,         31.25f },
-        { ItemID.CandyCaneHook,   25f },
+        { ItemID.WebSlinger,      16f * 22.625f },
+        { ItemID.SkeletronHand,   16f * 21.875f },
+        { ItemID.SlimeHook,       16f * 18.75f },
+        { ItemID.FishHook,        16f * 25f },
+        { ItemID.IvyWhip,         16f * 28f },
+        { ItemID.BatHook,         16f * 31.25f },
+        { ItemID.CandyCaneHook,   16f * 25f },
                                   
         // Hardmode               
-        { ItemID.DualHook,        27.5f },
-        { ItemID.QueenSlimeHook,  30f },
-        { ItemID.ThornHook,       30f },
-        { ItemID.IlluminantHook,  30f },
-        { ItemID.WormHook,        30f },
-        { ItemID.TendonHook,      30f },
-        { ItemID.AntiGravityHook, 31.25f },
-        { ItemID.SpookyHook,      34.375f },
-        { ItemID.ChristmasHook,   34.375f },
-        { ItemID.LunarHook,       34.375f },
-        { ItemID.StaticHook,      37.5f },
+        { ItemID.DualHook,        16f * 27.5f },
+        { ItemID.QueenSlimeHook,  16f * 30f },
+        { ItemID.ThornHook,       16f * 30f },
+        { ItemID.IlluminantHook,  16f * 30f },
+        { ItemID.WormHook,        16f * 30f },
+        { ItemID.TendonHook,      16f * 30f },
+        { ItemID.AntiGravityHook, 16f * 31.25f },
+        { ItemID.SpookyHook,      16f * 34.375f },
+        { ItemID.ChristmasHook,   16f * 34.375f },
+        { ItemID.LunarHook,       16f * 34.375f },
+        { ItemID.StaticHook,      16f * 37.5f },
     };
     public static Dictionary<int, int> VanillaNumHooks { get; private set; } = new()
     {

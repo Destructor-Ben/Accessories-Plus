@@ -36,8 +36,12 @@ Tooltips: {
 		NegatesFallDamage: Negates fall damage
 		FlightTime: "{0} {^0:second;seconds} flight time"
 		FlightHeight: "{0} {^0:tile;tiles} flight height"
-		HorizontalSpeed: "{0} mph max horizontal speed"
-		VerticalMultiplier: "{0}% jump speed multiplier"
+		FlightHeightUnknown: Unknown flight height
+		MaxHSpeed: "{0} mph max horizontal speed"
+		HAcceleration: "{0} mph/s horizontal acceleration"
+		CanHover: Can hover
+		MaxHSpeedHover: "{0} mph max horizontal speed while hovering"
+		HAccelerationHover: "{0} mph/s horizontal acceleration while hovering"
 	}
 
 	HookStats: {

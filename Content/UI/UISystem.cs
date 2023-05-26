@@ -27,7 +27,6 @@ internal class UISystem : ModSystem
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
-        // TODO - which layer
         int index = layers.FindIndex(layer => layer.Name == "Vanilla: Mouse Text");
         if (index == -1)
             return;

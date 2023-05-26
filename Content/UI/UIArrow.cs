@@ -4,6 +4,7 @@ namespace AccessoriesPlus.Content.UI;
 internal class UIArrow : UIElement
 {
     public Vector2 WorldTarget;
+    private UIImage icon;
 
     public UIArrow(Vector2 worldTarget)
     {
@@ -19,20 +20,26 @@ internal class UIArrow : UIElement
 
         // TODO - add other UI elements
         Main.instance.LoadItem(5000);
-        Append(new UIImage(TextureAssets.Item[5000]));
+        icon = new UIImage(TextureAssets.Item[5000]);
+        Append(icon);
     }
 
     public override void Update(GameTime gameTime)
     {
         // TODO - position on the screen
-        var position = (WorldTarget - Main.LocalPlayer.Center) / new Vector2(Main.maxTilesX * 16f, Main.maxTilesY * 16f);
+        var position = WorldTarget - Main.LocalPlayer.Center;
+        float rotation = position.ToRotation();
+
         position.Normalize();
-        position *= 0.5f;
-        position += Vector2.One * 0.5f;
-        position *= 2f;
-        HAlign = position.X;
-        VAlign = position.Y;
-        Main.NewText(position);
+        position *= 5f;
+
+        position += Main.LocalPlayer.Center - Main.screenPosition;
+        HAlign = position.X / Main.screenWidth;
+        VAlign = position.Y / Main.screenHeight;
+        //icon.Rotation = rotation;
+
+        Main.NewText(HAlign.ToString() + " " + VAlign.ToString());
+        Main.NewText(rotation);
 
         base.Update(gameTime);
     }

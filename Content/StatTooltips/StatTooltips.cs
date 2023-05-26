@@ -12,13 +12,28 @@ internal class StatTooltips : GlobalItem
         var mountStats = MountStats.Get(item);
 
         // Wings
+        // TODO - fix the speeds and accelerations
         if (Config.Instance.StatsWings && wingStats != null)
         {
             AddMiscLine(tooltips, wingStats, "Equipable", after: true);
             var wingTooltips = new List<TooltipLine>
             {
-                Util.GetTooltipLine("WingStats.NegatesFallDamage"),
+                Util.GetTooltipLine("WingStats.FlightTime", Util.RoundToNearest(wingStats.FlightTime / 60f, 0.5f)),
+                wingStats.FlightHeight != -1f ? Util.GetTooltipLine("WingStats.FlightHeight", Util.RoundToNearest(wingStats.FlightHeight / 60f, 0.5f)) : Util.GetTooltipLine("WingStats.FlightHeightUnknown"),
+                Util.GetTooltipLine("WingStats.MaxHSpeed", wingStats.MaxHSpeed),
+                Util.GetTooltipLine("WingStats.HAcceleration", wingStats.HAcceleration),
             };
+
+            if (wingStats.CanHover)
+            {
+                wingTooltips.Add(Util.GetTooltipLine("WingStats.CanHover"));
+                wingTooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", wingStats.MaxHSpeedHover));
+                wingTooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationHover", wingStats.HAccelerationHover));
+            }
+
+            // TODO vertical stats
+
+            wingTooltips.Add(Util.GetTooltipLine("WingStats.NegatesFallDamage"));
 
             tooltips.InsertTooltips("Equipable", after: true, wingTooltips.ToArray());
         }
@@ -26,11 +41,11 @@ internal class StatTooltips : GlobalItem
         // Hooks
         if (Config.Instance.StatsHooks && hookStats != null)
         {
-            // TODO - Fix conversions
+            // TODO - Fix conversions, check stats, fix rounding
             AddMiscLine(tooltips, hookStats, "Equipable", after: true);
             var hookTooltips = new List<TooltipLine>
             {
-                hookStats.Reach != -1 ? Util.GetTooltipLine("HookStats.Reach", Util.RoundToNearest(hookStats.Reach/* / 16f*/)) : Util.GetTooltipLine("HookStats.ReachUnknown"),
+                hookStats.Reach != -1 ? Util.GetTooltipLine("HookStats.Reach", Util.RoundToNearest(hookStats.Reach / 16f, 0.5f)) : Util.GetTooltipLine("HookStats.ReachUnknown"),
                 hookStats.NumHooks != -1 ? Util.GetTooltipLine("HookStats.NumHooks", hookStats.NumHooks) : Util.GetTooltipLine("HookStats.NumHooksUnknown"),
                 Util.GetTooltipLine(hookStats.Latching switch
                 {
@@ -39,9 +54,9 @@ internal class StatTooltips : GlobalItem
                     HookStats.LatchingMode.Simultaneous => "HookStats.LatchingSimultaneous",
                     _ => "HookStats.LatchingUnknown",
                 }),
-                hookStats.ShootSpeed != -1 ? Util.GetTooltipLine("HookStats.ShootSpeed", Util.RoundToNearest(hookStats.ShootSpeed * Util.PPTToMPH)) : Util.GetTooltipLine("HookStats.ShootSpeedUnknown"),
-                hookStats.RetreatSpeed != -1 ? Util.GetTooltipLine("HookStats.RetreatSpeed", Util.RoundToNearest(hookStats.RetreatSpeed * Util.PPTToMPH)) : Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"),
-                hookStats.PullSpeed != -1 ? Util.GetTooltipLine("HookStats.PullSpeed", Util.RoundToNearest(hookStats.PullSpeed * Util.PPTToMPH)) : Util.GetTooltipLine("HookStats.PullSpeedUnknown"),
+                hookStats.ShootSpeed != -1 ? Util.GetTooltipLine("HookStats.ShootSpeed", Util.RoundToNearest(hookStats.ShootSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.ShootSpeedUnknown"),
+                hookStats.RetreatSpeed != -1 ? Util.GetTooltipLine("HookStats.RetreatSpeed", Util.RoundToNearest(hookStats.RetreatSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"),
+                hookStats.PullSpeed != -1 ? Util.GetTooltipLine("HookStats.PullSpeed", Util.RoundToNearest(hookStats.PullSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.PullSpeedUnknown"),
             };
 
             tooltips.InsertTooltips("Equipable", after: true, hookTooltips.ToArray());
@@ -87,7 +102,6 @@ internal class StatTooltips : GlobalItem
     }
 
     // Adds the misc info to the tooltips
-    // TODO - is misc line even needed
     private static void AddMiscLine(List<TooltipLine> tooltips, Stats stats, string nameToInsertAfter, bool after)
     {
         if (!string.IsNullOrEmpty(stats.Misc))
