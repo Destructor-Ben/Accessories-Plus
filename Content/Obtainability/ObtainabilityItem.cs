@@ -55,24 +55,4 @@ internal class ObtainabilityItem : GlobalItem
             }
         }
     }
-
-    // Adding recipes
-    public override void AddRecipes()
-    {
-        // Hand warmer recipe
-        if (Config.Instance.ObtainabilityPresents)
-        {
-            Recipe.Create(ItemID.HandWarmer)
-                .AddTile(TileID.TinkerersWorkbench)
-                .AddIngredient(ItemID.Silk, 10)
-                .AddIngredient(ItemID.FlinxFur, 5)
-                .Register();
-        }
-
-        // TODO - more accessory recipes
-        if (Config.Instance.ObtainabiltyRecipes)
-        {
-
-        }
-    }
 }

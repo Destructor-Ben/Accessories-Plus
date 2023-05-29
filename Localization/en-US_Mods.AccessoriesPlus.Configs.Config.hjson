@@ -42,7 +42,7 @@ ImprovedPDA: {
 	Tooltip:
 		'''
 		Makes [i:Hellstone] Hellstone and [i:Diamond] Gems trackable by the [i:MetalDetector] Metal Detector
-		TODO - Arrows
+		Makes the [i:MetalDetector] Metal Detector and [i:LifeformAnalyzer] Lifeform Analyzer show distance information and create arrows that point toward targets
 		'''
 }
 
@@ -138,6 +138,11 @@ ObtainabilityShimmer: {
 		[i:BandofStarpower] Band of Starpower and [i:PanicNecklace] Panic Necklace
 		[i:WormScarf] Worm Scarf and [i:BrainOfConfusion] Brain of Confusion
 		'''
+}
+
+ObtainabilityNPCDrops: {
+	Label: "[i:ArmorPolish] Better Ankh Charm Drops"
+	Tooltip: Multiplies the base drop rate of all [i:AnkhCharm] Ankh Charm accessories by 3
 }
 
 ObtainabilityTravellingMerchant: {

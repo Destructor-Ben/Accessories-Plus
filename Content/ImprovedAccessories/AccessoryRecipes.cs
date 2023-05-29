@@ -1,5 +1,5 @@
 ﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
-internal class Recipes : ModSystem
+internal class AccessoryRecipes : ModSystem
 {
     public static RecipeGroup AnyFartBalloon;
     public static RecipeGroup AnyTsunamiBalloon;

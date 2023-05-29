@@ -1,6 +1,4 @@
-﻿using Terraria.GameContent;
-
-namespace AccessoriesPlus.Content.ImprovedAccessories;
+﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryItem : GlobalItem
 {
     public static Asset<Texture2D> OriginalBOBTexture;
@@ -52,8 +50,6 @@ internal class AccessoryItem : GlobalItem
                 break;
         }
     }
-
-    // TODO - some way to prevent an accessorys effects from being applied
 
     // Accessory effects
     public override void UpdateAccessory(Item item, Player player, bool hideVisual)

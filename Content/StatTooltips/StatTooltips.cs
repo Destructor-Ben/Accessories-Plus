@@ -1,7 +1,7 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-// TODO stat tooltips
 internal class StatTooltips : GlobalItem
 {
+    // TODO - for stats that have manual input, get it from the hooks that tML provides
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
         // Getting stats
@@ -27,8 +27,10 @@ internal class StatTooltips : GlobalItem
             if (wingStats.CanHover)
             {
                 wingTooltips.Add(Util.GetTooltipLine("WingStats.CanHover"));
-                wingTooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", wingStats.MaxHSpeedHover));
-                wingTooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationHover", wingStats.HAccelerationHover));
+                if (wingStats.MaxHSpeedHover != -1)
+                    wingTooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", wingStats.MaxHSpeedHover));
+                if (wingStats.HAccelerationHover != -1)
+                    wingTooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationHover", wingStats.HAccelerationHover));
             }
 
             // TODO vertical stats

@@ -1,14 +1,7 @@
-﻿using Terraria.DataStructures;
-
-namespace AccessoriesPlus.Content.ImprovedAccessories;
+﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryPlayer : ModPlayer
 {
-    // TODO - finish shiny stone rework
-    public override bool IsLoadingEnabled(Mod mod)
-    {
-        return false;
-    }
-
+    /*/ TODO - finish shiny stone rework
     public bool MaxLife => Player.statLife == Player.statLifeMax2;
     public bool FullyChargedShinyStone;
     public bool JustHurt;
@@ -96,5 +89,5 @@ internal class AccessoryPlayer : ModPlayer
             g = MathHelper.Lerp(r, 0.7f, ShinyStoneCharge);
             b = MathHelper.Lerp(r, 0.1f, ShinyStoneCharge);
         }
-    }
+    }*/
 }

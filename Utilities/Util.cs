@@ -164,9 +164,9 @@ internal static class Util
     /// <param name="value"></param>
     /// <param name="nearest"></param>
     /// <returns></returns>
-    public static float RoundToNearest(float value, float nearest = 10f)
+    public static float RoundToNearest(float value, float nearest = 1f)
     {
-        return MathF.Round(value * nearest) / nearest;
+        return MathF.Round(value / nearest) * nearest;
     }
 
     /// <summary>

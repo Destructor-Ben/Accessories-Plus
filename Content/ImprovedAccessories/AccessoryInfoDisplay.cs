@@ -42,7 +42,7 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
 
             // Changing display value
             var npc = Main.npc[Main.LocalPlayer.accCritterGuideNumber];
-            displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.RoundToNearest(npc.Distance(Main.LocalPlayer.Center) / 16f, 1f));
+            displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.RoundToNearest(npc.Distance(Main.LocalPlayer.Center) / 16f));
         }
 
         // Metal detector
@@ -52,19 +52,19 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
             UISystem.Instance.PDAState.DrawMetalDetector = true;
 
             // Changing display value
-            string tileName = GetBestOreTileName();
+            string tileName = GetBestOreTileName(Main.SceneMetrics.bestOre, Main.SceneMetrics.ClosestOrePosition);
             int distance = (int)(Main.SceneMetrics.ClosestOrePosition.Value.ToWorldCoordinates().Distance(Main.LocalPlayer.Center) / 16f);
             displayValue = Util.GetTextValue("InfoDisplays.FoundTreasure", tileName, distance);
         }
     }
 
-    private static string GetBestOreTileName()
+    public static string GetBestOreTileName(int type, Point? position)
     {
         int baseOption = 0;
-        int num10 = Main.SceneMetrics.bestOre;
-        if (Main.SceneMetrics.ClosestOrePosition.HasValue)
+        int num10 = type;
+        if (position.HasValue)
         {
-            var value = Main.SceneMetrics.ClosestOrePosition.Value;
+            var value = position.Value;
             var tileSafely = Framing.GetTileSafely(value);
             if (tileSafely.HasTile)
             {
