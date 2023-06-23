@@ -4,6 +4,8 @@ using Terraria.ModLoader.Config;
 namespace AccessoriesPlus.Configuration;
 internal class Config : ModConfig
 {
+    // TODO - more freedom
+#pragma warning disable CS0649
     public static Config Instance => ModContent.GetInstance<Config>();
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
@@ -12,22 +14,22 @@ internal class Config : ModConfig
 
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedTerrasparkBoots = true;
+    public bool ImprovedTerrasparkBoots;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedAnkhShield = true;
+    public bool ImprovedAnkhShield;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedHorseshoeBundle = true;
+    public bool ImprovedHorseshoeBundle;
 
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedHandOfCreation = true;
+    public bool ImprovedHandOfCreation;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ImprovedPDA = true;
+    public bool ImprovedPDA;
 
-    //public bool ReworkedShinyStone = true;
+    //public bool ReworkedShinyStone;
     #endregion
 
     #region Improved Grappling Hooks
@@ -52,34 +54,34 @@ internal class Config : ModConfig
     [Header("AccessorySlots")]
 
     [DefaultValue(true)]
-    public bool SlotMoonlord = true;
+    public bool SlotMoonlord;
     [DefaultValue(true)]
-    public bool SlotWings = true;
+    public bool SlotWings;
     [DefaultValue(true)]
-    public bool SlotShield = true;
+    public bool SlotShield;
     [DefaultValue(true)]
-    public bool SlotBoots = true;
+    public bool SlotBoots;
     [DefaultValue(true)]
-    public bool SlotForceWings = true;
+    public bool SlotForceWings;
     [DefaultValue(true)]
-    public bool SlotForceShields = true;
+    public bool SlotForceShields;
     [DefaultValue(true)]
-    public bool SlotForceBoots = true;
+    public bool SlotForceBoots;
     #endregion
 
     #region Stat Tooltips
     [Header("StatTooltips")]
 
     [DefaultValue(true)]
-    public bool StatsWings = true;
+    public bool StatsWings;
     [DefaultValue(true)]
-    public bool StatsHooks = true;
+    public bool StatsHooks;
     [DefaultValue(true)]
-    public bool StatsLightPets = true;
+    public bool StatsLightPets;
     [DefaultValue(true)]
-    public bool StatsMinecarts = true;
+    public bool StatsMinecarts;
     [DefaultValue(true)]
-    public bool StatsMounts = true;
+    public bool StatsMounts;
     #endregion
 
     #region Obtainability
@@ -87,19 +89,19 @@ internal class Config : ModConfig
 
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ObtainabilityRecipes = true;
+    public bool ObtainabilityRecipes;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ObtainabilityShimmer = true;
+    public bool ObtainabilityShimmer;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ObtainabilityNPCDrops = true;
+    public bool ObtainabilityNPCDrops;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ObtainabilityTravellingMerchant = true;
+    public bool ObtainabilityTravellingMerchant;
     [DefaultValue(true)]
     [ReloadRequired]
-    public bool ObtainabilityPresents = true;
+    public bool ObtainabilityPresents;
     #endregion
 
     /* Descriptions to be added later
@@ -137,4 +139,5 @@ internal class Config : ModConfig
     [*]A
     [/list]
     */
+#pragma warning restore CS0649
 }

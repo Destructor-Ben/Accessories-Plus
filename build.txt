@@ -1,8 +1,9 @@
 displayName = Accessories+
 author = Destructor_Ben
 version = 1.0.0.0
-homepage = https://discord.gg/uQzTRx2V8Y
+homepage = https://github.com/Destructor-Ben/Accessories-Plus
 hideCode = true
 hideResources = true
 includeSource = false
 side = Both
+dllReferences = TerraUtil

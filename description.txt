@@ -10,7 +10,7 @@ The changelog can be found on the Steam Workshop page under the change notes.
 
 To find the recipes changed, use the Recipe Browser mod.
 
-[c/8ffdff:Features + Changes]
+[c/8ffdff:Features]
 [c/c78fff:Improved Accessories]
 - [i:TerrasparkBoots] Improved Terraspark Boots
 - [i:AnkhShield] Improved Ankh Shield

@@ -2,6 +2,7 @@
 [list]
 [*]Rewrote the entire mod and ported it to 1.4.4
 [/list]
+    // TODO - add workshop images
 
 [h1]Features + Changes[/h1]
 [b]Improved Accessories[/b]

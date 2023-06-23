@@ -1,12 +1,12 @@
-﻿namespace AccessoriesPlus.Content.UI;
+﻿using Terraria.UI;
+
+namespace AccessoriesPlus.Content.UI;
 internal class UISystem : ModSystem
 {
     public static UISystem Instance => ModContent.GetInstance<UISystem>();
 
     public UserInterface PDAInterface;
     public UIPDA PDAState;
-
-    private GameTime uiGameTime;
 
     public override void Load()
     {
@@ -27,7 +27,7 @@ internal class UISystem : ModSystem
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
     {
-        int index = layers.FindIndex(layer => layer.Name == "Vanilla: Mouse Text");
+        int index = layers.FindIndex(layer => layer.Name == "Vanilla: Entity Health Bars");
         if (index == -1)
             return;
 
@@ -35,18 +35,15 @@ internal class UISystem : ModSystem
             "AccessoriesPlus: PDAInterface",
             delegate
             {
-                if (uiGameTime != null && PDAInterface?.CurrentState != null)
-                    PDAInterface.Draw(Main.spriteBatch, uiGameTime);
-
+                PDAInterface.Draw(Main.spriteBatch, null);
                 return true;
             },
-            InterfaceScaleType.UI
+            InterfaceScaleType.Game
         ));
     }
 
     public override void UpdateUI(GameTime gameTime)
     {
-        uiGameTime = gameTime;
         PDAInterface.Update(gameTime);
     }
 }

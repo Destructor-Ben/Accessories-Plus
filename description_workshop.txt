@@ -11,7 +11,7 @@ The changelog can be found on the Steam Workshop page under the change notes.
 To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2619954303]Recipe Browser Mod[/url]
 
 [hr][/hr]
-[h1]Features + Changes[/h1]
+[h1]Features[/h1]
 [b]Improved Accessories[/b]
 [list]
 [*]Improved Terraspark Boots

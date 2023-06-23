@@ -16,10 +16,10 @@ internal class AccessoryItem : GlobalItem
 
         if (Config.Instance.ImprovedHorseshoeBundle)
         {
-            TextureAssets.Item[ItemID.BundleofBalloons] = Util.RequestTex("BundleofBalloons");
-            TextureAssets.Item[ItemID.HorseshoeBundle] = Util.RequestTex("BundleofHorseshoeBalloons");
-            TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = Util.RequestTex("BundleofBalloons_Balloon");
-            TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = Util.RequestTex("BundleofHorseshoeBalloons_Balloon");
+            TextureAssets.Item[ItemID.BundleofBalloons] = Util.GetTexture("BundleofBalloons");
+            TextureAssets.Item[ItemID.HorseshoeBundle] = Util.GetTexture("BundleofHorseshoeBalloons");
+            TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = Util.GetTexture("BundleofBalloons_Balloon");
+            TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = Util.GetTexture("BundleofHorseshoeBalloons_Balloon");
         }
     }
 

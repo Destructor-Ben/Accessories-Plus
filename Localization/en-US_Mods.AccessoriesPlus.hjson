@@ -3,6 +3,7 @@ Unknown: Unknown
 InfoDisplays: {
 	FoundRareCreature: "{0} {1} {^1:tile;tiles} away"
 	FoundTreasure: "{0} {1} {^1:tile;tiles} away"
+	TilesDistance: "{0} {^0:tile;tiles} away"
 }
 
 AccessorySlots: {
@@ -20,6 +21,15 @@ AccessorySlots: {
 		FunctionalTooltip: Boots
 		VanityTooltip: Vanity Boots
 	}
+}
+
+RecipeGroups: {
+	AnyCopper: Any Copper Bar
+	AnySilver: Any Silver Bar
+	AnyGold: Any Gold Bar
+	AnyCobalt: Any Cobalt Bar
+	FartBalloons.Tooltip: Any Fart Balloon
+	TsunamiBalloons.Tooltip: Any Sharkron Balloon
 }
 
 Tooltips: {

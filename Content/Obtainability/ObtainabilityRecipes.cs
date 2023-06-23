@@ -9,10 +9,10 @@ internal class ObtainabilityRecipes : ModSystem
     // Recipe groups
     public override void AddRecipeGroups()
     {
-        AnyCopper = Util.RegisterRecipeGroup("AnyCopper", ItemID.CopperBar, ItemID.TinBar);
-        AnySilver = Util.RegisterRecipeGroup("AnySilver", ItemID.SilverBar, ItemID.TungstenBar);
-        AnyGold = Util.RegisterRecipeGroup("AnyGold", ItemID.GoldBar, ItemID.PlatinumBar);
-        AnyCobalt = Util.RegisterRecipeGroup("AnyCobalt", ItemID.CobaltBar, ItemID.PalladiumBar);
+        AnyCopper = Util.RegisterRecipeGroup("AnyCopper", ItemID.CopperBar, ItemID.CopperBar, ItemID.TinBar);
+        AnySilver = Util.RegisterRecipeGroup("AnySilver", ItemID.SilverBar, ItemID.SilverBar, ItemID.TungstenBar);
+        AnyGold = Util.RegisterRecipeGroup("AnyGold", ItemID.GoldBar, ItemID.GoldBar, ItemID.PlatinumBar);
+        AnyCobalt = Util.RegisterRecipeGroup("AnyCobalt", ItemID.CobaltBar, ItemID.CobaltBar, ItemID.PalladiumBar);
     }
 
     // Adding recipes

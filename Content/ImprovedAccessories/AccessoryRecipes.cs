@@ -7,8 +7,8 @@ internal class AccessoryRecipes : ModSystem
     // Recipe groups
     public override void AddRecipeGroups()
     {
-        AnyFartBalloon = Util.RegisterRecipeGroup("FartBalloons", ItemID.FartInABalloon, ItemID.BalloonHorseshoeFart);
-        AnyTsunamiBalloon = Util.RegisterRecipeGroup("TsunamiBalloons", ItemID.SharkronBalloon, ItemID.BalloonHorseshoeSharkron);
+        AnyFartBalloon = Util.RegisterRecipeGroup("FartBalloons", ItemID.FartInABalloon, ItemID.FartInABalloon, ItemID.BalloonHorseshoeFart);
+        AnyTsunamiBalloon = Util.RegisterRecipeGroup("TsunamiBalloons", ItemID.SharkronBalloon, ItemID.SharkronBalloon, ItemID.BalloonHorseshoeSharkron);
     }
 
     // Adding recipes
