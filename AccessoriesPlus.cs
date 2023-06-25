@@ -12,4 +12,9 @@ internal class AccessoriesPlus : Mod
     {
         Util.Unload();
     }
+
+    public override void HandlePacket(BinaryReader reader, int whoAmI)
+    {
+        Packet.Handle(reader, whoAmI);
+    }
 }
