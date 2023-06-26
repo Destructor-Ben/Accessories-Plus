@@ -1,6 +1,4 @@
-﻿using Terraria.Localization;
-
-namespace AccessoriesPlus.Content.AccessorySlots;
+﻿namespace AccessoriesPlus.Content.AccessorySlots;
 internal abstract class AbstractAccessorySlot : ModAccessorySlot
 {
     public virtual LocalizedText FunctionalTooltip => Util.GetText($"AccessorySlots.{GetType().Name}.FunctionalTooltip");

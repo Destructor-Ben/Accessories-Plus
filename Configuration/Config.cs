@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
+#pragma warning disable CS0649
 namespace AccessoriesPlus.Configuration;
 internal class Config : ModConfig
 {
     // TODO - more freedom
-#pragma warning disable CS0649
     public static Config Instance => ModContent.GetInstance<Config>();
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
@@ -139,5 +139,5 @@ internal class Config : ModConfig
     [*]A
     [/list]
     */
-#pragma warning restore CS0649
 }
+#pragma warning restore CS0649
