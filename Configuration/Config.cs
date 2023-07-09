@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel;
 using Terraria.ModLoader.Config;
+using TerraUtil.Configuration;
 
 #pragma warning disable CS0649
 namespace AccessoriesPlus.Configuration;
-internal class Config : ModConfig
+internal class Config : ModConfiguration
 {
-    // TODO - more freedom
     public static Config Instance => ModContent.GetInstance<Config>();
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
     #region Improved Accessories
+
     [Header("ImprovedAccessories")]
 
     [DefaultValue(true)]
@@ -25,32 +26,38 @@ internal class Config : ModConfig
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedHandOfCreation;
-    [DefaultValue(true)]
-    [ReloadRequired]
-    public bool ImprovedPDA;
+    public PDAConfig ImprovedPDA = new PDAConfig();
 
-    //public bool ReworkedShinyStone;
     #endregion
 
     #region Improved Grappling Hooks
+
     //[Header("ImprovedGrapplingHooks")]
 
     //public bool AutoDislodgeGrapple = false;
+
     #endregion
 
     #region Improved Pets
+
     //[Header("ImprovedPets")]
+
     #endregion
 
     #region Improved Mounts
+
     //[Header("ImprovedMounts")]
+
     #endregion
 
     #region Improved Minecarts
+
     //[Header("ImprovedMinecarts")]
+
     #endregion
 
     #region Accessory Slots
+
     [Header("AccessorySlots")]
 
     [DefaultValue(true)]
@@ -67,9 +74,11 @@ internal class Config : ModConfig
     public bool SlotForceShields;
     [DefaultValue(true)]
     public bool SlotForceBoots;
+
     #endregion
 
     #region Stat Tooltips
+
     [Header("StatTooltips")]
 
     [DefaultValue(true)]
@@ -82,10 +91,12 @@ internal class Config : ModConfig
     public bool StatsMinecarts;
     [DefaultValue(true)]
     public bool StatsMounts;
+
     #endregion
 
     #region Obtainability
-    [Header("Obtainability")]
+
+    [Header("Obtainability")]// TODO: make the config for obtainability more verbose
 
     [DefaultValue(true)]
     [ReloadRequired]
@@ -102,6 +113,7 @@ internal class Config : ModConfig
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ObtainabilityPresents;
+
     #endregion
 
     /* Descriptions to be added later

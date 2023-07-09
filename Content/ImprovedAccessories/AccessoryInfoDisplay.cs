@@ -4,15 +4,50 @@ using Terraria.Map;
 namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryInfoDisplay : GlobalInfoDisplay
 {
-    private short GemPriority => 235;
+    public static List<NPC> LifeformAnalyzerNPCs;
+    public static NPC BestNPC;
+
+    private const short GemPriority = 235;
+
+    public override void Load()
+    {
+        LifeformAnalyzerNPCs = new();
+    }
+
+    public override void Unload()
+    {
+        LifeformAnalyzerNPCs = null;
+
+        // Resetting tileOreFinderPriority values
+        Main.tileOreFinderPriority[TileID.Hellstone] = 0;
+
+        Main.tileOreFinderPriority[TileID.ExposedGems] = 0;
+        Main.tileOreFinderPriority[TileID.Amethyst] = 0;
+        Main.tileOreFinderPriority[TileID.Topaz] = 0;
+        Main.tileOreFinderPriority[TileID.Sapphire] = 0;
+        Main.tileOreFinderPriority[TileID.Emerald] = 0;
+        Main.tileOreFinderPriority[TileID.Ruby] = 0;
+        Main.tileOreFinderPriority[TileID.Diamond] = 0;
+
+        Main.tileOreFinderPriority[TileID.TreeAmethyst] = 0;
+        Main.tileOreFinderPriority[TileID.TreeTopaz] = 0;
+        Main.tileOreFinderPriority[TileID.TreeSapphire] = 0;
+        Main.tileOreFinderPriority[TileID.TreeEmerald] = 0;
+        Main.tileOreFinderPriority[TileID.TreeRuby] = 0;
+        Main.tileOreFinderPriority[TileID.TreeDiamond] = 0;
+        Main.tileOreFinderPriority[TileID.TreeAmber] = 0;
+    }
 
     public override void SetStaticDefaults()
     {
         // Metal detector priorities
-        if (Config.Instance.ImprovedPDA)
+        if (Config.Instance.ImprovedPDA.TrackHellstone)
         {
             Main.tileOreFinderPriority[TileID.Hellstone] = 450;
+        }
 
+        if (Config.Instance.ImprovedPDA.TrackGems)
+        {
             Main.tileOreFinderPriority[TileID.ExposedGems] = GemPriority;
             Main.tileOreFinderPriority[TileID.Amethyst] = GemPriority;
             Main.tileOreFinderPriority[TileID.Topaz] = GemPriority;
@@ -34,27 +69,70 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
     public override void ModifyDisplayValue(InfoDisplay currentDisplay, ref string displayValue)
     {
         // Lifeform analyzer
-        int rareNPC = Main.LocalPlayer.accCritterGuideNumber;
-        if (Config.Instance.ImprovedPDA && currentDisplay == InfoDisplay.LifeformAnalyzer && rareNPC >= 0 && rareNPC < 200 && Main.npc[rareNPC].active && Main.npc[rareNPC].rarity > 0)
+        if (currentDisplay == InfoDisplay.LifeformAnalyzer)
         {
+            // Searching for NPCs
+            Main.LocalPlayer.accCritterGuideCounter = 15;
+            if (Main.GameUpdateCount % 15 == 0)
+            {
+                BestNPC = null;
+                LifeformAnalyzerNPCs.Clear();
+
+                // Finding all rare npcs
+                foreach (var npc in Main.npc)
+                {
+                    bool npcInWhitelist = Config.Instance.ImprovedPDA.UseNPCWhitelist && Config.Instance.ImprovedPDA.NPCWhitelist.Where(n => n.Type == npc.type).Any();
+                    bool npcInBlacklist = Config.Instance.ImprovedPDA.UseNPCBlacklist && Config.Instance.ImprovedPDA.NPCBlacklist.Where(n => n.Type == npc.type).Any();
+                    if (npc.active && (npc.rarity > 0 || npcInWhitelist) && !npcInBlacklist && npc.Distance(Main.LocalPlayer.Center) <= 1300f)
+                    {
+                        LifeformAnalyzerNPCs.Add(npc);
+                    }
+                }
+
+                // Finding rarest npc
+                foreach (var npc in LifeformAnalyzerNPCs)
+                {
+                    if (npc.rarity > (BestNPC?.rarity ?? -1))
+                        BestNPC = npc;
+                }
+
+                Main.LocalPlayer.accCritterGuideNumber = (byte)(BestNPC?.whoAmI ?? -1);
+            }
+
             // Drawing the arrows
-            UISystem.Instance.PDAState.DrawLifeformAnalyzer = true;
+            UIPDA.Instance.DrawLifeformAnalyzerArrows = Config.Instance.ImprovedPDA.LifeformAnalyzerArrows;
 
             // Changing display value
-            var npc = Main.npc[Main.LocalPlayer.accCritterGuideNumber];
-            displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.RoundToNearest(npc.Distance(Main.LocalPlayer.Center) / 16f));
+            if (Config.Instance.ImprovedPDA.LifeformAnalyzerDistanceInfo && (BestNPC?.active ?? false))
+            {
+                var npc = Main.npc[Main.LocalPlayer.accCritterGuideNumber];
+                displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.Round(npc.Distance(Main.LocalPlayer.Center) / 16f));
+            }
         }
 
         // Metal detector
-        if (Config.Instance.ImprovedPDA && currentDisplay == InfoDisplay.MetalDetector && Main.SceneMetrics.bestOre > 0)
+        if (currentDisplay == InfoDisplay.MetalDetector && Main.SceneMetrics.bestOre > 0)
         {
             // Drawing the arrows
-            UISystem.Instance.PDAState.DrawMetalDetector = true;
+            UIPDA.Instance.DrawMetalDetectorArrows = Config.Instance.ImprovedPDA.MetalDetectorArrows;
 
             // Changing display value
-            string tileName = GetBestOreTileName(Main.SceneMetrics.bestOre, Main.SceneMetrics.ClosestOrePosition);
-            int distance = (int)(Main.SceneMetrics.ClosestOrePosition.Value.ToWorldCoordinates().Distance(Main.LocalPlayer.Center) / 16f);
-            displayValue = Util.GetTextValue("InfoDisplays.FoundTreasure", tileName, distance);
+            if (Config.Instance.ImprovedPDA.MetalDetectorDistanceInfo)
+            {
+                string tileName = GetBestOreTileName(Main.SceneMetrics.bestOre, Main.SceneMetrics.ClosestOrePosition);
+                int distance = (int)Util.Round(Main.SceneMetrics.ClosestOrePosition.Value.ToWorldCoordinates().Distance(Main.LocalPlayer.Center) / 16f);
+                displayValue = Util.GetTextValue("InfoDisplays.FoundTreasure", tileName, distance);
+            }
+        }
+    }
+
+    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor)
+    {
+        // Whitelisted NPCs don't have the colour change
+        if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false) && !NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
+        {
+            displayColor = Main.MouseTextColorReal;
+            // TODO: whitelisted golden critter's aren't handled because I can'y modify the background color of the text
         }
     }
 

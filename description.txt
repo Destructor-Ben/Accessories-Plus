@@ -34,5 +34,6 @@ To find the recipes changed, use the Recipe Browser mod.
 [c/c78fff:Obtainability]
 - [i:HermesBoots] More accessory recipes
 - [i:BottomlessShimmerBucket] More accessories can be shimmered into each other
+- [i:ArmorPolish] Increased the drop rate of all Ankh Charm accessories
 - [i:PeddlersHat] The Travelling Merchant is guaranteed to sell an accessory
 - [i:Present] Accessories found in presents have other methods of obtaining

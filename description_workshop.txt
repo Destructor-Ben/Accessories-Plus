@@ -42,6 +42,7 @@ To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles
 [list]
 [*]More accessory recipes
 [*]More accessories can be shimmered into each other
+[*]Increased the drop rate of all Ankh Charm accessories
 [*]The Travelling Merchant is guaranteed to sell an accessory
 [*]Accessories found in presents have other methods of obtaining
 [/list]

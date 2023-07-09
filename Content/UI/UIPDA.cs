@@ -1,38 +1,51 @@
 ﻿using AccessoriesPlus.Content.ImprovedAccessories;
-using System.Reflection;
 using Terraria.UI;
 using Terraria.UI.Chat;
+using TerraUtil.UI;
 
 namespace AccessoriesPlus.Content.UI;
-internal class UIPDA : UIState
+internal class UIPDA : Interface
 {
-    public bool DrawLifeformAnalyzer = false;
-    public bool DrawMetalDetector = false;
+    public static UIPDA Instance => ModContent.GetInstance<UIPDA>();
 
-    // This isn't safe, but shouldn't matter so long as beehives aren't detected by the metal detector
+    public bool DrawLifeformAnalyzerArrows = false;
+    public bool DrawMetalDetectorArrows = false;
+
+    private const float MaxArrowDistanceFromPlayer = 300f;
+
+    /*
+    // This isn't safe, but shouldn't matter so long as beehives and other items aren't detected by the metal detector
     private static MethodInfo ItemDropQueryMethod = typeof(WorldGen).GetMethod("KillTile_GetItemDrops", BindingFlags.NonPublic | BindingFlags.Static);
 
     private static int GetPrimaryTileDrop(int x, int y)
     {
-        object[] parameters = new object[] { x, y, Main.tile[x, y], null, null, null, null, false };
+        object[] parameters = new object[] { x, y, Main.tile[x, y], null, null, null, null, true };
         ItemDropQueryMethod.Invoke(null, parameters);
         return (int)parameters[3];
     }
+    */
 
+    public override int GetLayerInsertIndex(List<GameInterfaceLayer> layers)
+    {
+        return layers.FindIndex(l => l.Name == "Vanilla: Entity Health Bars") + 1;
+    }
+
+    // TODO: make UI elememnts for the arrows and rework them
     protected override void DrawSelf(SpriteBatch spriteBatch)
     {
         // Lifeform analyzer
-        if (DrawLifeformAnalyzer)
+        if (DrawLifeformAnalyzerArrows)
         {
-            foreach (var npc in Main.npc)
+            foreach (var npc in AccessoryInfoDisplay.LifeformAnalyzerNPCs)
             {
-                if (npc.active && npc.rarity > 0 && npc.Distance(Main.LocalPlayer.Center) <= 1300 && npc.Distance(Main.LocalPlayer.Center) >= 150f)
+                if (npc.active)
                     DrawNPCArrow(spriteBatch, npc);
             }
         }
 
         // Metal detector
-        if (DrawMetalDetector)
+        // TODO: better system for blobbing framed tiles together, and also making frameImportant tiles have their position centred
+        if (DrawMetalDetectorArrows)
         {
             var trackedTiles = new List<(Tile, Point)>();
 
@@ -46,7 +59,7 @@ internal class UIPDA : UIState
                         continue;
 
                     var tile = Main.tile[x, y];
-                    if (SceneMetrics.IsValidForOreFinder(tile) && new Point(x, y).ToWorldCoordinates().Distance(Main.LocalPlayer.Center) >= 150f)
+                    if (SceneMetrics.IsValidForOreFinder(tile))
                     {
                         // Adding the tile if there isn't one already
                         if (!trackedTiles.Where(t => t.Item1.TileType == tile.TileType).Any())
@@ -84,45 +97,14 @@ internal class UIPDA : UIState
         }
 
         // Resetting variables
-        DrawLifeformAnalyzer = false;
-        DrawMetalDetector = false;
+        DrawLifeformAnalyzerArrows = false;
+        DrawMetalDetectorArrows = false;
     }
 
-    // Calculating the position and rotation for an arrow
-    private static (Vector2, float) GetArrowPositionAndRotation(Vector2 target)
+    // Gets the preview texture for a tile
+    private static Asset<Texture2D> GetTileTexture(int x, int y, Tile tile)
     {
-        // Getting position and rotation
-        var position = target - Main.LocalPlayer.Center;
-        float rotation = position.ToRotation();
-
-        // Changing distance from player
-        position.Normalize();
-        position *= 100f;
-
-        // Moving to the center of the screen
-        position += Main.LocalPlayer.Center - Main.screenPosition;
-
-        return (position, rotation);
-    }
-
-    // Draws the arrow and background
-    private static void DrawArrow(SpriteBatch sb, Vector2 postition, float rotation)
-    {
-        // TODO
-    }
-
-    // Draws the text for the name and distance
-    private static void DrawText(SpriteBatch sb, Vector2 position, string text, Vector2 targetPos)
-    {
-        var font = FontAssets.MouseText.Value;
-
-        // Name
-        ChatManager.DrawColorCodedStringWithShadow(sb, font, text, position + new Vector2(0f, 30f), Color.White, 0f, ChatManager.GetStringSize(font, text, Vector2.One) / 2f, Vector2.One);
-
-        // Distance
-        int distance = (int)Util.RoundToNearest(targetPos.Distance(Main.LocalPlayer.Center) / 16f);
-        string distanceText = Util.GetTextValue("InfoDisplays.TilesDistance", distance);
-        ChatManager.DrawColorCodedStringWithShadow(sb, font, distanceText, position + new Vector2(0f, 50f), Color.White, 0f, ChatManager.GetStringSize(font, distanceText, Vector2.One) / 2f, Vector2.One);
+        return TextureAssets.NpcHead[0];
     }
 
     // Draws an arrow to the npc
@@ -155,15 +137,59 @@ internal class UIPDA : UIState
         DrawArrow(sb, position, rotation);
 
         // Drawing the tile
-        int itemID = GetPrimaryTileDrop(x, y);
-        if (itemID != -1)
-        {
-            var tex = TextureAssets.Item[itemID];
-            sb.Draw(tex.Value, position, null, Color.White, 0f, tex.Size() / 2, 1f, SpriteEffects.None, 0f);
-        }
+        var tex = GetTileTexture(x, y, target);
+        sb.Draw(tex.Value, position, null, Color.White, 0f, tex.Size() / 2, 1f, SpriteEffects.None, 0f);
 
         // Drawing the name and distance
         string name = AccessoryInfoDisplay.GetBestOreTileName(target.TileType, new Point(x, y));
         DrawText(sb, position, name, new Vector2(x * 16f, y * 16f));
+    }
+
+    // Calculating the position and rotation for an arrow
+    // TODO: make this work with multiple UI scales
+    private static (Vector2, float) GetArrowPositionAndRotation(Vector2 target)
+    {
+        // Getting position and rotation
+        var position = target - Main.LocalPlayer.Center;
+        float rotation = position.ToRotation();
+
+        // Changing distance from player
+        if (position.Length() >= MaxArrowDistanceFromPlayer)
+        {
+            position.Normalize();
+            position *= MaxArrowDistanceFromPlayer;
+        }
+
+        // Moving to the center of the screen
+        position += Main.LocalPlayer.Center - Util.ScreenPos;
+
+        return (position, rotation);
+    }
+
+    // Draws the arrow and 
+    // TODO: finish this
+    private static void DrawArrow(SpriteBatch sb, Vector2 position, float rotation)
+    {
+        Utils.DrawInvBG(sb, Utils.CenteredRectangle(position, Vector2.One * 50f));
+
+        var font = FontAssets.MouseText.Value;
+        string text = "->";
+        float scale = 3f;
+        ChatManager.DrawColorCodedStringWithShadow(sb, font, text, Vector2.Lerp(Main.LocalPlayer.Center - Util.ScreenPos, position, 0.5f), Color.White, rotation, ChatManager.GetStringSize(font, text, scale * Vector2.One) / 2f, scale * Vector2.One);
+    }
+
+    // Draws the text for the name and distance
+    // TODO: make this a tooltip
+    private static void DrawText(SpriteBatch sb, Vector2 position, string text, Vector2 targetPos)
+    {
+        var font = FontAssets.MouseText.Value;
+
+        // Name
+        ChatManager.DrawColorCodedStringWithShadow(sb, font, text, position + new Vector2(0f, 30f), Color.White, 0f, ChatManager.GetStringSize(font, text, Vector2.One) / 2f, Vector2.One);
+
+        // Distance
+        int distance = (int)Util.Round(targetPos.Distance(Main.LocalPlayer.Center) / 16f);
+        string distanceText = Util.GetTextValue("InfoDisplays.TilesDistance", distance);
+        ChatManager.DrawColorCodedStringWithShadow(sb, font, distanceText, position + new Vector2(0f, 50f), Color.White, 0f, ChatManager.GetStringSize(font, distanceText, Vector2.One) / 2f, Vector2.One);
     }
 }

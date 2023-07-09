@@ -32,6 +32,7 @@ internal class ObtainabilityRecipes : ModSystem
         if (Config.Instance.ObtainabilityRecipes)
         {
             #region Hand of Creation
+
             Recipe.Create(ItemID.PortableStool)
                 .AddTile(TileID.Sawmill)
                 .AddRecipeGroup(RecipeGroupID.Wood, 15)
@@ -43,9 +44,11 @@ internal class ObtainabilityRecipes : ModSystem
                 .AddRecipeGroup(AnySilver, 5)
                 .AddIngredient(ItemID.Bone, 5)
                 .Register();
+
             #endregion
 
             #region PDA
+
             Recipe.Create(ItemID.MetalDetector)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddIngredient(ItemID.Wire, 10)
@@ -76,9 +79,11 @@ internal class ObtainabilityRecipes : ModSystem
                 .AddIngredient(ItemID.Wire, 10)
                 .AddRecipeGroup(RecipeGroupID.IronBar, 5)
                 .Register();
+
             #endregion
 
             #region Terraspark Boots
+
             Recipe.Create(ItemID.HermesBoots)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddIngredient(ItemID.Silk, 10)
@@ -156,9 +161,11 @@ internal class ObtainabilityRecipes : ModSystem
                 .AddTile(TileID.WorkBenches)
                 .AddIngredient(ItemID.Vertebrae, 2)
                 .Register();
+
             #endregion
 
             #region Ankh Shield
+
             Recipe.Create(ItemID.CobaltShield)
                 .AddTile(TileID.Anvils)
                 .AddRecipeGroup(AnyCobalt, 10)
@@ -169,9 +176,11 @@ internal class ObtainabilityRecipes : ModSystem
                 .AddIngredient(ItemID.TurtleShell)
                 .AddIngredient(ItemID.IceBlock, 10)
                 .Register();
+
             #endregion
 
             #region Bundle of Horseshoe Balloons
+
             Recipe.Create(ItemID.LuckyHorseshoe)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddRecipeGroup(AnyGold, 8)
@@ -212,6 +221,7 @@ internal class ObtainabilityRecipes : ModSystem
                 .AddIngredient(ItemID.SandBlock, 10)
                 .AddIngredient(ItemID.Feather, 5)
                 .Register();
+
             #endregion
         }
     }

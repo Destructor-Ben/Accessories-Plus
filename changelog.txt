@@ -2,9 +2,8 @@
 [list]
 [*]Rewrote the entire mod and ported it to 1.4.4
 [/list]
-    // TODO - add workshop images
 
-[h1]Features + Changes[/h1]
+[h1]Features[/h1]
 [b]Improved Accessories[/b]
 [list]
 [*]Improved Terraspark Boots
@@ -35,6 +34,7 @@
 [list]
 [*]More accessory recipes
 [*]More accessories can be shimmered into each other
+[*]Increased the drop rate of all Ankh Charm accessories
 [*]The Travelling Merchant is guaranteed to sell an accessory
 [*]Accessories found in presents have other methods of obtaining
 [/list]

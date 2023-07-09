@@ -18,8 +18,8 @@ internal class StatTooltips : GlobalItem
             AddMiscLine(tooltips, wingStats, "Equipable", after: true);
             var wingTooltips = new List<TooltipLine>
             {
-                Util.GetTooltipLine("WingStats.FlightTime", Util.RoundToNearest(wingStats.FlightTime / 60f, 0.5f)),
-                wingStats.FlightHeight != -1f ? Util.GetTooltipLine("WingStats.FlightHeight", Util.RoundToNearest(wingStats.FlightHeight / 60f, 0.5f)) : Util.GetTooltipLine("WingStats.FlightHeightUnknown"),
+                Util.GetTooltipLine("WingStats.FlightTime", Util.Round(wingStats.FlightTime / 60f, 0.5f)),
+                wingStats.FlightHeight != -1f ? Util.GetTooltipLine("WingStats.FlightHeight", Util.Round(wingStats.FlightHeight / 60f, 0.5f)) : Util.GetTooltipLine("WingStats.FlightHeightUnknown"),
                 Util.GetTooltipLine("WingStats.MaxHSpeed", wingStats.MaxHSpeed),
                 Util.GetTooltipLine("WingStats.HAcceleration", wingStats.HAcceleration),
             };
@@ -47,7 +47,7 @@ internal class StatTooltips : GlobalItem
             AddMiscLine(tooltips, hookStats, "Equipable", after: true);
             var hookTooltips = new List<TooltipLine>
             {
-                hookStats.Reach != -1 ? Util.GetTooltipLine("HookStats.Reach", Util.RoundToNearest(hookStats.Reach / 16f, 0.5f)) : Util.GetTooltipLine("HookStats.ReachUnknown"),
+                hookStats.Reach != -1 ? Util.GetTooltipLine("HookStats.Reach", Util.Round(hookStats.Reach / 16f, 0.5f)) : Util.GetTooltipLine("HookStats.ReachUnknown"),
                 hookStats.NumHooks != -1 ? Util.GetTooltipLine("HookStats.NumHooks", hookStats.NumHooks) : Util.GetTooltipLine("HookStats.NumHooksUnknown"),
                 Util.GetTooltipLine(hookStats.Latching switch
                 {
@@ -56,9 +56,9 @@ internal class StatTooltips : GlobalItem
                     HookStats.LatchingMode.Simultaneous => "HookStats.LatchingSimultaneous",
                     _ => "HookStats.LatchingUnknown",
                 }),
-                hookStats.ShootSpeed != -1 ? Util.GetTooltipLine("HookStats.ShootSpeed", Util.RoundToNearest(hookStats.ShootSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.ShootSpeedUnknown"),
-                hookStats.RetreatSpeed != -1 ? Util.GetTooltipLine("HookStats.RetreatSpeed", Util.RoundToNearest(hookStats.RetreatSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"),
-                hookStats.PullSpeed != -1 ? Util.GetTooltipLine("HookStats.PullSpeed", Util.RoundToNearest(hookStats.PullSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.PullSpeedUnknown"),
+                hookStats.ShootSpeed != -1 ? Util.GetTooltipLine("HookStats.ShootSpeed", Util.Round(hookStats.ShootSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.ShootSpeedUnknown"),
+                hookStats.RetreatSpeed != -1 ? Util.GetTooltipLine("HookStats.RetreatSpeed", Util.Round(hookStats.RetreatSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"),
+                hookStats.PullSpeed != -1 ? Util.GetTooltipLine("HookStats.PullSpeed", Util.Round(hookStats.PullSpeed * Util.PPTToMPH), 0.5f) : Util.GetTooltipLine("HookStats.PullSpeedUnknown"),
             };
 
             tooltips.InsertTooltips("Equipable", after: true, hookTooltips.ToArray());
