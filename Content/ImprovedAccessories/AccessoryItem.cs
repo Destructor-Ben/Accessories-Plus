@@ -137,6 +137,13 @@ internal class AccessoryItem : GlobalItem
                     tooltips.RemoveTooltips("Tooltip0");
                 }
                 break;
+            case ItemID.Radar:
+                if (PDAConfig.Instance.RadarHighlightDanger)
+                {
+                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("Radar"));
+                    tooltips.RemoveTooltips("Tooltip0");
+                }
+                break;
             default:
                 break;
         }

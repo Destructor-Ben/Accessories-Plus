@@ -1,7 +1,7 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal class StatTooltips : GlobalItem
 {
-    // TODO - for stats that have manual input, get it from the hooks that tML provides
+    // TODO: for stats that have manual input, get it from the hooks that tML provides
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
         // Getting stats
@@ -12,10 +12,11 @@ internal class StatTooltips : GlobalItem
         var mountStats = MountStats.Get(item);
 
         // Wings
-        // TODO - fix the speeds and accelerations
+        // TODO: fix the speeds and accelerations
         if (Config.Instance.StatsWings && wingStats != null)
         {
             AddMiscLine(tooltips, wingStats, "Equipable", after: true);
+
             var wingTooltips = new List<TooltipLine>
             {
                 Util.GetTooltipLine("WingStats.FlightTime", Util.Round(wingStats.FlightTime / 60f, 0.5f)),
@@ -43,7 +44,7 @@ internal class StatTooltips : GlobalItem
         // Hooks
         if (Config.Instance.StatsHooks && hookStats != null)
         {
-            // TODO - Fix conversions, check stats, fix rounding
+            // TODO: Fix conversions, check stats, fix rounding
             AddMiscLine(tooltips, hookStats, "Equipable", after: true);
             var hookTooltips = new List<TooltipLine>
             {

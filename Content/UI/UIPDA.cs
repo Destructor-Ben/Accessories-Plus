@@ -8,12 +8,62 @@ internal class UIPDA : Interface
 {
     public static UIPDA Instance => ModContent.GetInstance<UIPDA>();
 
-    public bool DrawLifeformAnalyzerArrows = false;
-    public bool DrawMetalDetectorArrows = false;
-
     private const float MaxArrowDistanceFromPlayer = 300f;
 
+    private static Dictionary<int, int> TileToItem = new()
+    {
+        // Vanilla
+        [TileID.FossilOre] = ItemID.FossilOre,
+        [TileID.DesertFossil] = ItemID.DesertFossil,
+        [TileID.Copper] = ItemID.CopperOre,
+        [TileID.Tin] = ItemID.TinOre,
+        [TileID.Iron] = ItemID.IronOre,
+        [TileID.Lead] = ItemID.LeadOre,
+        [TileID.Silver] = ItemID.SilverOre,
+        [TileID.Tungsten] = ItemID.TungstenOre,
+        [TileID.Gold] = ItemID.GoldOre,
+        [TileID.Platinum] = ItemID.PlatinumOre,
+        [TileID.Demonite] = ItemID.DemoniteOre,
+        [TileID.Crimtane] = ItemID.CrimtaneOre,
+        [TileID.Meteorite] = ItemID.Meteorite,
+
+        [TileID.Heart] = ItemID.LifeCrystal,
+        [TileID.LifeCrystalBoulder] = ItemID.LifeCrystal,
+        [TileID.ManaCrystal] = ItemID.ManaCrystal,
+
+        [TileID.Cobalt] = ItemID.CobaltOre,
+        [TileID.Palladium] = ItemID.PalladiumOre,
+        [TileID.Mythril] = ItemID.MythrilOre,
+        [TileID.Orichalcum] = ItemID.OrichalcumOre,
+        [TileID.Adamantite] = ItemID.AdamantiteOre,
+        [TileID.Titanium] = ItemID.TitaniumOre,
+        [TileID.Chlorophyte] = ItemID.ChlorophyteOre,
+
+        [TileID.GlowTulip] = ItemID.GlowTulip,
+        [TileID.LifeFruit] = ItemID.LifeFruit,
+
+        // Ones that I add
+        [TileID.Hellstone] = ItemID.Hellstone,
+
+        [TileID.Amethyst] = ItemID.Amethyst,
+        [TileID.Topaz] = ItemID.Topaz,
+        [TileID.Sapphire] = ItemID.Sapphire,
+        [TileID.Emerald] = ItemID.Emerald,
+        [TileID.Ruby] = ItemID.Ruby,
+        [TileID.Diamond] = ItemID.Diamond,
+        [TileID.AmberStoneBlock] = ItemID.Amber,
+
+        [TileID.TreeAmethyst] = ItemID.GemTreeAmethystSeed,
+        [TileID.TreeTopaz] = ItemID.GemTreeTopazSeed,
+        [TileID.TreeSapphire] = ItemID.GemTreeSapphireSeed,
+        [TileID.TreeEmerald] = ItemID.GemTreeEmeraldSeed,
+        [TileID.TreeRuby] = ItemID.GemTreeRubySeed,
+        [TileID.TreeDiamond] = ItemID.GemTreeDiamondSeed,
+        [TileID.TreeAmber] = ItemID.GemTreeAmberSeed,
+    };
+
     /*
+    // TODO: reimplement this?
     // This isn't safe, but shouldn't matter so long as beehives and other items aren't detected by the metal detector
     private static MethodInfo ItemDropQueryMethod = typeof(WorldGen).GetMethod("KillTile_GetItemDrops", BindingFlags.NonPublic | BindingFlags.Static);
 
@@ -34,7 +84,7 @@ internal class UIPDA : Interface
     protected override void DrawSelf(SpriteBatch spriteBatch)
     {
         // Lifeform analyzer
-        if (DrawLifeformAnalyzerArrows)
+        if (PDAConfig.Instance.LifeformAnalyzerArrows && Util.InfoDisplayActive(InfoDisplay.LifeformAnalyzer))
         {
             foreach (var npc in AccessoryInfoDisplay.LifeformAnalyzerNPCs)
             {
@@ -44,8 +94,8 @@ internal class UIPDA : Interface
         }
 
         // Metal detector
-        // TODO: better system for blobbing framed tiles together, and also making frameImportant tiles have their position centred
-        if (DrawMetalDetectorArrows)
+        // TODO: better system for blobbing framed tiles together, and also making frameImportant tiles have their position centered
+        if (PDAConfig.Instance.MetalDetectorArrows && Util.InfoDisplayActive(InfoDisplay.MetalDetector))
         {
             var trackedTiles = new List<(Tile, Point)>();
 
@@ -95,16 +145,76 @@ internal class UIPDA : Interface
             foreach (var tile in trackedTiles)
                 DrawTileArrow(spriteBatch, tile.Item1, tile.Item2.X, tile.Item2.Y);
         }
-
-        // Resetting variables
-        DrawLifeformAnalyzerArrows = false;
-        DrawMetalDetectorArrows = false;
     }
 
     // Gets the preview texture for a tile
-    private static Asset<Texture2D> GetTileTexture(int x, int y, Tile tile)
+    private static Asset<Texture2D> GetTileTexture(Tile tile)
     {
-        return TextureAssets.NpcHead[0];
+        int type = tile.TileType;
+        int itemID = -1;
+        Asset<Texture2D> tex = null;
+
+        // Basic tiles
+        itemID = Util.FromDictOrDefault(type, TileToItem, -1);
+
+        // Chests
+        int chestStyle = tile.TileFrameX / 36;
+        if (type is TileID.Containers or TileID.FakeContainers)
+            itemID = Chest.chestItemSpawn[chestStyle];
+        else if (type is TileID.Containers2 or TileID.FakeContainers)
+            itemID = Chest.chestItemSpawn2[chestStyle];
+
+        // Gelatin crystal
+        if (type == TileID.Crystals && tile.TileFrameX >= 324)
+            itemID = ItemID.QueenSlimeCrystal;
+
+        // Strange plants
+        if (type == TileID.DyePlants)
+        {
+            int plantStyle = tile.TileFrameX / 34;
+            itemID = 1107 + plantStyle;
+            if (plantStyle is >= 8 and <= 11)
+                itemID = 3385 + plantStyle - 8;
+        }
+
+        // Exposed gems
+        if (type == TileID.ExposedGems)
+        {
+            switch (tile.TileFrameX / 18)
+            {
+                case 0:
+                    itemID = ItemID.Amethyst;
+                    break;
+                case 1:
+                    itemID = ItemID.Topaz;
+                    break;
+                case 2:
+                    itemID = ItemID.Sapphire;
+                    break;
+                case 3:
+                    itemID = ItemID.Emerald;
+                    break;
+                case 4:
+                    itemID = ItemID.Ruby;
+                    break;
+                case 5:
+                    itemID = ItemID.Diamond;
+                    break;
+                case 6:
+                    itemID = ItemID.Amber;
+                    break;
+            }
+        }
+
+        // TODO: Modded tiles
+
+        if (tex == null && itemID != -1)
+        {
+            Main.instance.LoadItem(itemID);
+            tex = TextureAssets.Item[itemID];
+        }
+
+        return tex ?? TextureAssets.NpcHead[0];
     }
 
     // Draws an arrow to the npc
@@ -112,37 +222,51 @@ internal class UIPDA : Interface
     {
         // Getting position
         (var position, float rotation) = GetArrowPositionAndRotation(target.Center);
-
-        // Drawing the background and arrow
-        DrawArrow(sb, position, rotation);
-
-        // Drawing an NPC
         var npc = new NPC();
         npc.SetDefaults(target.type);
         npc.IsABestiaryIconDummy = true;
         npc.Center = position;
-        Main.instance.DrawNPCDirect(sb, npc, false, Vector2.Zero);
 
-        // Drawing the name and distance
-        DrawText(sb, position, npc.GivenOrTypeName, npc.Center);
+        // Drawing the background and arrow
+        DrawArrow(sb, position, rotation, npc.GivenOrTypeName, target.Center);
+
+        // Drawing an NPC
+        Main.instance.DrawNPCDirect(sb, npc, false, Vector2.Zero);
     }
 
     // Draws an arrow to the tile
     private static void DrawTileArrow(SpriteBatch sb, Tile target, int x, int y)
     {
-        // Getting position
+        // Getting data
         (var position, float rotation) = GetArrowPositionAndRotation(new Point(x, y).ToWorldCoordinates());
+        var tex = GetTileTexture(target);
 
         // Drawing the background and arrow
-        DrawArrow(sb, position, rotation);
+        string name = AccessoryInfoDisplay.GetBestOreTileName(target.TileType, new Point(x, y));
+        DrawArrow(sb, position, rotation, name, new Point(x, y).ToWorldCoordinates());
 
         // Drawing the tile
-        var tex = GetTileTexture(x, y, target);
-        sb.Draw(tex.Value, position, null, Color.White, 0f, tex.Size() / 2, 1f, SpriteEffects.None, 0f);
+        if (target.TileType != TileID.Pots)
+        {
+            sb.Draw(tex.Value, position, null, Color.White, 0f, tex.Size() / 2, 1f, SpriteEffects.None, 0f);
+            return;
+        }
 
-        // Drawing the name and distance
-        string name = AccessoryInfoDisplay.GetBestOreTileName(target.TileType, new Point(x, y));
-        DrawText(sb, position, name, new Vector2(x * 16f, y * 16f));
+        // Pots are handled differently
+        tex = TextureAssets.Tile[TileID.Pots];
+        for (int i = -1; i <= 1; i += 2)
+        {
+            for (int j = -1; j <= 1; j += 2)
+            {
+                int frameY = target.TileFrameY;
+                if (frameY % (18 * 2) == 0)
+                    frameY += 18;
+
+                var source = tex.Frame(3 * 2, 37 * 2, i == -1 ? 0 : 1, (j == -1 ? 0 : 1) + (int)Util.Round(frameY, 18) / 18 - 1, 0, 0);
+                var destination = new Rectangle((int)(position.X - 8 + i * 8), (int)(position.Y - 8 + j * 8), 18, 18);
+                sb.Draw(tex.Value, destination, source, Color.White);
+            }
+        }
     }
 
     // Calculating the position and rotation for an arrow
@@ -166,30 +290,29 @@ internal class UIPDA : Interface
         return (position, rotation);
     }
 
-    // Draws the arrow and 
-    // TODO: finish this
-    private static void DrawArrow(SpriteBatch sb, Vector2 position, float rotation)
+    // Draws the arrow and background
+    private static void DrawArrow(SpriteBatch sb, Vector2 position, float rotation, string name, Vector2 targetPos)
     {
-        Utils.DrawInvBG(sb, Utils.CenteredRectangle(position, Vector2.One * 50f));
+        // Background
+        var container = Utils.CenteredRectangle(position, Vector2.One * 50f);
+        Utils.DrawInvBG(sb, container);
 
-        var font = FontAssets.MouseText.Value;
-        string text = "->";
-        float scale = 3f;
-        ChatManager.DrawColorCodedStringWithShadow(sb, font, text, Vector2.Lerp(Main.LocalPlayer.Center - Util.ScreenPos, position, 0.5f), Color.White, rotation, ChatManager.GetStringSize(font, text, scale * Vector2.One) / 2f, scale * Vector2.One);
-    }
+        // Arrow
+        var font = FontAssets.DeathText.Value;
+        string arrowText = "->";
+        float scale = 1f;
+        var arrowPos = Vector2.Lerp(Main.LocalPlayer.Center - Util.ScreenPos, position, 0.5f);
+        var origin = ChatManager.GetStringSize(font, arrowText, scale * Vector2.One) / 3f;// 3f looks better than 2f because the font is weird or something
+        ChatManager.DrawColorCodedStringWithShadow(sb, font, arrowText, arrowPos, Color.White, rotation, origin, scale * Vector2.One);
 
-    // Draws the text for the name and distance
-    // TODO: make this a tooltip
-    private static void DrawText(SpriteBatch sb, Vector2 position, string text, Vector2 targetPos)
-    {
-        var font = FontAssets.MouseText.Value;
+        // Mouse text
+        if (!container.Contains(Util.MousePos))
+            return;
 
-        // Name
-        ChatManager.DrawColorCodedStringWithShadow(sb, font, text, position + new Vector2(0f, 30f), Color.White, 0f, ChatManager.GetStringSize(font, text, Vector2.One) / 2f, Vector2.One);
-
-        // Distance
         int distance = (int)Util.Round(targetPos.Distance(Main.LocalPlayer.Center) / 16f);
         string distanceText = Util.GetTextValue("InfoDisplays.TilesDistance", distance);
-        ChatManager.DrawColorCodedStringWithShadow(sb, font, distanceText, position + new Vector2(0f, 50f), Color.White, 0f, ChatManager.GetStringSize(font, distanceText, Vector2.One) / 2f, Vector2.One);
+
+        Util.ResetMouseText();
+        Util.MouseText(name + " - " + distanceText, true);
     }
 }

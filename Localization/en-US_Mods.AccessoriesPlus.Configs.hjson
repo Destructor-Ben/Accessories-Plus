@@ -167,6 +167,17 @@ PDAConfig: {
 		LifeformAnalyzer: "[i:LifeformAnalyzer] Lifeform Analyzer"
 	}
 
+	// Radar
+	RadarHighlightEnemies: {
+		Label: Highlight Enemies
+		Tooltip: Makes the [i:Radar] Radar highlight enemies like the [i:HunterPotion] Hunter Potion
+	}
+
+	RadarHighlightDanger: {
+		Label: Highlight Dangerous Tiles
+		Tooltip: Makes the [i:Radar] Radar highlight dangerous tiles like the [i:TrapsightPotion] Dangersense Potion
+	}
+
 	// Metal detector
 	MetalDetectorDistanceInfo: {
 		Label: Distance Information
@@ -193,12 +204,6 @@ PDAConfig: {
 		Tooltip: Allows the [i:MetalDetector] Metal Detector to track Hellstone
 	}
 
-	// Radar
-	RadarHighlight: {
-		Label: Highlight Enemies
-		Tooltip: Makes the [i:Radar] Radar highlight enemies
-	}
-
 	// Lifeform analyzer
 	LifeformAnalyzerDistanceInfo: {
 		Label: Distance Information
@@ -211,7 +216,7 @@ PDAConfig: {
 	}
 
 	LifeformAnalyzerHighlight: {
-		Label: Lifeform Analyzer Highlight
+		Label: Highlight Rare Creatures
 		Tooltip: Makes the [i:LifeformAnalyzer] Lifeform Analyzer highlight rare creatures
 	}
 
@@ -227,11 +232,7 @@ PDAConfig: {
 
 	NPCWhitelist: {
 		Label: NPC Whitelist
-		Tooltip:
-			'''
-			Allows the [i:LifeformAnalyzer] Lifeform Analyzer to track additional creatures
-			The number value is the rarity of the NPC
-			'''
+		Tooltip: Allows the [i:LifeformAnalyzer] Lifeform Analyzer to track additional creatures
 	}
 
 	NPCBlacklist: {

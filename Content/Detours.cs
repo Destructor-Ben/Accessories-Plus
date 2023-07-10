@@ -1,9 +1,12 @@
-﻿namespace AccessoriesPlus.Content;
+﻿using AccessoriesPlus.Content.ImprovedAccessories;
+
+namespace AccessoriesPlus.Content;
 internal class Detours : ModSystem
 {
     public override void Load()
     {
         /*/ Automatically dislodging grappling hooks
+        // TODO: finish
         On_Player.GrappleMovement += delegate (On_Player.orig_GrappleMovement orig, Player self)
         {
             if (Config.Instance.AutoDislodgeGrapple)
@@ -33,5 +36,29 @@ internal class Detours : ModSystem
 
             orig(self);
         };*/
+
+        // Making lifeform analyzer have custom highlight colours
+        On_NPC.GetNPCColorTintedByBuffs += delegate (On_NPC.orig_GetNPCColorTintedByBuffs orig, NPC self, Color npcColor)
+        {
+            var originalColor = orig(self, npcColor);
+
+            if (!AccessoryInfoDisplay.LifeformAnalyzerNPCs.Contains(self) || !Util.InfoDisplayActive(InfoDisplay.LifeformAnalyzer) || !PDAConfig.Instance.LifeformAnalyzerHighlight)
+                return originalColor;
+
+            byte r = 200;
+            byte g = 170;
+            byte b = 0;
+
+            if (npcColor.R < r)
+                npcColor.R = r;
+
+            if (npcColor.G < g)
+                npcColor.G = g;
+
+            if (npcColor.B < b)
+                npcColor.B = b;
+
+            return npcColor;
+        };
     }
 }

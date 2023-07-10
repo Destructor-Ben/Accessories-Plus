@@ -8,7 +8,7 @@ internal class HookStats : Stats
     public float RetreatSpeed = -1f;
     public float PullSpeed = -1f;
 
-    // TODO - combine these into a single dictionary of HookStats
+    // TODO: combine these into a single dictionary of HookStats
     public static Dictionary<int, float> VanillaReach { get; private set; } = new()
     {
         // Pre hardmode

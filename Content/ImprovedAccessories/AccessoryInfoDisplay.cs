@@ -1,5 +1,4 @@
-﻿using AccessoriesPlus.Content.UI;
-using Terraria.Map;
+﻿using Terraria.Map;
 
 namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryInfoDisplay : GlobalInfoDisplay
@@ -22,12 +21,14 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
         Main.tileOreFinderPriority[TileID.Hellstone] = 0;
 
         Main.tileOreFinderPriority[TileID.ExposedGems] = 0;
+
         Main.tileOreFinderPriority[TileID.Amethyst] = 0;
         Main.tileOreFinderPriority[TileID.Topaz] = 0;
         Main.tileOreFinderPriority[TileID.Sapphire] = 0;
         Main.tileOreFinderPriority[TileID.Emerald] = 0;
         Main.tileOreFinderPriority[TileID.Ruby] = 0;
         Main.tileOreFinderPriority[TileID.Diamond] = 0;
+        Main.tileOreFinderPriority[TileID.AmberStoneBlock] = 0;
 
         Main.tileOreFinderPriority[TileID.TreeAmethyst] = 0;
         Main.tileOreFinderPriority[TileID.TreeTopaz] = 0;
@@ -41,20 +42,22 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
     public override void SetStaticDefaults()
     {
         // Metal detector priorities
-        if (Config.Instance.ImprovedPDA.TrackHellstone)
+        if (PDAConfig.Instance.TrackHellstone)
         {
             Main.tileOreFinderPriority[TileID.Hellstone] = 450;
         }
 
-        if (Config.Instance.ImprovedPDA.TrackGems)
+        if (PDAConfig.Instance.TrackGems)
         {
             Main.tileOreFinderPriority[TileID.ExposedGems] = GemPriority;
+
             Main.tileOreFinderPriority[TileID.Amethyst] = GemPriority;
             Main.tileOreFinderPriority[TileID.Topaz] = GemPriority;
             Main.tileOreFinderPriority[TileID.Sapphire] = GemPriority;
             Main.tileOreFinderPriority[TileID.Emerald] = GemPriority;
             Main.tileOreFinderPriority[TileID.Ruby] = GemPriority;
             Main.tileOreFinderPriority[TileID.Diamond] = GemPriority;
+            Main.tileOreFinderPriority[TileID.AmberStoneBlock] = GemPriority;
 
             Main.tileOreFinderPriority[TileID.TreeAmethyst] = GemPriority;
             Main.tileOreFinderPriority[TileID.TreeTopaz] = GemPriority;
@@ -81,8 +84,8 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
                 // Finding all rare npcs
                 foreach (var npc in Main.npc)
                 {
-                    bool npcInWhitelist = Config.Instance.ImprovedPDA.UseNPCWhitelist && Config.Instance.ImprovedPDA.NPCWhitelist.Where(n => n.Type == npc.type).Any();
-                    bool npcInBlacklist = Config.Instance.ImprovedPDA.UseNPCBlacklist && Config.Instance.ImprovedPDA.NPCBlacklist.Where(n => n.Type == npc.type).Any();
+                    bool npcInWhitelist = PDAConfig.Instance.UseNPCWhitelist && PDAConfig.Instance.NPCWhitelist.Where(n => n.Type == npc.type).Any();
+                    bool npcInBlacklist = PDAConfig.Instance.UseNPCBlacklist && PDAConfig.Instance.NPCBlacklist.Where(n => n.Type == npc.type).Any();
                     if (npc.active && (npc.rarity > 0 || npcInWhitelist) && !npcInBlacklist && npc.Distance(Main.LocalPlayer.Center) <= 1300f)
                     {
                         LifeformAnalyzerNPCs.Add(npc);
@@ -99,11 +102,8 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
                 Main.LocalPlayer.accCritterGuideNumber = (byte)(BestNPC?.whoAmI ?? -1);
             }
 
-            // Drawing the arrows
-            UIPDA.Instance.DrawLifeformAnalyzerArrows = Config.Instance.ImprovedPDA.LifeformAnalyzerArrows;
-
             // Changing display value
-            if (Config.Instance.ImprovedPDA.LifeformAnalyzerDistanceInfo && (BestNPC?.active ?? false))
+            if (PDAConfig.Instance.LifeformAnalyzerDistanceInfo && (BestNPC?.active ?? false))
             {
                 var npc = Main.npc[Main.LocalPlayer.accCritterGuideNumber];
                 displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.Round(npc.Distance(Main.LocalPlayer.Center) / 16f));
@@ -113,11 +113,8 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
         // Metal detector
         if (currentDisplay == InfoDisplay.MetalDetector && Main.SceneMetrics.bestOre > 0)
         {
-            // Drawing the arrows
-            UIPDA.Instance.DrawMetalDetectorArrows = Config.Instance.ImprovedPDA.MetalDetectorArrows;
-
             // Changing display value
-            if (Config.Instance.ImprovedPDA.MetalDetectorDistanceInfo)
+            if (PDAConfig.Instance.MetalDetectorDistanceInfo)
             {
                 string tileName = GetBestOreTileName(Main.SceneMetrics.bestOre, Main.SceneMetrics.ClosestOrePosition);
                 int distance = (int)Util.Round(Main.SceneMetrics.ClosestOrePosition.Value.ToWorldCoordinates().Distance(Main.LocalPlayer.Center) / 16f);
@@ -128,11 +125,11 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
 
     public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor)
     {
-        // Whitelisted NPCs don't have the colour change
+        // Whitelisted NPCs don't have the colour change so I need to do it myself
         if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false) && !NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
         {
             displayColor = Main.MouseTextColorReal;
-            // TODO: whitelisted golden critter's aren't handled because I can'y modify the background color of the text
+            // TODO: whitelisted golden critter's aren't handled because I can't modify the background color of the text
         }
     }
 
@@ -157,6 +154,9 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
 
         if (string.IsNullOrEmpty(name) && num10 == TileID.Hellstone)
             name = Lang.GetItemNameValue(ItemID.Hellstone);
+
+        if (TileID.Sets.CountsAsGemTree[num10])
+            name = Util.GetTextValue("GemTree");
 
         return name;
     }

@@ -4,6 +4,12 @@ using TerraUtil.Configuration;
 namespace AccessoriesPlus.Configuration;
 internal class PDAConfig : SubConfig
 {
+    public static PDAConfig Instance => Config.Instance.ImprovedPDA;
+
+    [Header("Radar")]
+    public bool RadarHighlightEnemies = true;
+    public bool RadarHighlightDanger = true;
+
     [Header("MetalDetector")]
     public bool MetalDetectorDistanceInfo = true;
     public bool MetalDetectorArrows = true;
@@ -14,9 +20,6 @@ internal class PDAConfig : SubConfig
     [ReloadRequired]
     public bool TrackHellstone = true;
     // TODO: add whitelist and blacklist for metal detector when TileDefinition finally comes around
-
-    [Header("Radar")]
-    public bool RadarHighlight = true;
 
     [Header("LifeformAnalyzer")]
     public bool LifeformAnalyzerDistanceInfo = true;

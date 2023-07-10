@@ -1,4 +1,5 @@
 Unknown: Unknown
+GemTree: Gem Tree
 
 InfoDisplays: {
 	FoundRareCreature: "{0} {1} {^1:tile;tiles} away"
@@ -41,6 +42,7 @@ Tooltips: {
 	AnkhShield1: Absorbs 25% of damage done to players on your team when above 25% life
 	AnkhShield2: Enemies are more likely to target you
 	BundleOfBalloons0: Allows the holder to sextuple jump
+	Radar: Detects enemies and danger around you
 
 	WingStats: {
 		NegatesFallDamage: Negates fall damage

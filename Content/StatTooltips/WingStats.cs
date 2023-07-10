@@ -9,10 +9,10 @@ internal class WingStats : Stats
     public float MaxHSpeedHover = -1f;
     public float HAccelerationHover = -1f;
 
-    // TODO - add vertical wing stats
+    // TODO: add vertical wing stats
 
-    // TODO - fill this out
-    // TODO - combine these into a single dictionary of WingStats
+    // TODO: fill this out
+    // TODO: combine these into a single dictionary of WingStats
     public static Dictionary<int, float> VanillaFlightHeight = new()
     {
         { ItemID.WingsSolar, 16f * 100 },
@@ -40,7 +40,8 @@ internal class WingStats : Stats
         // Flight time
         stats.FlightTime = vanillaStats.FlyTime;
 
-        // Flight height TODO - calculate
+        // Flight height
+        // TODO: calculate
         stats.FlightHeight = Util.FromDictOrDefault(item.type, VanillaFlightHeight, -1f);
 
         // Max horizontal speed
@@ -58,7 +59,8 @@ internal class WingStats : Stats
         // Horizontal acceleration (hovering)
         stats.HAcceleration = vanillaStats.DownHoverAccelerationMult;
 
-        // Modded hooks TODO WingMovement (vertical) and WingAirLogicTweaks (horizontal)
+        // Modded hooks
+        // TODO: WingMovement (vertical) and WingAirLogicTweaks (horizontal)
         //ItemLoader.HorizontalWingSpeeds
         //ItemLoader.VerticalWingSpeeds
 

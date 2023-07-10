@@ -12,6 +12,7 @@ internal class MinecartStats : Stats
 
     public static MinecartStats Get(Item item)
     {
+        // TODO: allow modded minecart stats and also allow different super cart stats
         return item.mountType == -1 || !MountID.Sets.Cart[item.mountType]
             ? null
             : Main.LocalPlayer.UsingSuperCart
