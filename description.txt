@@ -1,16 +1,12 @@
 Accessories+ adds and tweaks accessories, equipment, and accessory slots to improve and balance Terraria.
 
+[c/8ffdff:Features]
 There is an option to use each feature in the config, so if you don't like some of them you can disable them. The config also lists the features in more detail.
 
 The mod is not complete yet, and many more features such as improvements and reworks to mounts, minecarts, grappling hooks, pets, and more accessories will be coming.
 
-If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam Page, Github Repository, or Discord Server
+To find the recipes changed, use the Recipe Browser Mod.
 
-The changelog can be found on the Steam Workshop page under the change notes.
-
-To find the recipes changed, use the Recipe Browser mod.
-
-[c/8ffdff:Features]
 [c/c78fff:Improved Accessories]
 - [i:TerrasparkBoots] Improved Terraspark Boots
 - [i:AnkhShield] Improved Ankh Shield
@@ -37,3 +33,11 @@ To find the recipes changed, use the Recipe Browser mod.
 - [i:ArmorPolish] Increased the drop rate of all Ankh Charm accessories
 - [i:PeddlersHat] The Travelling Merchant is guaranteed to sell an accessory
 - [i:Present] Accessories found in presents have other methods of obtaining
+
+[c/8ffdff:Contact]
+If you find any bugs, have any suggestions, or want compatibility with other mods, please let me know on the mod's Steam Page, Github Repository (homepage), or Discord Server (linked on the Steam Page).
+
+Additionally, the changelog can be found on the Steam Workshop Page under the change notes.
+
+[c/8ffdff:Support]
+Please consider rating and favouriting the mod on Steam, starring the Github Repository (homepage), and joining the Discord Server (linked on the Steam Page) if you would like to support this mod.

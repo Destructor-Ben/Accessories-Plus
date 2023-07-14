@@ -1,17 +1,12 @@
 Accessories+ adds and tweaks accessories, equipment, and accessory slots to improve and balance Terraria.
 
+[h1]Features[/h1]
 There is an option to use each feature in the config, so if you don't like some of them you can disable them. The config also lists the features in more detail.
 
 The mod is not complete yet, and many more features such as improvements and reworks to mounts, minecarts, grappling hooks, pets, and more accessories will be coming.
 
-If you find any bugs, have any suggestions, or want compatiblity with large content mods such as Calamity, please let me know on the mod's Steam Page, [url=https://github.com/Destructor-Ben/Accessories-Plus]Github Repository[/url] or [url=https://discord.gg/uQzTRx2V8Y]Discord Server[/url]
-
-The changelog can be found on the Steam Workshop page under the change notes.
-
 To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2619954303]Recipe Browser Mod[/url]
 
-[hr][/hr]
-[h1]Features[/h1]
 [b]Improved Accessories[/b]
 [list]
 [*]Improved Terraspark Boots
@@ -46,3 +41,12 @@ To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles
 [*]The Travelling Merchant is guaranteed to sell an accessory
 [*]Accessories found in presents have other methods of obtaining
 [/list]
+
+[h1]Contact[/h1]
+If you find any bugs, have any suggestions, or want compatibility with other mods, please let me know on the mod's Steam Page, [url=https://github.com/Destructor-Ben/Accessories-Plus]Github Repository[/url] or [url=https://discord.gg/uQzTRx2V8Y]Discord Server[/url]
+
+Additionally, the changelog can be found on the Steam Workshop Page under the change notes.
+
+[h1]Support[/h1]
+[img]https://i.imgur.com/W2c5CX6.gif[/img]
+Please consider rating and favouriting the mod on Steam, starring the [url=https://github.com/Destructor-Ben/Accessories-Plus]Github Repository[/url] and joining the [url=https://discord.gg/uQzTRx2V8Y]Discord Server[/url] if you would like to support this mod.

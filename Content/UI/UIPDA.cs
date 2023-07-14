@@ -155,7 +155,7 @@ internal class UIPDA : Interface
         Asset<Texture2D> tex = null;
 
         // Basic tiles
-        itemID = Util.FromDictOrDefault(type, TileToItem, -1);
+        itemID = TileToItem.TryGetOrGiven(type, -1);
 
         // Chests
         int chestStyle = tile.TileFrameX / 36;
@@ -293,10 +293,6 @@ internal class UIPDA : Interface
     // Draws the arrow and background
     private static void DrawArrow(SpriteBatch sb, Vector2 position, float rotation, string name, Vector2 targetPos)
     {
-        // Background
-        var container = Utils.CenteredRectangle(position, Vector2.One * 50f);
-        Utils.DrawInvBG(sb, container);
-
         // Arrow
         var font = FontAssets.DeathText.Value;
         string arrowText = "->";
@@ -304,6 +300,10 @@ internal class UIPDA : Interface
         var arrowPos = Vector2.Lerp(Main.LocalPlayer.Center - Util.ScreenPos, position, 0.5f);
         var origin = ChatManager.GetStringSize(font, arrowText, scale * Vector2.One) / 3f;// 3f looks better than 2f because the font is weird or something
         ChatManager.DrawColorCodedStringWithShadow(sb, font, arrowText, arrowPos, Color.White, rotation, origin, scale * Vector2.One);
+
+        // Background
+        var container = Utils.CenteredRectangle(position, Vector2.One * 50f);
+        Utils.DrawInvBG(sb, container);
 
         // Mouse text
         if (!container.Contains(Util.MousePos))

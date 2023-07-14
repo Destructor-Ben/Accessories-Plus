@@ -28,8 +28,9 @@ internal class LightPetStats : Stats
         ExposesEnemies = exposesEnemies;
     }
 
+    // TODO: if something is a light pet but doesn't have stats instead of saying unknown brightness it will say nothing
     public static LightPetStats Get(Item item)
     {
-        return !VanillaLightPetStats.TryGetValue(item.type, out var stats) ? null : stats;
+        return VanillaLightPetStats.TryGetOrGiven(item.type, null);
     }
 }

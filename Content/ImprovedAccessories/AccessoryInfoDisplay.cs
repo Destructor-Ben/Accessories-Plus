@@ -156,7 +156,7 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
             name = Lang.GetItemNameValue(ItemID.Hellstone);
 
         if (TileID.Sets.CountsAsGemTree[num10])
-            name = Util.GetTextValue("GemTree");
+            name = Util.GetTextValue("InfoDisplays.GemTree");
 
         return name;
     }

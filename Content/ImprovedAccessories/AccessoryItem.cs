@@ -44,7 +44,10 @@ internal class AccessoryItem : GlobalItem
         {
             case ItemID.AnkhShield:
                 if (Config.Instance.ImprovedAnkhShield)
+                {
+                    entity.StatsModifiedBy.Add(Mod);
                     entity.defense = 12;
+                }
                 break;
             default:
                 break;
@@ -140,7 +143,7 @@ internal class AccessoryItem : GlobalItem
             case ItemID.Radar:
                 if (PDAConfig.Instance.RadarHighlightDanger)
                 {
-                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("Radar"));
+                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("Radar0"));
                     tooltips.RemoveTooltips("Tooltip0");
                 }
                 break;

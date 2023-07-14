@@ -79,7 +79,7 @@ internal class Config : ModConfiguration
 
     #region Stat Tooltips
 
-    [Header("StatTooltips")]
+    [Header("StatTooltips")]// TODO: make the config for stat tooltips more verbose, allow toggling individual lines
 
     [DefaultValue(true)]
     public bool StatsWings;

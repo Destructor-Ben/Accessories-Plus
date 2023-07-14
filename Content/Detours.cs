@@ -38,6 +38,7 @@ internal class Detours : ModSystem
         };*/
 
         // Making lifeform analyzer have custom highlight colours
+        // TODO: make rare npcs sparkle if they are highlighted as well
         On_NPC.GetNPCColorTintedByBuffs += delegate (On_NPC.orig_GetNPCColorTintedByBuffs orig, NPC self, Color npcColor)
         {
             var originalColor = orig(self, npcColor);

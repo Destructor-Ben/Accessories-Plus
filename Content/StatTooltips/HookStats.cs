@@ -1,14 +1,16 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal class HookStats : Stats
 {
-    public float Reach = -1f;
-    public int NumHooks = -1;
-    public LatchingMode Latching = LatchingMode.Unknown;
-    public float ShootSpeed = -1f;
-    public float RetreatSpeed = -1f;
-    public float PullSpeed = -1f;
+    public float Reach { get; private set; } = -1f;
+    public int NumHooks { get; private set; } = -1;
+    public LatchingMode Latching { get; private set; } = LatchingMode.Unknown;
+    public float ShootSpeed { get; private set; } = -1f;
+    public float RetreatSpeed { get; private set; } = -1f;
+    public float PullSpeed { get; private set; } = -1f;
 
     // TODO: combine these into a single dictionary of HookStats
+    // TODO: for stats that have a dictionary, get it from the hooks that tML provides such as ProjectileLoader.GrapplePullSpeed and store it
+    // TODO: change item ids to projectile ids
     public static Dictionary<int, float> VanillaReach { get; private set; } = new()
     {
         // Pre hardmode
@@ -197,28 +199,43 @@ internal class HookStats : Stats
 
         var stats = new HookStats();
         var proj = new Projectile();
+        int type = item.type;
         proj.SetDefaults(item.shoot);
 
         // Reach
-        stats.Reach = proj.ModProjectile?.GrappleRange() ?? Util.FromDictOrDefault(item.type, VanillaReach, -1f);
+        stats.Reach = proj.ModProjectile?.GrappleRange() ?? VanillaReach.TryGetOrGiven(item.type, -1f);
 
         // Number of hooks
-        stats.NumHooks = Util.FromDictOrDefault(item.type, VanillaNumHooks, ProjectileID.Sets.SingleGrappleHook[item.shoot] ? 1 : -1);
-        ProjectileLoader.NumGrappleHooks(proj, Main.LocalPlayer, ref stats.NumHooks);
+        int predictedNumHooks = ProjectileID.Sets.SingleGrappleHook[item.shoot] ? 1 : -1;
+        stats.NumHooks = VanillaNumHooks.TryGetOrGiven(type, predictedNumHooks);
+
+        int numHooks = -1;
+        ProjectileLoader.NumGrappleHooks(proj, Main.LocalPlayer, ref numHooks);
+        if (numHooks != -1)
+            stats.NumHooks = numHooks;
 
         // Latching
-        stats.Latching = Util.FromDictOrDefault(item.type, VanillaLatching, ProjectileID.Sets.SingleGrappleHook[item.shoot] ? LatchingMode.Single : LatchingMode.Unknown);
+        var predictedLatching = ProjectileID.Sets.SingleGrappleHook[item.shoot] ? LatchingMode.Single : LatchingMode.Unknown;
+        stats.Latching = VanillaLatching.TryGetOrGiven(type, predictedLatching);
 
         // Shoot speed
         stats.ShootSpeed = item.shootSpeed;
 
         // Retreat speed
-        stats.RetreatSpeed = Util.FromDictOrDefault(item.type, VanillaRetreatSpeed, -1f);
-        ProjectileLoader.GrappleRetreatSpeed(proj, Main.LocalPlayer, ref stats.RetreatSpeed);
+        stats.RetreatSpeed = VanillaRetreatSpeed.TryGetOrGiven(item.type, -1f);
+
+        float retreatSpeed = -1f;
+        ProjectileLoader.GrappleRetreatSpeed(proj, Main.LocalPlayer, ref retreatSpeed);
+        if (retreatSpeed != -1f)
+            stats.RetreatSpeed = retreatSpeed;
 
         // Pull speed
-        stats.PullSpeed = Util.FromDictOrDefault(item.type, VanillaPullSpeed, -1f);
-        ProjectileLoader.GrapplePullSpeed(proj, Main.LocalPlayer, ref stats.PullSpeed);
+        stats.PullSpeed = VanillaPullSpeed.TryGetOrGiven(item.type, -1f);
+
+        float pullSpeed = -1f;
+        ProjectileLoader.GrapplePullSpeed(proj, Main.LocalPlayer, ref pullSpeed);
+        if (pullSpeed != -1f)
+            stats.PullSpeed = pullSpeed;
 
         return stats;
     }

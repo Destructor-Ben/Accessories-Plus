@@ -1,10 +1,8 @@
-Unknown: Unknown
-GemTree: Gem Tree
-
 InfoDisplays: {
 	FoundRareCreature: "{0} {1} {^1:tile;tiles} away"
 	FoundTreasure: "{0} {1} {^1:tile;tiles} away"
 	TilesDistance: "{0} {^0:tile;tiles} away"
+	GemTree: Gem Tree
 }
 
 AccessorySlots: {
@@ -42,7 +40,7 @@ Tooltips: {
 	AnkhShield1: Absorbs 25% of damage done to players on your team when above 25% life
 	AnkhShield2: Enemies are more likely to target you
 	BundleOfBalloons0: Allows the holder to sextuple jump
-	Radar: Detects enemies and danger around you
+	Radar0: Detects enemies and danger around you
 
 	WingStats: {
 		NegatesFallDamage: Negates fall damage
@@ -50,10 +48,12 @@ Tooltips: {
 		FlightHeight: "{0} {^0:tile;tiles} flight height"
 		FlightHeightUnknown: Unknown flight height
 		MaxHSpeed: "{0} mph max horizontal speed"
-		HAcceleration: "{0} mph/s horizontal acceleration"
+		MaxHSpeedUnknown: No max horizontal speed
+		HAccelerationMult: "{0}x horizontal acceleration"
 		CanHover: Can hover
 		MaxHSpeedHover: "{0} mph max horizontal speed while hovering"
-		HAccelerationHover: "{0} mph/s horizontal acceleration while hovering"
+		MaxHSpeedHoverUnknown: No max horizontal speed while hovering
+		HAccelerationMultHover: "{0}x horizontal acceleration while hovering"
 	}
 
 	HookStats: {
@@ -75,6 +75,7 @@ Tooltips: {
 
 	LightPetStats: {
 		Brightness: "{0}% brightness"
+		BrightnessUnknown: Unknown brightness
 		Controllable: Controllable
 		ExposesTreasure: Reveals treasure
 		ExposesEnemies: Reveals enemies
@@ -86,5 +87,15 @@ Tooltips: {
 	}
 
 	MountStats: {
+		FlightTime: "{0} {^0:second;seconds} flight time"
+		CanHover: Can hover
+		RunSpeed: "{0} mph run speed"
+		SwimSpeed: "{0} mph swim speed"
+		Acceleration: "{0} pixels/tick/tick acceleration"
+		JumpSpeed: "{0} mph jump speed"
+		JumpHeight: "{0} {^0:tile;tiles} jump height"
+		AutoJump: Allows auto-jump
+		HeightBoost: "{0} {^0:tile;tiles} height boost"
+		FallDamageMult: "{0}x fall damage"
 	}
 }
