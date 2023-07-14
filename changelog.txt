@@ -1,4 +1,4 @@
-[b]v1.0.0.0[/b]
+[b]v1.2.0.1[/b]
 [list]
 [*]Rewrote the entire mod and ported it to 1.4.4
 [/list]
