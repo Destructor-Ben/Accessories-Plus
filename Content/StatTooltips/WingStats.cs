@@ -62,16 +62,7 @@ internal class WingStats : Stats
         { ItemID.LongRainbowTrailWings, 201 * 16f },
     };
 
-    private WingStats(float flightTime = -1f, float flightHeight = -1f, float maxHSpeed = -1f, float hAcceleration = 1f, bool canHover = false, float maxHSpeedHover = -1f, float hAccelerationHover = 1f, string misc = "") : base(misc)
-    {
-        FlightTime = flightTime;
-        FlightHeight = flightHeight;
-        MaxHSpeed = maxHSpeed;
-        HAccelerationMult = hAcceleration;
-        CanHover = canHover;
-        MaxHSpeedHover = maxHSpeedHover;
-        HAccelerationMultHover = hAccelerationHover;
-    }
+    private WingStats() { }
 
     public static WingStats Get(Item item)
     {
@@ -109,5 +100,39 @@ internal class WingStats : Stats
         // ItemLoader.VerticalWingSpeeds
 
         return stats;
+    }
+
+    public override void Apply(List<TooltipLine> tooltips)
+    {
+        if (!Config.Instance.StatsWings)
+            return;
+
+        // Flight
+        tooltips.Add(Util.GetTooltipLine("WingStats.FlightTime", Util.Round(FlightTime / 60f, 0.1f)));
+        if (FlightHeight != -1f)
+            tooltips.Add(Util.GetTooltipLine("WingStats.FlightHeight", Util.Round(FlightHeight / 16f, 0.1f)));
+        else
+            tooltips.Add(Util.GetTooltipLine("WingStats.FlightHeightUnknown"));
+
+        // Horizontal motion
+        if (MaxHSpeed != -1f)
+            tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeed", Util.Round(MaxHSpeed * Util.PPTToMPH, 0.1f)));
+        else
+            tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedUnknown"));
+        tooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationMult", HAccelerationMult));
+
+        // Hovering
+        if (CanHover)
+        {
+            tooltips.Add(Util.GetTooltipLine("WingStats.CanHover"));
+            if (MaxHSpeedHover != -1f)
+                tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", Util.Round(MaxHSpeedHover * Util.PPTToMPH, 0.1f)));
+            else
+                tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHoverUnknown"));
+            tooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationMultHover", HAccelerationMultHover));
+        }
+
+        // Negates fall damage
+        tooltips.Add(Util.GetTooltipLine("WingStats.NegatesFallDamage"));
     }
 }

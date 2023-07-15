@@ -1,6 +1,14 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal class HookStats : Stats
 {
+    public enum LatchingMode
+    {
+        Unknown,
+        Single,
+        Individual,
+        Simultaneous
+    }
+
     public float Reach { get; private set; } = -1f;
     public int NumHooks { get; private set; } = -1;
     public LatchingMode Latching { get; private set; } = LatchingMode.Unknown;
@@ -182,19 +190,11 @@ internal class HookStats : Stats
         { ItemID.StaticHook,      11f },
     };
 
-    private HookStats(float reach = -1f, int numHooks = -1, LatchingMode latchingMode = LatchingMode.Unknown, float shootSpeed = -1f, float retreatSpeed = -1f, float pullSpeed = -1f, string misc = "") : base(misc)
-    {
-        Reach = reach;
-        NumHooks = numHooks;
-        Latching = latchingMode;
-        ShootSpeed = shootSpeed;
-        RetreatSpeed = retreatSpeed;
-        PullSpeed = pullSpeed;
-    }
+    private HookStats() { }
 
     public static HookStats Get(Item item)
     {
-        if (!Main.projHook[item.shoot])
+        if (item.shoot <= ProjectileID.None || !Main.projHook[item.shoot])
             return null;
 
         var stats = new HookStats();
@@ -240,11 +240,46 @@ internal class HookStats : Stats
         return stats;
     }
 
-    public enum LatchingMode
+    public override void Apply(List<TooltipLine> tooltips)
     {
-        Unknown,
-        Single,
-        Individual,
-        Simultaneous
+        if (!Config.Instance.StatsHooks)
+            return;
+
+        // Reach
+        if (Reach != -1)
+            tooltips.Add(Util.GetTooltipLine("HookStats.Reach", (decimal)Util.Round(Reach / 16f, 0.1f)));
+        else
+            tooltips.Add(Util.GetTooltipLine("HookStats.ReachUnknown"));
+
+        // Number of hooks
+        if (NumHooks != -1)
+            tooltips.Add(Util.GetTooltipLine("HookStats.NumHooks", NumHooks));
+        else
+            tooltips.Add(Util.GetTooltipLine("HookStats.NumHooksUnknown"));
+
+        // Latching mode
+        tooltips.Add(Util.GetTooltipLine(Latching switch
+        {
+            LatchingMode.Single => "HookStats.LatchingSingle",
+            LatchingMode.Individual => "HookStats.LatchingIndividual",
+            LatchingMode.Simultaneous => "HookStats.LatchingSimultaneous",
+            _ => "HookStats.LatchingUnknown",
+        }));
+
+        // Speeds
+        if (ShootSpeed != -1)
+            tooltips.Add(Util.GetTooltipLine("HookStats.ShootSpeed", Util.Round(ShootSpeed * Util.PPTToMPH), 0.1f));
+        else
+            tooltips.Add(Util.GetTooltipLine("HookStats.ShootSpeedUnknown"));
+
+        if (RetreatSpeed != -1)
+            tooltips.Add(Util.GetTooltipLine("HookStats.RetreatSpeed", Util.Round(RetreatSpeed * Util.PPTToMPH), 0.1f));
+        else
+            tooltips.Add(Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"));
+
+        if (PullSpeed != -1)
+            tooltips.Add(Util.GetTooltipLine("HookStats.PullSpeed", Util.Round(PullSpeed * Util.PPTToMPH), 0.1f));
+        else
+            tooltips.Add(Util.GetTooltipLine("HookStats.PullSpeedUnknown"));
     }
 }

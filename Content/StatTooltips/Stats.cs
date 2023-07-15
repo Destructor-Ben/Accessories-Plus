@@ -1,10 +1,19 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal abstract class Stats
 {
-    public string Misc;
+    public virtual string LineNameToInsertAround => "Equipable";
+    public virtual bool After => true;
 
-    protected Stats(string misc = "")
+    public abstract void Apply(List<TooltipLine> tooltips);
+
+    public static Stats GetStats(Item item)
     {
-        Misc = misc;
+        var wingStats = WingStats.Get(item);
+        var hookStats = HookStats.Get(item);
+        var lightPetStats = LightPetStats.Get(item);
+        var minecartStats = MinecartStats.Get(item);
+        var mountStats = MountStats.Get(item);
+
+        return wingStats ?? hookStats ?? lightPetStats ?? minecartStats ?? mountStats ?? (Stats)null;
     }
 }
