@@ -26,6 +26,12 @@ internal class CustomSlotPlayer : ModPlayer
         {
             Player.RefreshInfoAccsFromItemType(item);
         }
+
+        // Void bag
+        foreach (var item in Player.bank4.item)
+        {
+            Player.RefreshInfoAccsFromItemType(item);
+        }
     }
 
     // TODO: Making other players share their mechanical accessories and building accessories effects

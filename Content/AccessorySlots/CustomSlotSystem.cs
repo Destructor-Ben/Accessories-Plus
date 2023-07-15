@@ -14,7 +14,7 @@ internal class CustomSlotSystem : GlobalItem
 
     };
 
-    // Forcing wings, etc. inmto modded slots
+    // Forcing wings, etc. into modded slots
     public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
     {
         var wingSlot = ModContent.GetInstance<WingSlot>();
@@ -38,7 +38,6 @@ internal class CustomSlotSystem : GlobalItem
     {
         if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
         {
-            Main.NewText(item.Name);
             player.CopyVanillaEquipEffects(item.type, true);
         }
     }
