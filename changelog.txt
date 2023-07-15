@@ -1,40 +1,4 @@
-[b]v1.2.0.1[/b]
+[b]v1.2.0.2[/b]
 [list]
-[*]Rewrote the entire mod and ported it to 1.4.4
-[/list]
-
-[h1]Features[/h1]
-[b]Improved Accessories[/b]
-[list]
-[*]Improved Terraspark Boots
-[*]Improved Ankh Shield
-[*]Improved Bundle of Horseshoe Balloons
-[*]Improved Hand of Creation
-[*]Improved PDA
-[/list]
-
-[b]Accessory Slots[/b]
-[list]
-[*]Post-Moonlord Accessory Slot
-[*]Wing Slot
-[*]Shield Slot
-[*]Boot Slot
-[/list]
-
-[b]Stat Tooltips[/b]
-[list]
-[*]Wings have stats in their tooltips
-[*]Hooks have stats in their tooltips
-[*]Light pets have stats in their tooltips
-[*]Minecarts have stats in their tooltips
-[*]Mounts have stats in their tooltips
-[/list]
-
-[b]Obtainability[/b]
-[list]
-[*]More accessory recipes
-[*]More accessories can be shimmered into each other
-[*]Increased the drop rate of all Ankh Charm accessories
-[*]The Travelling Merchant is guaranteed to sell an accessory
-[*]Accessories found in presents have other methods of obtaining
+[*]
 [/list]
