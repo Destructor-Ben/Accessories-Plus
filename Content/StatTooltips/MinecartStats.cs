@@ -1,4 +1,5 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
+// TODO: merge minecart stats into mount stats
 internal class MinecartStats : Stats
 {
     // TODO: change these to pixel values
