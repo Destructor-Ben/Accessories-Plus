@@ -1,6 +1,7 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal class MountStats : Stats
 {
+    // TODO: change height boost to include the players height
     public int FlightTime { get; private set; } = 0;
     public bool CanHover { get; private set; } = false;
     public float RunSpeed { get; private set; } = 0f;
@@ -16,7 +17,7 @@ internal class MountStats : Stats
 
     public static MountStats Get(Item item)
     {
-        if (item.mountType <= MountID.None || MountID.Sets.Cart[item.mountType])
+        if (item.mountType <= MountID.None)
             return null;
 
         var stats = new MountStats();
@@ -51,6 +52,15 @@ internal class MountStats : Stats
 
         // Fall damage multiplier
         stats.FallDamageMult = vanillaStats.fallDamage;
+
+        // Minecart upgrade kit
+        if (MountID.Sets.Cart[item.mountType] && Main.LocalPlayer.UsingSuperCart)
+        {
+            stats.RunSpeed = Math.Max(Mount.SuperCartRunSpeed, Mount.SuperCartDashSpeed);
+            stats.Acceleration = Mount.SuperCartAcceleration;
+            stats.JumpHeight = Mount.SuperCartJumpHeight;
+            stats.JumpSpeed = Mount.SuperCartJumpSpeed;
+        }
 
         return stats;
     }

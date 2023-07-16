@@ -88,8 +88,6 @@ internal class Config : ModConfiguration
     [DefaultValue(true)]
     public bool StatsLightPets;
     [DefaultValue(true)]
-    public bool StatsMinecarts;
-    [DefaultValue(true)]
     public bool StatsMounts;
 
     #endregion

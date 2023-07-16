@@ -1,4 +1,5 @@
 [b]v1.2.0.2[/b]
 [list]
-[*]
+[*]Fixed bugs regarding stat tooltips
+[*]Merged Minecart stats into mount stats
 [/list]

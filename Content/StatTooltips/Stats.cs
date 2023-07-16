@@ -11,9 +11,8 @@ internal abstract class Stats
         var wingStats = WingStats.Get(item);
         var hookStats = HookStats.Get(item);
         var lightPetStats = LightPetStats.Get(item);
-        var minecartStats = MinecartStats.Get(item);
         var mountStats = MountStats.Get(item);
 
-        return wingStats ?? hookStats ?? lightPetStats ?? minecartStats ?? mountStats ?? (Stats)null;
+        return wingStats ?? hookStats ?? lightPetStats ?? mountStats ?? (Stats)null;
     }
 }
