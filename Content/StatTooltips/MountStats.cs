@@ -1,7 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
 internal class MountStats : Stats
 {
-    // TODO: change height boost to include the players height
     public int FlightTime { get; private set; } = 0;
     public bool CanHover { get; private set; } = false;
     public float RunSpeed { get; private set; } = 0f;
@@ -86,14 +85,14 @@ internal class MountStats : Stats
 
         // Jumping
         if (JumpSpeed != 0f)
-            tooltips.Add(Util.GetTooltipLine("MountStats.JumpSpeed", (decimal)Util.Round(JumpSpeed * Util.PPTToMPH, 0.1f)));// TODO: is this correct?
+            tooltips.Add(Util.GetTooltipLine("MountStats.JumpSpeed", (decimal)Util.Round(JumpSpeed * Util.PPTToMPH, 0.1f)));
 
         if (JumpHeight != 0)
             tooltips.Add(Util.GetTooltipLine("MountStats.JumpHeight", (decimal)Util.Round(JumpHeight / 16f, 0.1f)));// TODO: is this correct?
 
         // Misc
         if (HeightBoost != 0)
-            tooltips.Add(Util.GetTooltipLine("MountStats.HeightBoost", (decimal)Util.Round(HeightBoost / 16f, 0.1f)));
+            tooltips.Add(Util.GetTooltipLine("MountStats.HeightBoost", (decimal)Util.Round((HeightBoost + 42) / 16f, 0.1f)));// 42 is player height
 
         if (FallDamageMult != 1f)
             tooltips.Add(Util.GetTooltipLine("MountStats.FallDamageMult", FallDamageMult));

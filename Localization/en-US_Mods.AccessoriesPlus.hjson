@@ -81,11 +81,6 @@ Tooltips: {
 		ExposesEnemies: Reveals enemies
 	}
 
-	MinecartStats: {
-		MaxSpeed: "{0} mph max speed"
-		Acceleration: "{0} mph/s acceleration"
-	}
-
 	MountStats: {
 		FlightTime: "{0} {^0:second;seconds} flight time"
 		CanHover: Can hover
@@ -95,7 +90,7 @@ Tooltips: {
 		JumpSpeed: "{0} mph jump speed"
 		JumpHeight: "{0} {^0:tile;tiles} jump height"
 		AutoJump: Allows auto-jump
-		HeightBoost: "{0} {^0:tile;tiles} height boost"
+		HeightBoost: "{0} {^0:tile;tiles} high"
 		FallDamageMult: "{0}x fall damage"
 	}
 }
