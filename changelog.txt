@@ -2,4 +2,5 @@
 [list]
 [*]Fixed bugs regarding stat tooltips
 [*]Merged Minecart stats into mount stats
+[*]Fixed an issue regarding accessory slots
 [/list]
