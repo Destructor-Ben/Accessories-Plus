@@ -1,8 +1,5 @@
-[b]v1.2.0.2[/b]
+[b]v1.2.0.3[/b]
 [list]
-[*]Fixed quite a few bugs regarding stat tooltips
-[*]Merged Minecart stats into mount stats
-[*]Fixed an issue regarding accessory slots being unable to equip any accessory
-[*]Fixed scaling issues with the arrows from the Metal Detector and Lifeform Analyzer
-[*]Fixed issues with making Hellstone and gems detected by the Metal Detector
+[*]Gave Minecart stats their own config back
+[*]Added boosted line for minecart stats when using the Minecart Upgrade Kit
 [/list]

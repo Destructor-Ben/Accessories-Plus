@@ -6,6 +6,7 @@ using TerraUtil.Configuration;
 namespace AccessoriesPlus.Configuration;
 internal class Config : ModConfiguration
 {
+    // TODO: split into server and client config
     public static Config Instance => ModContent.GetInstance<Config>();
     public override ConfigScope Mode => ConfigScope.ServerSide;
 
@@ -87,6 +88,8 @@ internal class Config : ModConfiguration
     public bool StatsHooks;
     [DefaultValue(true)]
     public bool StatsLightPets;
+    [DefaultValue(true)]
+    public bool StatsMinecarts;
     [DefaultValue(true)]
     public bool StatsMounts;
 

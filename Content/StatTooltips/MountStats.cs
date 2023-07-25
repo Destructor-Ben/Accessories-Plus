@@ -11,6 +11,7 @@ internal class MountStats : Stats
     public bool AutoJump { get; private set; } = false;
     public int HeightBoost { get; private set; } = 0;
     public float FallDamageMult { get; private set; } = 0f;
+    public bool BoostedMinecart { get; private set; } = false;
 
     private MountStats() { }
 
@@ -21,6 +22,12 @@ internal class MountStats : Stats
 
         var stats = new MountStats();
         var vanillaStats = Mount.mounts[item.mountType];
+
+        if (!Config.Instance.StatsMinecarts && vanillaStats.Minecart)
+            return null;
+
+        if (!Config.Instance.StatsMounts && !vanillaStats.Minecart)
+            return null;
 
         // Flight time
         stats.FlightTime = vanillaStats.flightTimeMax;
@@ -59,6 +66,7 @@ internal class MountStats : Stats
             stats.Acceleration = Mount.SuperCartAcceleration;
             stats.JumpHeight = Mount.SuperCartJumpHeight;
             stats.JumpSpeed = Mount.SuperCartJumpSpeed;
+            stats.BoostedMinecart = true;
         }
 
         return stats;
@@ -66,9 +74,6 @@ internal class MountStats : Stats
 
     public override void Apply(List<TooltipLine> tooltips)
     {
-        if (!Config.Instance.StatsMounts)
-            return;
-
         // Flight
         if (FlightTime > 0)
             tooltips.Add(Util.GetTooltipLine("MountStats.FlightTime", (decimal)Util.Round(FlightTime / 60f, 0.1f)));
@@ -103,5 +108,9 @@ internal class MountStats : Stats
 
         if (AutoJump)
             tooltips.Add(Util.GetTooltipLine("MountStats.AutoJump"));
+
+        // Bosted for minecarts
+        if (BoostedMinecart)
+            tooltips.Add(Util.GetTooltipLine("MountStats.BoostedMinecart"));
     }
 }

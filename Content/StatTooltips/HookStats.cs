@@ -194,7 +194,7 @@ internal class HookStats : Stats
 
     public static HookStats Get(Item item)
     {
-        if (item.shoot <= ProjectileID.None || !Main.projHook[item.shoot])
+        if (!Config.Instance.StatsHooks || item.shoot <= ProjectileID.None || !Main.projHook[item.shoot])
             return null;
 
         var stats = new HookStats();
@@ -242,9 +242,6 @@ internal class HookStats : Stats
 
     public override void Apply(List<TooltipLine> tooltips)
     {
-        if (!Config.Instance.StatsHooks)
-            return;
-
         // Reach
         if (Reach != -1)
             tooltips.Add(Util.GetTooltipLine("HookStats.Reach", (decimal)Util.Round(Reach / 16f, 0.1f)));

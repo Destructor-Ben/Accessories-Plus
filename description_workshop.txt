@@ -29,7 +29,8 @@ To find the recipes changed, use the [url=https://steamcommunity.com/sharedfiles
 [*]Wings have stats in their tooltips
 [*]Hooks have stats in their tooltips
 [*]Light pets have stats in their tooltips
-[*]Minecarts & Mounts have stats in their tooltips
+[*]Minecarts have stats in their tooltips
+[*]Mounts have stats in their tooltips
 [/list]
 
 [b]Obtainability[/b]

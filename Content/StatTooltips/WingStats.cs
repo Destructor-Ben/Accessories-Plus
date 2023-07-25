@@ -66,7 +66,7 @@ internal class WingStats : Stats
 
     public static WingStats Get(Item item)
     {
-        if (item.wingSlot <= 0)
+        if (!Config.Instance.StatsWings || item.wingSlot <= 0)
             return null;
 
         var stats = new WingStats();
@@ -104,9 +104,6 @@ internal class WingStats : Stats
 
     public override void Apply(List<TooltipLine> tooltips)
     {
-        if (!Config.Instance.StatsWings)
-            return;
-
         // Flight
         tooltips.Add(Util.GetTooltipLine("WingStats.FlightTime", (decimal)Util.Round(FlightTime / 60f, 0.1f)));
         if (FlightHeight != -1f)

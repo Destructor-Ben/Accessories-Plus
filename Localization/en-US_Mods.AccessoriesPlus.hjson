@@ -92,5 +92,6 @@ Tooltips: {
 		AutoJump: Allows auto-jump
 		HeightBoost: "{0} {^0:tile;tiles} high"
 		FallDamageMult: "{0}x fall damage"
+		BoostedMinecart: Has boosted stats
 	}
 }

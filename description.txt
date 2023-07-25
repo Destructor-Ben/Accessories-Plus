@@ -24,7 +24,8 @@ To find the recipes changed, use the Recipe Browser Mod.
 - [i:WingsSolar] Wings have stats in their tooltips
 - [i:LunarHook] Hooks have stats in their tooltips
 - [i:SuspiciousLookingTentacle] Light pets have stats in their tooltips
-- [i:DrillContainmentUnit] Minecarts & Mounts have stats in their tooltips
+- [i:MeowmereMinecart] Minecarts have stats in their tooltips
+- [i:DrillContainmentUnit] Mounts have stats in their tooltips
 
 [c/c78fff:Obtainability]
 - [i:HermesBoots] More accessory recipes
