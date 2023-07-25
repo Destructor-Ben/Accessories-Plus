@@ -108,15 +108,15 @@ internal class WingStats : Stats
             return;
 
         // Flight
-        tooltips.Add(Util.GetTooltipLine("WingStats.FlightTime", Util.Round(FlightTime / 60f, 0.1f)));
+        tooltips.Add(Util.GetTooltipLine("WingStats.FlightTime", (decimal)Util.Round(FlightTime / 60f, 0.1f)));
         if (FlightHeight != -1f)
-            tooltips.Add(Util.GetTooltipLine("WingStats.FlightHeight", Util.Round(FlightHeight / 16f, 0.1f)));
+            tooltips.Add(Util.GetTooltipLine("WingStats.FlightHeight", (decimal)Util.Round(FlightHeight / 16f, 0.1f)));
         else
             tooltips.Add(Util.GetTooltipLine("WingStats.FlightHeightUnknown"));
 
         // Horizontal motion
         if (MaxHSpeed != -1f)
-            tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeed", Util.Round(MaxHSpeed * Util.PPTToMPH, 0.1f)));
+            tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeed", (decimal)Util.Round(MaxHSpeed * Util.PPTToMPH, 0.1f)));
         else
             tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedUnknown"));
         tooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationMult", HAccelerationMult));
@@ -126,7 +126,7 @@ internal class WingStats : Stats
         {
             tooltips.Add(Util.GetTooltipLine("WingStats.CanHover"));
             if (MaxHSpeedHover != -1f)
-                tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", Util.Round(MaxHSpeedHover * Util.PPTToMPH, 0.1f)));
+                tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHover", (decimal)Util.Round(MaxHSpeedHover * Util.PPTToMPH, 0.1f)));
             else
                 tooltips.Add(Util.GetTooltipLine("WingStats.MaxHSpeedHoverUnknown"));
             tooltips.Add(Util.GetTooltipLine("WingStats.HAccelerationMultHover", HAccelerationMultHover));

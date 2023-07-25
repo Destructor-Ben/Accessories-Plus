@@ -36,6 +36,7 @@ internal class CustomSlotSystem : GlobalItem
     // Making builder accessories work in the inventory
     public override void UpdateInfoAccessory(Item item, Player player)
     {
+        return;// TODO: temporary
         if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
         {
             player.CopyVanillaEquipEffects(item.type, true);

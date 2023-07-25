@@ -268,17 +268,17 @@ internal class HookStats : Stats
 
         // Speeds
         if (ShootSpeed != -1)
-            tooltips.Add(Util.GetTooltipLine("HookStats.ShootSpeed", Util.Round(ShootSpeed * Util.PPTToMPH), 0.1f));
+            tooltips.Add(Util.GetTooltipLine("HookStats.ShootSpeed", (decimal)Util.Round(ShootSpeed * Util.PPTToMPH), 0.1f));
         else
             tooltips.Add(Util.GetTooltipLine("HookStats.ShootSpeedUnknown"));
 
         if (RetreatSpeed != -1)
-            tooltips.Add(Util.GetTooltipLine("HookStats.RetreatSpeed", Util.Round(RetreatSpeed * Util.PPTToMPH), 0.1f));
+            tooltips.Add(Util.GetTooltipLine("HookStats.RetreatSpeed", (decimal)Util.Round(RetreatSpeed * Util.PPTToMPH), 0.1f));
         else
             tooltips.Add(Util.GetTooltipLine("HookStats.RetreatSpeedUnknown"));
 
         if (PullSpeed != -1)
-            tooltips.Add(Util.GetTooltipLine("HookStats.PullSpeed", Util.Round(PullSpeed * Util.PPTToMPH), 0.1f));
+            tooltips.Add(Util.GetTooltipLine("HookStats.PullSpeed", (decimal)Util.Round(PullSpeed * Util.PPTToMPH), 0.1f));
         else
             tooltips.Add(Util.GetTooltipLine("HookStats.PullSpeedUnknown"));
     }

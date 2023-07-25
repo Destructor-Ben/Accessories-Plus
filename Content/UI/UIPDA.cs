@@ -8,6 +8,8 @@ internal class UIPDA : Interface
 {
     public static UIPDA Instance => ModContent.GetInstance<UIPDA>();
 
+    public override InterfaceScaleType ScaleType => InterfaceScaleType.Game;// TODO: remove this once I fix the UI scaling
+
     private const float MaxArrowDistanceFromPlayer = 300f;
 
     private static Dictionary<int, int> TileToItem = new()
@@ -273,6 +275,10 @@ internal class UIPDA : Interface
     // TODO: make this work with multiple UI scales
     private static (Vector2, float) GetArrowPositionAndRotation(Vector2 target)
     {
+        // Scaling
+        float uiScale = Main.UIScale;
+        var zoom = Main.GameViewMatrix.Zoom - Vector2.One;
+
         // Getting position and rotation
         var position = target - Main.LocalPlayer.Center;
         float rotation = position.ToRotation();

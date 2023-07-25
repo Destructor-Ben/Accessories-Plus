@@ -14,6 +14,7 @@ internal class CustomSlotPlayer : ModPlayer
     // Updating in inventory and vanity slots
     public void InfoAccsUpdate()
     {
+        return;// TODO: temporary
         // Vanity slots
         for (int i = 13; i < 20; i++)
         {

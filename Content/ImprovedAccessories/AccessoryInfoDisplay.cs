@@ -6,67 +6,79 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
     public static List<NPC> LifeformAnalyzerNPCs;
     public static NPC BestNPC;
 
+    private static Dictionary<int, (short, bool)> ModifiedSpelunk;
+    // TODO: increasing priorities for gems
     private const short GemPriority = 235;
+    private const short HellstonePriority = 450;
 
     public override void Load()
     {
         LifeformAnalyzerNPCs = new();
+        ModifiedSpelunk = new();
     }
 
     public override void Unload()
     {
-        LifeformAnalyzerNPCs = null;
-
         // Resetting tileOreFinderPriority values
-        Main.tileOreFinderPriority[TileID.Hellstone] = 0;
+        if (ModifiedSpelunk is not null)
+            UnloadSpelunk();
 
-        Main.tileOreFinderPriority[TileID.ExposedGems] = 0;
+        LifeformAnalyzerNPCs = null;
+        ModifiedSpelunk = null;
+    }
 
-        Main.tileOreFinderPriority[TileID.Amethyst] = 0;
-        Main.tileOreFinderPriority[TileID.Topaz] = 0;
-        Main.tileOreFinderPriority[TileID.Sapphire] = 0;
-        Main.tileOreFinderPriority[TileID.Emerald] = 0;
-        Main.tileOreFinderPriority[TileID.Ruby] = 0;
-        Main.tileOreFinderPriority[TileID.Diamond] = 0;
-        Main.tileOreFinderPriority[TileID.AmberStoneBlock] = 0;
+    // Automatically unloads the spelunkeable tiles that I have modified
+    private static void UnloadSpelunk()
+    {
+        foreach (var tile in ModifiedSpelunk)
+        {
+            int type = tile.Key;
+            short priority = tile.Value.Item1;
+            bool spelunkable = tile.Value.Item2;
 
-        Main.tileOreFinderPriority[TileID.TreeAmethyst] = 0;
-        Main.tileOreFinderPriority[TileID.TreeTopaz] = 0;
-        Main.tileOreFinderPriority[TileID.TreeSapphire] = 0;
-        Main.tileOreFinderPriority[TileID.TreeEmerald] = 0;
-        Main.tileOreFinderPriority[TileID.TreeRuby] = 0;
-        Main.tileOreFinderPriority[TileID.TreeDiamond] = 0;
-        Main.tileOreFinderPriority[TileID.TreeAmber] = 0;
+            Main.tileOreFinderPriority[type] = priority;
+            Main.tileSpelunker[type] = spelunkable;
+        }
     }
 
     public override void SetStaticDefaults()
     {
         // Metal detector priorities
         if (PDAConfig.Instance.TrackHellstone)
-        {
-            Main.tileOreFinderPriority[TileID.Hellstone] = 450;
-        }
+            ModifyTileSpelunk(TileID.Hellstone, HellstonePriority);
 
         if (PDAConfig.Instance.TrackGems)
         {
-            Main.tileOreFinderPriority[TileID.ExposedGems] = GemPriority;
+            ModifyTileSpelunk(TileID.ExposedGems, GemPriority);
 
-            Main.tileOreFinderPriority[TileID.Amethyst] = GemPriority;
-            Main.tileOreFinderPriority[TileID.Topaz] = GemPriority;
-            Main.tileOreFinderPriority[TileID.Sapphire] = GemPriority;
-            Main.tileOreFinderPriority[TileID.Emerald] = GemPriority;
-            Main.tileOreFinderPriority[TileID.Ruby] = GemPriority;
-            Main.tileOreFinderPriority[TileID.Diamond] = GemPriority;
-            Main.tileOreFinderPriority[TileID.AmberStoneBlock] = GemPriority;
+            ModifyTileSpelunk(TileID.Amethyst, GemPriority);
+            ModifyTileSpelunk(TileID.Topaz, GemPriority);
+            ModifyTileSpelunk(TileID.Sapphire, GemPriority);
+            ModifyTileSpelunk(TileID.Emerald, GemPriority);
+            ModifyTileSpelunk(TileID.Ruby, GemPriority);
+            ModifyTileSpelunk(TileID.Diamond, GemPriority);
+            ModifyTileSpelunk(TileID.AmberStoneBlock, GemPriority);
 
-            Main.tileOreFinderPriority[TileID.TreeAmethyst] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeTopaz] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeSapphire] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeEmerald] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeRuby] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeDiamond] = GemPriority;
-            Main.tileOreFinderPriority[TileID.TreeAmber] = GemPriority;
+            ModifyTileSpelunk(TileID.TreeAmethyst, GemPriority);
+            ModifyTileSpelunk(TileID.TreeTopaz, GemPriority);
+            ModifyTileSpelunk(TileID.TreeSapphire, GemPriority);
+            ModifyTileSpelunk(TileID.TreeEmerald, GemPriority);
+            ModifyTileSpelunk(TileID.TreeRuby, GemPriority);
+            ModifyTileSpelunk(TileID.TreeDiamond, GemPriority);
+            ModifyTileSpelunk(TileID.TreeAmber, GemPriority);
         }
+    }
+
+    private static void ModifyTileSpelunk(int type, short priority)
+    {
+        // Storing original values
+        short metalDetectorValue = Main.tileOreFinderPriority[type];
+        bool isSpelunkable = Main.tileSpelunker[type];
+        ModifiedSpelunk.Add(type, (metalDetectorValue, isSpelunkable));
+
+        // Modifying values
+        Main.tileOreFinderPriority[type] = priority;
+        Main.tileSpelunker[type] = true;
     }
 
     public override void ModifyDisplayValue(InfoDisplay currentDisplay, ref string displayValue)
@@ -106,7 +118,7 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
             if (PDAConfig.Instance.LifeformAnalyzerDistanceInfo && (BestNPC?.active ?? false))
             {
                 var npc = Main.npc[Main.LocalPlayer.accCritterGuideNumber];
-                displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, Util.Round(npc.Distance(Main.LocalPlayer.Center) / 16f));
+                displayValue = Util.GetTextValue("InfoDisplays.FoundRareCreature", npc.GivenOrTypeName, (int)Util.Round(npc.Distance(Main.LocalPlayer.Center) / 16f));
             }
         }
 
