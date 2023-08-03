@@ -1,8 +1,8 @@
-﻿using System.ComponentModel;
+﻿#pragma warning disable CS0649
+using System.ComponentModel;
 using Terraria.ModLoader.Config;
 using TerraUtil.Configuration;
 
-#pragma warning disable CS0649
 namespace AccessoriesPlus.Configuration;
 internal class Config : ModConfiguration
 {
@@ -153,4 +153,3 @@ internal class Config : ModConfiguration
     [/list]
     */
 }
-#pragma warning restore CS0649
