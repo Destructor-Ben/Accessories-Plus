@@ -3,4 +3,5 @@
 [*]Gave Minecart stats their own config back
 [*]Added boosted line for minecart stats when using the Minecart Upgrade Kit
 [*]Changed hideCode and hideResources to false
+[*]Fixed a spelling mistake in the configs
 [/list]

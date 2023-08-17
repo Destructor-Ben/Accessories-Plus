@@ -74,12 +74,12 @@ Config: {
 
 	SlotForceWings: {
 		Label: "[i:CreativeWings] Force Wing Slot"
-		Tooltip: Forces wings to be placed in the boot slot
+		Tooltip: Forces wings to be placed in the wing slot
 	}
 
 	SlotForceShields: {
 		Label: "[i:ObsidianShield] Force Shield Slot"
-		Tooltip: Forces shields to be placed in the boot slot
+		Tooltip: Forces shields to be placed in the shield slot
 	}
 
 	SlotForceBoots: {
