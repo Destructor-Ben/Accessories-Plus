@@ -135,13 +135,19 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
         }
     }
 
-    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor)
+    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor, ref Color displayShadowColor)
     {
         // Whitelisted NPCs don't have the colour change so I need to do it myself
-        if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false) && !NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
+        if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false))
         {
             displayColor = Main.MouseTextColorReal;
-            // TODO: whitelisted golden critter's aren't handled because I can't modify the background color of the text
+            displayShadowColor = Color.Black;
+
+            if (NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
+            {
+                displayColor = InfoDisplay.GoldInfoTextColor;
+                displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
+            }
         }
     }
 

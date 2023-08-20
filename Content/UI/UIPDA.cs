@@ -66,7 +66,7 @@ internal class UIPDA : Interface
 
     /*
     // TODO: reimplement this?
-    // This isn't safe, but shouldn't matter so long as beehives and other items aren't detected by the metal detector
+    // This isn't safe, but shouldn't matter so long as beehives and other tiles aren't detected by the metal detector
     private static MethodInfo ItemDropQueryMethod = typeof(WorldGen).GetMethod("KillTile_GetItemDrops", BindingFlags.NonPublic | BindingFlags.Static);
 
     private static int GetPrimaryTileDrop(int x, int y)
