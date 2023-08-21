@@ -1,20 +1,8 @@
-﻿namespace AccessoriesPlus.Content.Obtainability;
+﻿using AccessoriesPlus.Content.RecipeGroups;
+
+namespace AccessoriesPlus.Content.Obtainability;
 internal class ObtainabilityRecipes : ModSystem
 {
-    public static RecipeGroup AnyCopper;
-    public static RecipeGroup AnySilver;
-    public static RecipeGroup AnyGold;
-    public static RecipeGroup AnyCobalt;
-
-    // Recipe groups
-    public override void AddRecipeGroups()
-    {
-        AnyCopper = Util.RegisterRecipeGroup("AnyCopper", ItemID.CopperBar, ItemID.CopperBar, ItemID.TinBar);
-        AnySilver = Util.RegisterRecipeGroup("AnySilver", ItemID.SilverBar, ItemID.SilverBar, ItemID.TungstenBar);
-        AnyGold = Util.RegisterRecipeGroup("AnyGold", ItemID.GoldBar, ItemID.GoldBar, ItemID.PlatinumBar);
-        AnyCobalt = Util.RegisterRecipeGroup("AnyCobalt", ItemID.CobaltBar, ItemID.CobaltBar, ItemID.PalladiumBar);
-    }
-
     // Adding recipes
     public override void AddRecipes()
     {
@@ -41,7 +29,7 @@ internal class ObtainabilityRecipes : ModSystem
             Recipe.Create(ItemID.AncientChisel)
                 .AddTile(TileID.Anvils)
                 .AddIngredient(ItemID.Sandstone, 5)
-                .AddRecipeGroup(AnySilver, 5)
+                .AddRecipeGroup<Silver>(5)
                 .AddIngredient(ItemID.Bone, 5)
                 .Register();
 
@@ -59,7 +47,7 @@ internal class ObtainabilityRecipes : ModSystem
             Recipe.Create(ItemID.Compass)
                 .AddTile(TileID.TinkerersWorkbench)
                 .AddRecipeGroup(RecipeGroupID.IronBar, 5)
-                .AddRecipeGroup(AnyCopper, 5)
+                .AddRecipeGroup<Copper>(5)
                 .Register();
 
             Recipe.Create(ItemID.DepthMeter)
@@ -123,7 +111,7 @@ internal class ObtainabilityRecipes : ModSystem
 
             Recipe.Create(ItemID.Aglet)
                 .AddTile(TileID.Anvils)
-                .AddRecipeGroup(AnyCopper, 5)
+                .AddRecipeGroup<Copper>(5)
                 .Register();
 
             Recipe.Create(ItemID.AnkletoftheWind)
@@ -168,7 +156,7 @@ internal class ObtainabilityRecipes : ModSystem
 
             Recipe.Create(ItemID.CobaltShield)
                 .AddTile(TileID.Anvils)
-                .AddRecipeGroup(AnyCobalt, 10)
+                .AddRecipeGroup<Cobalt>(10)
                 .Register();
 
             Recipe.Create(ItemID.FrozenTurtleShell)
@@ -183,7 +171,7 @@ internal class ObtainabilityRecipes : ModSystem
 
             Recipe.Create(ItemID.LuckyHorseshoe)
                 .AddTile(TileID.TinkerersWorkbench)
-                .AddRecipeGroup(AnyGold, 8)
+                .AddRecipeGroup<Gold>(8)
                 .AddIngredient(ItemID.Cloud, 10)
                 .Register();
 

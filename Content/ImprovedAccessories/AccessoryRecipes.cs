@@ -1,16 +1,8 @@
-﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
+﻿using AccessoriesPlus.Content.RecipeGroups;
+
+namespace AccessoriesPlus.Content.ImprovedAccessories;
 internal class AccessoryRecipes : ModSystem
 {
-    public static RecipeGroup AnyFartBalloon;
-    public static RecipeGroup AnyTsunamiBalloon;
-
-    // Recipe groups
-    public override void AddRecipeGroups()
-    {
-        AnyFartBalloon = Util.RegisterRecipeGroup("FartBalloons", ItemID.FartInABalloon, ItemID.FartInABalloon, ItemID.BalloonHorseshoeFart);
-        AnyTsunamiBalloon = Util.RegisterRecipeGroup("TsunamiBalloons", ItemID.SharkronBalloon, ItemID.SharkronBalloon, ItemID.BalloonHorseshoeSharkron);
-    }
-
     // Adding recipes
     public override void AddRecipes()
     {
@@ -91,8 +83,8 @@ internal class AccessoryRecipes : ModSystem
                 .AddRecipeGroup(RecipeGroupID.CloudBalloons)
                 .AddRecipeGroup(RecipeGroupID.BlizzardBalloons)
                 .AddRecipeGroup(RecipeGroupID.SandstormBalloons)
-                .AddRecipeGroup(AnyFartBalloon)
-                .AddRecipeGroup(AnyTsunamiBalloon)
+                .AddRecipeGroup<FartBalloons>()
+                .AddRecipeGroup<SharkronBalloons>()
                 .Register();
         }
     }

@@ -39,7 +39,7 @@ internal class CustomSlotSystem : GlobalItem
         return;// TODO: temporary
         if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
         {
-            player.CopyVanillaEquipEffects(item.type, true);
+            player.CopyVanillaEquipEffects(item.type);
         }
     }
 }

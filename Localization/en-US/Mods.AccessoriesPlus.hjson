@@ -23,12 +23,12 @@ AccessorySlots: {
 }
 
 RecipeGroups: {
-	AnyCopper: Any Copper Bar
-	AnySilver: Any Silver Bar
-	AnyGold: Any Gold Bar
-	AnyCobalt: Any Cobalt Bar
-	FartBalloons.Tooltip: Any Fart Balloon
-	TsunamiBalloons.Tooltip: Any Sharkron Balloon
+	Copper: Any Copper Bar
+	Silver: Any Silver Bar
+	Gold: Any Gold Bar
+	Cobalt: Any Cobalt Bar
+	FartBalloons: Any Fart Balloon
+	SharkronBalloons: Any Sharkron Balloon
 }
 
 Tooltips: {
