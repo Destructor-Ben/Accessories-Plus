@@ -27,7 +27,7 @@ internal class Config : ModConfiguration
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedHandOfCreation;
-    public PDAConfig ImprovedPDA = new PDAConfig();
+    public PDAConfig ImprovedPDA = new();
 
     #endregion
 

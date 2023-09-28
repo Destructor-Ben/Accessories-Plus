@@ -61,6 +61,7 @@ internal class ObtainabilityNPC : GlobalNPC
     public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
     {
         // Making ankh shield drops more common
+        // TODO: this is bugged
         if (Config.Instance.ObtainabilityNPCDrops)
         {
             var rules = npcLoot.Get().Where(r => r is DropBasedOnExpertMode drop && drop.ruleForNormalMode is CommonDrop drop2 && drop.ruleForExpertMode is CommonDrop drop3 && ankhShieldItems.Contains(drop2.itemId));
