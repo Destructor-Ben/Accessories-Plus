@@ -69,11 +69,16 @@ internal class ObtainabilityNPC : GlobalNPC
             {
                 // Modifying existing drop
                 var drop = rule as DropBasedOnExpertMode;
-                var n = drop.ruleForNormalMode as CommonDrop;
-                var e = drop.ruleForExpertMode as CommonDrop;
+                var n = (CommonDrop)drop.ruleForNormalMode;
+                var e = (CommonDrop)drop.ruleForExpertMode;
 
-                n.chanceDenominator /= 3;
-                e.chanceDenominator /= 3;
+                n.chanceNumerator = 3;
+
+                // Since expert is weird, it changes the number of times rolled instead of the denominator/numerator
+                e.chanceNumerator = 6;
+
+                if (e is CommonDropWithRerolls reroll)
+                    reroll.timesToRoll = 1;
             }
         }
     }

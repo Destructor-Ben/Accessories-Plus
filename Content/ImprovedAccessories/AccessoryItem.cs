@@ -72,6 +72,8 @@ internal class AccessoryItem : GlobalItem
                 if (Config.Instance.ImprovedTerrasparkBoots)
                 {
                     player.CopyVanillaEquipEffects(ItemID.AmphibianBoots, hideVisual);
+                    // Amphibian boots override this
+                    player.accRunSpeed = 6.75f;
                 }
                 break;
             case ItemID.AnkhShield:

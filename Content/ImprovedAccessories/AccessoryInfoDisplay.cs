@@ -135,18 +135,18 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
         }
     }
 
-    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor, ref Color displayShadowColor)
+    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor)//TODO:, ref Color displayShadowColor)
     {
         // Whitelisted NPCs don't have the colour change so I need to do it myself
         if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false))
         {
             displayColor = Main.MouseTextColorReal;
-            displayShadowColor = Color.Black;
+            //displayShadowColor = Color.Black;
 
             if (NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
             {
-                displayColor = InfoDisplay.GoldInfoTextColor;
-                displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
+                displayColor = Main.OurFavoriteColor;//InfoDisplay.GoldInfoTextColor;
+                //displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
             }
         }
     }
