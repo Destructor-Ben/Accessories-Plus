@@ -1,7 +1,8 @@
 ﻿namespace AccessoriesPlus;
-internal class AccessoriesPlus : TerraUtilMod
+
+public class AccessoriesPlusMod : TerraUtilMod
 {
-    public static AccessoriesPlus Instance => ModContent.GetInstance<AccessoriesPlus>();
+    public static AccessoriesPlusMod Instance => ModContent.GetInstance<AccessoriesPlusMod>();
 
     // TODO: add workshop images
     // TODO: make description more specific in terms of what is actually changed because a lot of it is very generic

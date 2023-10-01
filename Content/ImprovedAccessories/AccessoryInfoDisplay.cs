@@ -1,7 +1,8 @@
 ﻿using Terraria.Map;
 
 namespace AccessoriesPlus.Content.ImprovedAccessories;
-internal class AccessoryInfoDisplay : GlobalInfoDisplay
+
+public class AccessoryInfoDisplay : GlobalInfoDisplay
 {
     public static List<NPC> LifeformAnalyzerNPCs;
     public static NPC BestNPC;
@@ -81,7 +82,7 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
         Main.tileSpelunker[type] = true;
     }
 
-    public override void ModifyDisplayValue(InfoDisplay currentDisplay, ref string displayValue)
+    public override void ModifyDisplayParameters(InfoDisplay currentDisplay, ref string displayValue, ref string displayName, ref Color displayColor, ref Color displayShadowColor)
     {
         // Lifeform analyzer
         if (currentDisplay == InfoDisplay.LifeformAnalyzer)
@@ -133,20 +134,17 @@ internal class AccessoryInfoDisplay : GlobalInfoDisplay
                 displayValue = Util.GetTextValue("InfoDisplays.FoundTreasure", tileName, distance);
             }
         }
-    }
 
-    public override void ModifyDisplayColor(InfoDisplay currentDisplay, ref Color displayColor)//TODO:, ref Color displayShadowColor)
-    {
         // Whitelisted NPCs don't have the colour change so I need to do it myself
         if (currentDisplay == InfoDisplay.LifeformAnalyzer && (BestNPC?.active ?? false))
         {
             displayColor = Main.MouseTextColorReal;
-            //displayShadowColor = Color.Black;
+            displayShadowColor = Color.Black;
 
             if (NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
             {
                 displayColor = Main.OurFavoriteColor;//InfoDisplay.GoldInfoTextColor;
-                //displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
+                displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
             }
         }
     }

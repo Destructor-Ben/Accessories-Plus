@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal class StatTooltips : GlobalItem
+
+public class StatTooltips : GlobalItem
 {
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {

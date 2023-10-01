@@ -4,7 +4,8 @@ using Terraria.UI.Chat;
 using TerraUtil.UI;
 
 namespace AccessoriesPlus.Content.UI;
-internal class UIPDA : Interface
+
+public class UIPDA : Interface
 {
     public static UIPDA Instance => ModContent.GetInstance<UIPDA>();
 

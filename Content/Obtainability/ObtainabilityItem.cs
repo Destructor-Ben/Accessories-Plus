@@ -1,7 +1,8 @@
 ﻿using Terraria.GameContent.ItemDropRules;
 
 namespace AccessoriesPlus.Content.Obtainability;
-internal class ObtainabilityItem : GlobalItem
+
+public class ObtainabilityItem : GlobalItem
 {
     public override void SetStaticDefaults()
     {

@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
-internal class AccessoryItem : GlobalItem
+
+public class AccessoryItem : GlobalItem
 {
     public static Asset<Texture2D> OriginalBOBTexture;
     public static Asset<Texture2D> OriginalBOBBalloonTexture;

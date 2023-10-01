@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal class WingStats : Stats
+
+public class WingStats : Stats
 {
     public float FlightTime { get; private set; } = -1f;
     public float FlightHeight { get; private set; } = -1f;

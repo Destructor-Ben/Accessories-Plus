@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal class MountStats : Stats
+
+public class MountStats : Stats
 {
     public int FlightTime { get; private set; } = 0;
     public bool CanHover { get; private set; } = false;

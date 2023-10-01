@@ -1,7 +1,8 @@
 ﻿namespace AccessoriesPlus.Content.AccessorySlots;
-internal class CustomSlotPlayer : ModPlayer
+
+public class CustomSlotPlayer : ModPlayer
 {
-    public override void UpdateEquips()
+    /*public override void UpdateEquips()
     {
         InfoAccsUpdate();
     }
@@ -39,5 +40,5 @@ internal class CustomSlotPlayer : ModPlayer
     public override void RefreshInfoAccessoriesFromTeamPlayers(Player otherPlayer)
     {
         base.RefreshInfoAccessoriesFromTeamPlayers(otherPlayer);
-    }
+    }*/
 }

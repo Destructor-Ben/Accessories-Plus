@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.AccessorySlots;
-internal class ShieldSlot : AbstractAccessorySlot
+
+public class ShieldSlot : AbstractAccessorySlot
 {
     public override int FunctionalItemID => ItemID.CobaltShield;
     public override int VanityItemID => ItemID.AnkhShield;

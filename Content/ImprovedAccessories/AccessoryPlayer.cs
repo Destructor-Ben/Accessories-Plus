@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
-internal class AccessoryPlayer : ModPlayer
+
+public class AccessoryPlayer : ModPlayer
 {
     public override void PostUpdateMiscEffects()
     {

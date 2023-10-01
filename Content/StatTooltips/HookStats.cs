@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal class HookStats : Stats
+
+public class HookStats : Stats
 {
     public enum LatchingMode
     {

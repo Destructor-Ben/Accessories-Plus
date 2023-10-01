@@ -1,6 +1,7 @@
 ﻿namespace AccessoriesPlus.Content.AccessorySlots;
+
 // Triple A so it gets placed before other slots
-internal class AAAPostMLSlot : ModAccessorySlot
+public class AAAPostMLSlot : ModAccessorySlot
 {
     public override bool IsEnabled()
     {

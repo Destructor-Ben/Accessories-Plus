@@ -1,7 +1,8 @@
 ﻿using Terraria.GameContent.ItemDropRules;
 
 namespace AccessoriesPlus.Content.Obtainability;
-internal class ObtainabilityNPC : GlobalNPC
+
+public class ObtainabilityNPC : GlobalNPC
 {
     private static List<int> travellingMerchantItems = new()
     {

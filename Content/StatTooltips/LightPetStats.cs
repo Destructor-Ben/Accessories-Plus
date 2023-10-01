@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal class LightPetStats : Stats
+
+public class LightPetStats : Stats
 {
     public float Brightness { get; private set; } = -1f;
     public bool Controllable { get; private set; } = false;

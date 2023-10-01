@@ -1,7 +1,8 @@
 ﻿using AccessoriesPlus.Content.ImprovedAccessories;
 
 namespace AccessoriesPlus.Content;
-internal class Detours : ModSystem
+
+public class Detours : ModSystem
 {
     public override void Load()
     {

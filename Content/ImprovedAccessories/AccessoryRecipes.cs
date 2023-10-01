@@ -1,7 +1,8 @@
 ﻿using AccessoriesPlus.Content.RecipeGroups;
 
 namespace AccessoriesPlus.Content.ImprovedAccessories;
-internal class AccessoryRecipes : ModSystem
+
+public class AccessoryRecipes : ModSystem
 {
     // Adding recipes
     public override void AddRecipes()

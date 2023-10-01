@@ -1,5 +1,6 @@
 ﻿namespace AccessoriesPlus.Content.StatTooltips;
-internal abstract class Stats
+
+public abstract class Stats
 {
     public virtual string LineNameToInsertAround => "Equipable";
     public virtual bool After => true;

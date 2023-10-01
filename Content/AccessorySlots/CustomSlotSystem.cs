@@ -1,10 +1,11 @@
 ﻿using Terraria.ModLoader.Default;
 
 namespace AccessoriesPlus.Content.AccessorySlots;
-internal class CustomSlotSystem : GlobalItem
+
+public class CustomSlotSystem : GlobalItem
 {
     // TODO: fill out
-    private static List<int> BuilderAccessories = new()
+    /*private static List<int> BuilderAccessories = new()
     {
         ItemID.HandOfCreation,
     };
@@ -12,7 +13,7 @@ internal class CustomSlotSystem : GlobalItem
     private static List<int> BuilderAccessoriesFromAccPlus = new()
     {
 
-    };
+    };//*/
 
     // Forcing wings, etc. into modded slots
     public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
@@ -23,6 +24,7 @@ internal class CustomSlotSystem : GlobalItem
 
         // Have to minus the number of accessory slots, since that is how many slots ahead the vanity one is, and subtracting it gets back to the original slot
         int vanitySlot = slot - player.GetModPlayer<ModAccessorySlotPlayer>().SlotCount;
+
         if (Config.Instance.SlotWings && Config.Instance.SlotForceWings && wingSlot.IsValidItem(item))
             return modded && (wingSlot.Type == slot || wingSlot.Type == vanitySlot);
         else if (Config.Instance.SlotShield && Config.Instance.SlotForceShields && shieldSlot.IsValidItem(item))
@@ -37,9 +39,9 @@ internal class CustomSlotSystem : GlobalItem
     public override void UpdateInfoAccessory(Item item, Player player)
     {
         return;// TODO: temporary
-        if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
-        {
-            player.CopyVanillaEquipEffects(item.type);
-        }
+               //if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
+               //{
+               //   player.CopyVanillaEquipEffects(item.type);
+               //}
     }
 }

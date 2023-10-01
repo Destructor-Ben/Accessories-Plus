@@ -1,10 +1,12 @@
-﻿#pragma warning disable CS0649
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Terraria.ModLoader.Config;
 using TerraUtil.Configuration;
 
 namespace AccessoriesPlus.Configuration;
-internal class Config : ModConfiguration
+
+#pragma warning disable CS0649
+
+public class Config : ModConfiguration
 {
     // TODO: split into server and client config
     public static Config Instance => ModContent.GetInstance<Config>();

@@ -1,7 +1,8 @@
 ﻿using AccessoriesPlus.Content.RecipeGroups;
 
 namespace AccessoriesPlus.Content.Obtainability;
-internal class ObtainabilityRecipes : ModSystem
+
+public class ObtainabilityRecipes : ModSystem
 {
     // Adding recipes
     public override void AddRecipes()
