@@ -1,9 +1,4 @@
-[b]v1.2.0.3 v{ModVersion} - {tMLBuildPurpose} tModLoader v{tMLVersion}[/b]
+[b]v{ModVersion} - {tMLBuildPurpose} tModLoader v{tMLVersion}[/b]
 [list]
-[*]Gave Minecart stats their own config back
-[*]Added boosted line for minecart stats when using the Minecart Upgrade Kit
-[*]Changed hideCode and hideResources to false
-[*]Fixed a spelling mistake in the configs
-[*]Fixed a bug where Terraspark boots had the incorrect speed
-[*]Fixed a bug where the ingredients of the Ankh Charm were guaranteed to drop
+[*]Ported to new tML version
 [/list]
