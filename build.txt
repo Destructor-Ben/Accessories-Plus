@@ -2,7 +2,7 @@ displayName = Accessories+
 author = Destructor_Ben
 homepage = https://github.com/Destructor-Ben/Accessories-Plus
 
-version = 1.2.0.3
+version = 1.2.0.4
 side = Both
 dllReferences = TerraUtil
 
