@@ -49,6 +49,7 @@ public class AccessoryItem : GlobalItem
                     entity.StatsModifiedBy.Add(Mod);
                     entity.defense = 12;
                 }
+
                 break;
             default:
                 break;
@@ -67,6 +68,7 @@ public class AccessoryItem : GlobalItem
                     player.CopyVanillaEquipEffects(ItemID.Toolbelt, hideVisual);
                     player.CopyVanillaEquipEffects(ItemID.Toolbox, hideVisual);
                 }
+
                 break;
             case ItemID.TerrasparkBoots:
                 // Terraspark boots
@@ -76,6 +78,7 @@ public class AccessoryItem : GlobalItem
                     // Amphibian boots override this
                     player.accRunSpeed = 6.75f;
                 }
+
                 break;
             case ItemID.AnkhShield:
                 // Ankh shield
@@ -85,6 +88,7 @@ public class AccessoryItem : GlobalItem
                     player.CopyVanillaEquipEffects(ItemID.HeroShield, hideVisual);
                     player.CopyVanillaEquipEffects(ItemID.FrozenShield, hideVisual);
                 }
+
                 break;
             case ItemID.AnkhCharm:
                 // Ankh charm
@@ -92,6 +96,7 @@ public class AccessoryItem : GlobalItem
                 {
                     player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
                 }
+
                 break;
             case ItemID.BundleofBalloons:
             case ItemID.HorseshoeBundle:
@@ -101,6 +106,7 @@ public class AccessoryItem : GlobalItem
                     player.CopyVanillaEquipEffects(ItemID.FartInABalloon, hideVisual);
                     player.CopyVanillaEquipEffects(ItemID.SharkronBalloon, hideVisual);
                 }
+
                 break;
             default:
                 break;
@@ -119,6 +125,7 @@ public class AccessoryItem : GlobalItem
                     tooltips.InsertTooltips("Tooltip2", after: true, Util.GetTooltipLine("HandOfCreation0"), Util.GetTooltipLine("HandOfCreation1"));
                     tooltips.RemoveTooltips("Tooltip2");
                 }
+
                 break;
             case ItemID.TerrasparkBoots:
                 // Terraspark boots
@@ -126,6 +133,7 @@ public class AccessoryItem : GlobalItem
                 {
                     tooltips.InsertTooltips("Tooltip4", after: true, Util.GetTooltipLine("TerrasparkBoots0"), Util.GetTooltipLine("TerrasparkBoots1"));
                 }
+
                 break;
             case ItemID.AnkhShield:
                 // Ankh shield
@@ -133,6 +141,7 @@ public class AccessoryItem : GlobalItem
                 {
                     tooltips.InsertTooltips("Tooltip1", after: true, Util.GetTooltipLine("AnkhShield0"), Util.GetTooltipLine("AnkhShield1"), Util.GetTooltipLine("AnkhShield2"));
                 }
+
                 break;
             case ItemID.BundleofBalloons:
             case ItemID.HorseshoeBundle:
@@ -142,6 +151,7 @@ public class AccessoryItem : GlobalItem
                     tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("BundleOfBalloons0"));
                     tooltips.RemoveTooltips("Tooltip0");
                 }
+
                 break;
             case ItemID.Radar:
                 if (PDAConfig.Instance.RadarHighlightDanger)
@@ -149,6 +159,7 @@ public class AccessoryItem : GlobalItem
                     tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("Radar0"));
                     tooltips.RemoveTooltips("Tooltip0");
                 }
+
                 break;
             default:
                 break;
