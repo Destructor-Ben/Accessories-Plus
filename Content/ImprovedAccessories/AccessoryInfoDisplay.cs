@@ -143,7 +143,7 @@ public class AccessoryInfoDisplay : GlobalInfoDisplay
 
             if (NPCID.Sets.GoldCrittersCollection.Contains(BestNPC.type))
             {
-                displayColor = Main.OurFavoriteColor;//InfoDisplay.GoldInfoTextColor;
+                displayColor = InfoDisplay.GoldInfoTextColor;
                 displayShadowColor = InfoDisplay.GoldInfoTextShadowColor;
             }
         }
