@@ -154,11 +154,10 @@ public class UIPDA : Interface
     private static Asset<Texture2D> GetTileTexture(Tile tile)
     {
         int type = tile.TileType;
-        int itemID = -1;
         Asset<Texture2D> tex = null;
 
         // Basic tiles
-        itemID = TileToItem.TryGetOrGiven(type, -1);
+        int itemID = TileToItem.TryGetOrGiven(type, -1);
 
         // Chests
         int chestStyle = tile.TileFrameX / 36;
@@ -273,7 +272,7 @@ public class UIPDA : Interface
     }
 
     // Calculating the position and rotation for an arrow
-    // TODO: make this work with multiple UI scales
+    // TODO: make this work with multiple UI scales: Utils.ToScreenPosition
     private static (Vector2, float) GetArrowPositionAndRotation(Vector2 target)
     {
         // Scaling
