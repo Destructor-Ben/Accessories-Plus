@@ -29,6 +29,7 @@ public class Config : ModConfiguration
     [DefaultValue(true)]
     [ReloadRequired]
     public bool ImprovedHandOfCreation;
+    [Expand(false)]
     public PDAConfig ImprovedPDA = new();
 
     #endregion
@@ -71,11 +72,11 @@ public class Config : ModConfiguration
     public bool SlotShield;
     [DefaultValue(true)]
     public bool SlotBoots;
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     public bool SlotForceWings;
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     public bool SlotForceShields;
-    [DefaultValue(true)]
+    [DefaultValue(false)]
     public bool SlotForceBoots;
 
     #endregion

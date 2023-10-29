@@ -1,6 +1,5 @@
 [b]v{ModVersion} - {tMLBuildPurpose} tModLoader v{tMLVersion}[/b]
 [list]
-[*]Ported to new tML version
-[*]Fixed an issue with tooltips for certain items not showing up
-[*]Fixed the duplication menu breaking
+[*]Made the PDA config not expand when the config is opened
+[*]Changed forcing accessory slots to not be default behaviour
 [/list]
