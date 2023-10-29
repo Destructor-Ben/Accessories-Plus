@@ -2,10 +2,10 @@
 
 namespace AccessoriesPlus.Core;
 
-public class ObtainabilityRecipes : ModSystem
+public partial class AccessorySystem
 {
     // Adding recipes
-    public override void AddRecipes()
+    private static void AddObtainabilityRecipes()
     {
         // Hand warmer recipe
         if (Config.Instance.ObtainabilityPresents)
@@ -216,7 +216,7 @@ public class ObtainabilityRecipes : ModSystem
     }
 
     // Removing existing recipes
-    public override void PostAddRecipes()
+    private static void RemoveObtainabilityRecipes()
     {
         // More accessory recipes
         if (Config.Instance.ObtainabilityRecipes)

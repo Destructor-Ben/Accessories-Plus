@@ -3,21 +3,10 @@ using Terraria.ModLoader.Default;
 
 namespace AccessoriesPlus.Core;
 
-public class CustomSlotSystem : GlobalItem
+public partial class AccessoryItem
 {
-    // TODO: fill out
-    /*private static List<int> BuilderAccessories = new()
-    {
-        ItemID.HandOfCreation,
-    };
-
-    private static List<int> BuilderAccessoriesFromAccPlus = new()
-    {
-
-    };//*/
-
     // Forcing wings, etc. into modded slots
-    public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
+    private static bool ForceSlots(Item item, Player player, int slot, bool modded)
     {
         var wingSlot = ModContent.GetInstance<WingSlot>();
         var shieldSlot = ModContent.GetInstance<ShieldSlot>();
@@ -34,15 +23,5 @@ public class CustomSlotSystem : GlobalItem
             return modded && (bootSlot.Type == slot || bootSlot.Type == vanitySlot);
 
         return true;
-    }
-
-    // Making builder accessories work in the inventory
-    public override void UpdateInfoAccessory(Item item, Player player)
-    {
-        return;// TODO: temporary
-               //if (BuilderAccessories.Contains(item.type) || Config.Instance.ImprovedHandOfCreation && BuilderAccessoriesFromAccPlus.Contains(item.type))
-               //{
-               //   player.CopyVanillaEquipEffects(item.type);
-               //}
     }
 }

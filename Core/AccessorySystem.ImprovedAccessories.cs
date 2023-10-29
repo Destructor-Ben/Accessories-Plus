@@ -2,10 +2,10 @@
 
 namespace AccessoriesPlus.Core;
 
-public class AccessoryRecipes : ModSystem
+public partial class AccessorySystem
 {
     // Adding recipes
-    public override void AddRecipes()
+    private static void AddImprovedRecipies()
     {
         // Hand of creation
         if (Config.Instance.ImprovedHandOfCreation)
@@ -91,7 +91,7 @@ public class AccessoryRecipes : ModSystem
     }
 
     // Removing recipes not from this mod
-    public override void PostAddRecipes()
+    private static void RemoveImprovedRecipies()
     {
         // Hand of creation
         if (Config.Instance.ImprovedHandOfCreation)

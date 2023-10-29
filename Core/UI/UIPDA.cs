@@ -243,7 +243,7 @@ public class UIPDA : Interface
         var tex = GetTileTexture(target);
 
         // Drawing the background and arrow
-        string name = AccessoryInfoDisplay.GetBestOreTileName(target.TileType, new Point(x, y));
+        string name = AccessoryInfoDisplay.GetTileName(target.TileType, new Point(x, y));
         DrawArrow(sb, position, rotation, name, new Point(x, y).ToWorldCoordinates());
 
         // Drawing the tile

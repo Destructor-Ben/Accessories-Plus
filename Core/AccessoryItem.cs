@@ -1,162 +1,40 @@
 ﻿namespace AccessoriesPlus.Core;
 
-public class AccessoryItem : GlobalItem
+public partial class AccessoryItem : GlobalItem
 {
-    public static Asset<Texture2D> OriginalBOBTexture;
-    public static Asset<Texture2D> OriginalBOBBalloonTexture;
-    public static Asset<Texture2D> OriginalBOHBTexture;
-    public static Asset<Texture2D> OriginalBOHBBalloonTexture;
-
     public override void SetStaticDefaults()
     {
-        // Texture replacing the bundle of balloons
-        OriginalBOBTexture = TextureAssets.Item[ItemID.BundleofBalloons];
-        OriginalBOBBalloonTexture = TextureAssets.Item[ItemID.HorseshoeBundle];
-        OriginalBOHBTexture = TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons];
-        OriginalBOHBBalloonTexture = TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle];
-
-        if (Config.Instance.ImprovedHorseshoeBundle)
-        {
-            TextureAssets.Item[ItemID.BundleofBalloons] = Util.GetTexture("Items/BundleofBalloons");
-            TextureAssets.Item[ItemID.HorseshoeBundle] = Util.GetTexture("Items/BundleofHorseshoeBalloons");
-            TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = Util.GetTexture("Items/BundleofBalloons_Balloon");
-            TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = Util.GetTexture("Items/BundleofHorseshoeBalloons_Balloon");
-        }
+        ReplaceBOBTexture();
+        ModifyShimmerCrafting();
     }
 
     public override void Unload()
     {
-        // Undoing texture replacement
-        TextureAssets.Item[ItemID.BundleofBalloons] = OriginalBOBTexture;
-        TextureAssets.Item[ItemID.HorseshoeBundle] = OriginalBOBBalloonTexture;
-        TextureAssets.AccBalloon[ArmorIDs.Balloon.BundleofBalloons] = OriginalBOHBTexture;
-        TextureAssets.AccBalloon[ArmorIDs.Balloon.HorseshoeBundle] = OriginalBOHBBalloonTexture;
-
-        OriginalBOBTexture = null;
-        OriginalBOBBalloonTexture = null;
-        OriginalBOHBTexture = null;
-        OriginalBOHBBalloonTexture = null;
+        UndoReplaceBOBTexture();
     }
 
-    // Changing default values
     public override void SetDefaults(Item entity)
     {
-        switch (entity.type)
-        {
-            case ItemID.AnkhShield:
-                if (Config.Instance.ImprovedAnkhShield)
-                {
-                    entity.StatsModifiedBy.Add(Mod);
-                    entity.defense = 12;
-                }
-
-                break;
-            default:
-                break;
-        }
+        ModifyAccessoryStats(entity);
     }
 
-    // Accessory effects
     public override void UpdateAccessory(Item item, Player player, bool hideVisual)
     {
-        switch (item.type)
-        {
-            case ItemID.HandOfCreation:
-                // Hand of creation
-                if (Config.Instance.ImprovedHandOfCreation)
-                {
-                    player.CopyVanillaEquipEffects(ItemID.Toolbelt, hideVisual);
-                    player.CopyVanillaEquipEffects(ItemID.Toolbox, hideVisual);
-                }
-
-                break;
-            case ItemID.TerrasparkBoots:
-                // Terraspark boots
-                if (Config.Instance.ImprovedTerrasparkBoots)
-                {
-                    player.CopyVanillaEquipEffects(ItemID.AmphibianBoots, hideVisual);
-                    // Amphibian boots override this
-                    player.accRunSpeed = 6.75f;
-                }
-
-                break;
-            case ItemID.AnkhShield:
-                // Ankh shield
-                if (Config.Instance.ImprovedAnkhShield)
-                {
-                    player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
-                    player.CopyVanillaEquipEffects(ItemID.HeroShield, hideVisual);
-                    player.CopyVanillaEquipEffects(ItemID.FrozenShield, hideVisual);
-                }
-
-                break;
-            case ItemID.AnkhCharm:
-                // Ankh charm
-                if (Config.Instance.ImprovedAnkhShield)
-                    player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
-
-                break;
-            case ItemID.BundleofBalloons:
-            case ItemID.HorseshoeBundle:
-                // Bundle of horseshoe balloons
-                if (Config.Instance.ImprovedHorseshoeBundle)
-                {
-                    player.CopyVanillaEquipEffects(ItemID.FartInABalloon, hideVisual);
-                    player.CopyVanillaEquipEffects(ItemID.SharkronBalloon, hideVisual);
-                }
-
-                break;
-            default:
-                break;
-        }
+        ModifyAccessoryEffects(item, player, hideVisual);
     }
 
-    // Changing tooltips
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
-        switch (item.type)
-        {
-            case ItemID.HandOfCreation:
-                // Hand of creation
-                if (Config.Instance.ImprovedHandOfCreation)
-                {
-                    tooltips.InsertTooltips("Tooltip2", after: true, Util.GetTooltipLine("HandOfCreation0"), Util.GetTooltipLine("HandOfCreation1"));
-                    tooltips.RemoveTooltips("Tooltip2");
-                }
+        ModifyAccessoryTooltips(item, tooltips);
+    }
 
-                break;
-            case ItemID.TerrasparkBoots:
-                // Terraspark boots
-                if (Config.Instance.ImprovedTerrasparkBoots)
-                    tooltips.InsertTooltips("Tooltip4", after: true, Util.GetTooltipLine("TerrasparkBoots0"), Util.GetTooltipLine("TerrasparkBoots1"));
+    public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+    {
+        ModifyPresentLoot(item, itemLoot);
+    }
 
-                break;
-            case ItemID.AnkhShield:
-                // Ankh shield
-                if (Config.Instance.ImprovedAnkhShield)
-                    tooltips.InsertTooltips("Tooltip1", after: true, Util.GetTooltipLine("AnkhShield0"), Util.GetTooltipLine("AnkhShield1"), Util.GetTooltipLine("AnkhShield2"));
-
-                break;
-            case ItemID.BundleofBalloons:
-            case ItemID.HorseshoeBundle:
-                // Bundle of horseshoe balloons
-                if (Config.Instance.ImprovedHorseshoeBundle)
-                {
-                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("BundleOfBalloons0"));
-                    tooltips.RemoveTooltips("Tooltip0");
-                }
-
-                break;
-            case ItemID.Radar:
-                if (PDAConfig.Instance.RadarHighlightDanger)
-                {
-                    tooltips.InsertTooltips("Tooltip0", after: true, Util.GetTooltipLine("Radar0"));
-                    tooltips.RemoveTooltips("Tooltip0");
-                }
-
-                break;
-            default:
-                break;
-        }
+    public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
+    {
+        return ForceSlots(item, player, slot, modded);
     }
 }

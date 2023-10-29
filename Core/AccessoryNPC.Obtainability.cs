@@ -2,7 +2,7 @@
 
 namespace AccessoriesPlus.Core;
 
-public class ObtainabilityNPC : GlobalNPC
+public partial class AccessoryNPC
 {
     private static List<int> travellingMerchantItems = new()
     {
@@ -15,6 +15,7 @@ public class ObtainabilityNPC : GlobalNPC
         ItemID.PortableCementMixer,
         ItemID.ActuationAccessory,
     };
+
     private static List<int> ankhShieldItems = new()
     {
         ItemID.ArmorPolish,
@@ -30,7 +31,7 @@ public class ObtainabilityNPC : GlobalNPC
     };
 
     // Modifying NPC shops
-    public override void ModifyShop(NPCShop shop)
+    private static void ModifyObtainabilityShop(NPCShop shop)
     {
         // Adding toolbox to Mechanic
         if (Config.Instance.ObtainabilityPresents && shop.NpcType == NPCID.Mechanic)
@@ -38,7 +39,7 @@ public class ObtainabilityNPC : GlobalNPC
     }
 
     // Adding a guaranteed accessory to the travelling merchant
-    public override void SetupTravelShop(int[] shop, ref int nextSlot)
+    private static void SetupObtainabilityTravelShop(int[] shop, ref int nextSlot)
     {
         if (Config.Instance.ObtainabilityTravellingMerchant)
         {
@@ -59,10 +60,9 @@ public class ObtainabilityNPC : GlobalNPC
     }
 
     // Modifying NPC loot
-    public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+    private static void ModifyObtainabilityLoot(NPC npc, NPCLoot npcLoot)
     {
         // Making ankh shield drops more common
-        // TODO: this is bugged
         if (Config.Instance.ObtainabilityNPCDrops)
         {
             var rules = npcLoot.Get().Where(r => r is DropBasedOnExpertMode drop && drop.ruleForNormalMode is CommonDrop drop2 && drop.ruleForExpertMode is CommonDrop drop3 && ankhShieldItems.Contains(drop2.itemId));
