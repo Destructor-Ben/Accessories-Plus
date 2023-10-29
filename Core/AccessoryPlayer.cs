@@ -1,4 +1,4 @@
-﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
+﻿namespace AccessoriesPlus.Core;
 
 public class AccessoryPlayer : ModPlayer
 {

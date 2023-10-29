@@ -1,6 +1,6 @@
 ﻿using Terraria.Map;
 
-namespace AccessoriesPlus.Content.ImprovedAccessories;
+namespace AccessoriesPlus.Core;
 
 public class AccessoryInfoDisplay : GlobalInfoDisplay
 {
@@ -100,9 +100,7 @@ public class AccessoryInfoDisplay : GlobalInfoDisplay
                     bool npcInWhitelist = PDAConfig.Instance.UseNPCWhitelist && PDAConfig.Instance.NPCWhitelist.Where(n => n.Type == npc.type).Any();
                     bool npcInBlacklist = PDAConfig.Instance.UseNPCBlacklist && PDAConfig.Instance.NPCBlacklist.Where(n => n.Type == npc.type).Any();
                     if (npc.active && (npc.rarity > 0 || npcInWhitelist) && !npcInBlacklist && npc.Distance(Main.LocalPlayer.Center) <= 1300f)
-                    {
                         LifeformAnalyzerNPCs.Add(npc);
-                    }
                 }
 
                 // Finding rarest npc

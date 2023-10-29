@@ -1,4 +1,4 @@
-﻿namespace AccessoriesPlus.Content.ImprovedAccessories;
+﻿namespace AccessoriesPlus.Core;
 
 public class AccessoryItem : GlobalItem
 {
@@ -93,9 +93,7 @@ public class AccessoryItem : GlobalItem
             case ItemID.AnkhCharm:
                 // Ankh charm
                 if (Config.Instance.ImprovedAnkhShield)
-                {
                     player.CopyVanillaEquipEffects(ItemID.HandWarmer, hideVisual);
-                }
 
                 break;
             case ItemID.BundleofBalloons:
@@ -130,17 +128,13 @@ public class AccessoryItem : GlobalItem
             case ItemID.TerrasparkBoots:
                 // Terraspark boots
                 if (Config.Instance.ImprovedTerrasparkBoots)
-                {
                     tooltips.InsertTooltips("Tooltip4", after: true, Util.GetTooltipLine("TerrasparkBoots0"), Util.GetTooltipLine("TerrasparkBoots1"));
-                }
 
                 break;
             case ItemID.AnkhShield:
                 // Ankh shield
                 if (Config.Instance.ImprovedAnkhShield)
-                {
                     tooltips.InsertTooltips("Tooltip1", after: true, Util.GetTooltipLine("AnkhShield0"), Util.GetTooltipLine("AnkhShield1"), Util.GetTooltipLine("AnkhShield2"));
-                }
 
                 break;
             case ItemID.BundleofBalloons:

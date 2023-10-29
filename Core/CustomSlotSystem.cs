@@ -1,6 +1,7 @@
-﻿using Terraria.ModLoader.Default;
+﻿using AccessoriesPlus.Content.AccessorySlots;
+using Terraria.ModLoader.Default;
 
-namespace AccessoriesPlus.Content.AccessorySlots;
+namespace AccessoriesPlus.Core;
 
 public class CustomSlotSystem : GlobalItem
 {

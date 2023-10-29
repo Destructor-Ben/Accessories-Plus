@@ -1,6 +1,6 @@
 ﻿using AccessoriesPlus.Content.RecipeGroups;
 
-namespace AccessoriesPlus.Content.Obtainability;
+namespace AccessoriesPlus.Core;
 
 public class ObtainabilityRecipes : ModSystem
 {

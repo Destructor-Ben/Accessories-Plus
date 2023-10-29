@@ -1,6 +1,6 @@
 ﻿using Terraria.GameContent.ItemDropRules;
 
-namespace AccessoriesPlus.Content.Obtainability;
+namespace AccessoriesPlus.Core;
 
 public class ObtainabilityNPC : GlobalNPC
 {

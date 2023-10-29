@@ -1,6 +1,6 @@
 ﻿using AccessoriesPlus.Content.RecipeGroups;
 
-namespace AccessoriesPlus.Content.ImprovedAccessories;
+namespace AccessoriesPlus.Core;
 
 public class AccessoryRecipes : ModSystem
 {

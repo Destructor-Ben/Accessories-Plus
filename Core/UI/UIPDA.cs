@@ -1,9 +1,8 @@
-﻿using AccessoriesPlus.Content.ImprovedAccessories;
-using Terraria.UI;
+﻿using Terraria.UI;
 using Terraria.UI.Chat;
 using TerraUtil.UI;
 
-namespace AccessoriesPlus.Content.UI;
+namespace AccessoriesPlus.Core.UI;
 
 public class UIPDA : Interface
 {

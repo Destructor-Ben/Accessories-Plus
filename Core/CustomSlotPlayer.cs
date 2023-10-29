@@ -1,4 +1,4 @@
-﻿namespace AccessoriesPlus.Content.AccessorySlots;
+﻿namespace AccessoriesPlus.Core;
 
 public class CustomSlotPlayer : ModPlayer
 {
