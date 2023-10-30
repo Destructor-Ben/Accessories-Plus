@@ -3,7 +3,7 @@ using TerraUtil.Configuration;
 
 namespace AccessoriesPlus.Configuration;
 
-public class PDAConfig : SubConfig
+public class PDAConfig : SubConfiguration
 {
     public static PDAConfig Instance => Config.Instance.ImprovedPDA;
 
