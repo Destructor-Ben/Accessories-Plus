@@ -2,7 +2,7 @@
 
 namespace AccessoriesPlus.Core.Edits;
 
-public class PDATintEdit : Detour
+public class PDATintILEdit : Detour
 {
     public override void Apply()
     {
